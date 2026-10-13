@@ -16,7 +16,7 @@
     "onebreakfast": {"title": "OneBreakfast with Anara", "desc": "A light-hearted morning show with music, interviews and lifestyle tips.", "detail": {"type": "pool", "pool": "breakfast_guests", "prefix": "Today: "}},
     "onebreakfast_weekend": {"title": "OneBreakfast Weekend", "desc": "Anara's weekend edition: markets, music and the week's lighter side.", "detail": {"type": "pool", "pool": "breakfast_guests", "prefix": "Today: "}},
     "voices_of_janyl": {"title": "Voices of Janyl", "desc": "Talk show featuring discussions on current events, social and religious issues.", "detail": {"type": "pool", "pool": "talk_topics", "prefix": "Today: "}},
-    "debate_one": {"title": "Debate One", "desc": "IradOne's prime-time current-affairs panel.", "detail": {"type": "headline_or_pool", "pool": "debate_topics", "prefix": "Tonight: ", "max_age_days": 3}},
+    "debate_one": {"title": "OneDebate", "desc": "IradOne's prime-time current-affairs panel.", "detail": {"type": "headline_or_pool", "pool": "debate_topics", "prefix": "Tonight: ", "max_age_days": 3}},
     "onetruth": {"title": "OneTruth", "desc": "IradOne's premier journalism programme highlighting local issues.", "detail": {"type": "pool", "pool": "onetruth_topics", "prefix": "This week: "}},
     "business_irad": {"title": "Business Irad", "desc": "Markets, the som, oil and feedlot prices, with guests from Talasbank and the Bank of Irad."},
     "nurzhan_today": {"title": "Nurzhan Today", "desc": "Regional magazine from IradOne's Nurzhan studio: the refinery city, its neighbourhoods and its football."},
