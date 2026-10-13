@@ -312,19 +312,12 @@
 </section>
 
 
-<!-- TV Schedule Section -->
+<!-- TV Schedule Section (built by schedule.js from schedule.json) -->
 <section id="schedule" class="schedule">
     <h2>Program Schedule</h2>
-    
-    <!-- Tabs for Dates -->
-    <div class="tabs">
-        <button class="tablink active" onclick="openTab(event, 'today')" id="todayTab"></button>
-        <button class="tablink" onclick="openTab(event, 'tomorrow')" id="tomorrowTab"></button>
-        <button class="tablink" onclick="openTab(event, 'dayAfter')" id="dayAfterTab"></button>
-    </div>
-
-    <!-- Today's Schedule (Only one schedule, dynamically updated) -->
-    <div id="today" class="tabcontent" style="display: block;">
+    <div class="tabs" id="schedule-tabs" role="tablist"></div>
+    <div id="schedule-day" class="tabcontent" style="display: block;">
+        <p class="schedule-special" hidden></p>
         <div class="schedule-table">
             <table>
                 <thead>
@@ -334,12 +327,11 @@
                         <th>Description</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <!-- Schedule rows will be dynamically populated by JavaScript -->
-                </tbody>
+                <tbody></tbody>
             </table>
         </div>
     </div>
+    <p class="schedule-note">All times are Irad Time (IRT, UTC+6).</p>
 </section>
 
 
@@ -409,6 +401,7 @@ document.addEventListener('DOMContentLoaded', () => {
     handleVideoThumbnailClick(); // Initialize grid video click handlers
 });
 </script>
+<script src="schedule.js"></script>
 <script src="scripts.js"></script>
 </body>
 </html>

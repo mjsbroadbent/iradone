@@ -697,3 +697,129 @@ footer {
     grid-template-columns: 1fr;
   }
 }
+
+/* ---------- TV schedule (schedule.js) ---------- */
+.schedule {
+  padding: 2rem;
+}
+
+#schedule-tabs {
+  overflow-x: auto;
+  justify-content: flex-start;
+  scrollbar-width: thin;
+  margin-bottom: 0;
+}
+
+#schedule-tabs .tablink {
+  flex: 0 0 auto;
+  white-space: nowrap;
+  font-size: 0.9rem;
+  padding: 8px 14px;
+}
+
+.schedule-special {
+  background: #ffcc00;
+  color: #000;
+  font-weight: bold;
+  padding: 6px 10px;
+  border-radius: 5px;
+  margin: 0 0 10px;
+}
+
+.schedule-table .slot-time {
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.schedule-table th:nth-child(1),
+.schedule-table td:nth-child(1) {
+  width: 12%;
+}
+
+.schedule-table th:nth-child(2),
+.schedule-table td:nth-child(2) {
+  width: 30%;
+}
+
+.schedule-table th:nth-child(3),
+.schedule-table td:nth-child(3) {
+  width: 58%;
+}
+
+.slot-subtitle {
+  display: block;
+  font-style: italic;
+  color: #666;
+}
+
+.slot-detail {
+  display: block;
+  font-weight: bold;
+  color: #004d99;
+}
+
+.schedule-table tr.special td {
+  background: #fff8db;
+}
+
+.schedule-table tr.on-now td {
+  background: #e6f0fa;
+}
+
+.on-now-badge {
+  display: block;
+  width: max-content;
+  margin-top: 4px;
+  background: #c8102e;
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 1px 6px;
+  border-radius: 3px;
+}
+
+.schedule-note {
+  text-align: center;
+  font-size: 0.8rem;
+  color: #666;
+}
+
+@media (max-width: 600px) {
+  .schedule {
+    padding: 1rem;
+  }
+
+  .tabcontent {
+    padding: 8px;
+  }
+
+  .schedule-table table,
+  .schedule-table tbody,
+  .schedule-table tr,
+  .schedule-table td {
+    display: block;
+    width: auto !important;
+  }
+
+  .schedule-table thead {
+    display: none;
+  }
+
+  .schedule-table tr {
+    display: grid;
+    grid-template-columns: 4.5rem 1fr;
+    border-bottom: 1px solid #ddd;
+    padding: 6px 0;
+  }
+
+  .schedule-table td {
+    border: none;
+    padding: 2px 6px;
+  }
+
+  .schedule-table td.slot-time {
+    grid-row: span 2;
+  }
+}

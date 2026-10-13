@@ -1,6 +1,18 @@
 {
   "site_url": "https://iradone.com",
-  "max_stories_per_run": 3,
+  "cadence": {
+    "_comment": "One story on a news day. chance_by_days_since_last_story is the chance that a day is a news day, given how many days ago the last story went out. With these values stories are usually daily, sometimes 2 days apart and occasionally 3. The publish time is picked at random inside the window (Irad Time hours).",
+    "max_stories_per_day": 1,
+    "publish_window_hours_irt": [
+      8,
+      19
+    ],
+    "chance_by_days_since_last_story": {
+      "1": 0.7,
+      "2": 0.6,
+      "default": 1.0
+    }
+  },
   "max_age_hours": 96,
   "max_candidates_for_triage": 40,
   "triage_model": "claude-haiku-5-5",

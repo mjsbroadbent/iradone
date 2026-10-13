@@ -4,11 +4,13 @@
 Pulls real Central Asian news from RSS feeds, has Claude recast a few stories
 as IradOne reports set in Irad, and rebuilds the static site.
 
-  python newsroom/newsroom.py run      # fetch, write new stories, rebuild
+  python newsroom/newsroom.py run      # publish today's story if one is due, rebuild
+  python newsroom/newsroom.py due      # is a story due now? (--preview 14 shows the plan)
   python newsroom/newsroom.py build    # rebuild pages from news/data only
 
 Options for run:
-  --max N          stories to publish this run (default from config.json)
+  --force          publish now, ignoring the daily cadence
+  --max N          stories to publish this run (default: max_stories_per_day)
   --dry-run        do everything except write files
   --fixtures DIR   read feeds from DIR/*.xml instead of the network (testing)
   --mock           fake the Claude calls (testing, no API key needed)
@@ -452,14 +454,92 @@ def save_story(story: dict, item: dict, pick: dict, articles: list[dict], publis
     return art
 
 
+
+# --------------------------------------------------------------------------
+# Cadence: at most one story a day, with occasional quiet days
+# --------------------------------------------------------------------------
+
+def _day_random(day: dt.date, salt: str) -> float:
+    h = hashlib.sha256(f"iradone|{day.isoformat()}|{salt}".encode()).hexdigest()
+    return int(h[:12], 16) / 16 ** 12
+
+
+def last_story_day(articles: list[dict]) -> dt.date | None:
+    days = [dt.datetime.fromisoformat(a["published"]).astimezone(IRAD_TZ).date() for a in articles]
+    return max(days) if days else None
+
+
+def day_plan(day: dt.date, articles: list[dict]) -> dict:
+    """Decide, the same way every time for a given day, whether it is a news
+    day and from what time of day the story may go out."""
+    cad = CONFIG["cadence"]
+    last = last_story_day([a for a in articles
+                           if dt.datetime.fromisoformat(a["published"]).astimezone(IRAD_TZ).date() < day])
+    days_since = (day - last).days if last else 99
+    chances = cad["chance_by_days_since_last_story"]
+    chance = chances.get(str(days_since), chances["default"])
+    start_h, end_h = cad["publish_window_hours_irt"]
+    minutes = int(_day_random(day, "time") * (end_h - start_h) * 60)
+    publish_at = dt.datetime.combine(day, dt.time(start_h), IRAD_TZ) + dt.timedelta(minutes=minutes)
+    return {"day": day.isoformat(), "days_since_last": days_since, "chance": chance,
+            "news_day": _day_random(day, "news") < chance, "publish_from": publish_at,
+            "window_end": dt.datetime.combine(day, dt.time(end_h), IRAD_TZ) + dt.timedelta(hours=2)}
+
+
+def is_due(now: dt.datetime, articles: list[dict]) -> tuple[bool, str]:
+    today = now.date()
+    published_today = sum(1 for a in articles
+                          if dt.datetime.fromisoformat(a["published"]).astimezone(IRAD_TZ).date() == today)
+    if published_today >= CONFIG["cadence"]["max_stories_per_day"]:
+        return False, "today's story is already out"
+    plan = day_plan(today, articles)
+    if not plan["news_day"]:
+        return False, (f"quiet day ({plan['days_since_last']} days since last story, "
+                       f"{plan['chance']:.0%} chance)")
+    if now < plan["publish_from"]:
+        return False, f"news day; story due from {plan['publish_from']:%H:%M} IRT"
+    if now > plan["window_end"]:
+        return False, "news day, but today's window has closed"
+    return True, f"news day; due since {plan['publish_from']:%H:%M} IRT"
+
+
+def due_command(args) -> int:
+    now = now_irad()
+    articles = load_articles()
+    due, why = is_due(now, articles)
+    print(f"{now:%Y-%m-%d %H:%M} IRT: {'DUE' if due else 'not due'} ({why})")
+    out = os.environ.get("GITHUB_OUTPUT")
+    if out:
+        with open(out, "a") as f:
+            f.write(f"due={'true' if due else 'false'}\n")
+    if args.preview:
+        print("\nNext days (assuming each news day publishes):")
+        sim = list(articles)
+        for i in range(args.preview):
+            day = now.date() + dt.timedelta(days=i)
+            plan = day_plan(day, sim)
+            mark = f"story from {plan['publish_from']:%H:%M}" if plan["news_day"] else "quiet"
+            if i == 0 and not due and "already out" in why:
+                print(f"  {day:%a %d %b}: today's story is already out")
+                continue
+            print(f"  {day:%a %d %b}: {mark}  (chance {plan['chance']:.0%})")
+            if plan["news_day"]:
+                sim.insert(0, {"published": plan["publish_from"].isoformat()})
+    return 0
+
 # --------------------------------------------------------------------------
 # Run
 # --------------------------------------------------------------------------
 
 def run(args) -> int:
-    max_n = args.max if args.max is not None else CONFIG["max_stories_per_run"]
+    max_n = args.max if args.max is not None else CONFIG["cadence"]["max_stories_per_day"]
     today = now_irad()
     log(f"IradOne newsroom run, {today:%Y-%m-%d %H:%M} IRT, up to {max_n} stories")
+    if not args.force:
+        due, why = is_due(today, load_articles())
+        log(f"Cadence: {why}")
+        if not due:
+            return 0
 
     seen = prune_seen(load_seen())
     log("Fetching feeds")
@@ -496,7 +576,7 @@ def run(args) -> int:
         claude = Claude(args.mock)
         today_str = f"{today:%A %d %B %Y}"
         try:
-            picks = claude.triage(candidates, recent, max_n, today_str)
+            picks = claude.triage(candidates, recent, max_n + 1, today_str)  # one spare
         except Exception as exc:
             log(f"Triage failed: {exc.__class__.__name__}: {exc}")
             picks, failures = None, 1
@@ -504,6 +584,8 @@ def run(args) -> int:
             log(f"Triage picked {len(picks)}: " + json.dumps(picks, ensure_ascii=False))
         picked_ids = set()
         for pick in picks or []:
+            if published_new >= max_n:
+                break
             try:
                 pid = int(pick.get("id"))
             except (TypeError, ValueError):
@@ -540,13 +622,7 @@ def run(args) -> int:
                          "at": today.isoformat()}
             published_new += 1
             log(f"  published: {art['headline']}")
-        if picks and not failures:
-            # Triage worked and passed over these; don't offer them again.
-            # After any failure, leave them for the next run instead.
-            for c in candidates:
-                if c["id"] not in picked_ids:
-                    seen.setdefault(url_key(c["url"]), {"decision": "passed in triage",
-                                                        "title": c["title"], "at": today.isoformat()})
+        # Items triage passed over stay eligible until they age out (max_age_hours).
 
     if args.dry_run:
         log(f"Dry run: {published_new} stories would be published")
@@ -571,6 +647,9 @@ def main():
     r.add_argument("--dry-run", action="store_true")
     r.add_argument("--fixtures")
     r.add_argument("--mock", action="store_true")
+    r.add_argument("--force", action="store_true", help="publish now, ignoring the daily cadence")
+    d = sub.add_parser("due", help="say whether a story is due now")
+    d.add_argument("--preview", type=int, default=0, metavar="DAYS", help="also show the plan for the next DAYS days")
     sub.add_parser("build")
     args = ap.parse_args()
     sys.path.insert(0, str(NEWSROOM))
@@ -578,6 +657,8 @@ def main():
         import build
         build.build()
         return 0
+    if args.cmd == "due":
+        return due_command(args)
     try:
         return run(args)
     except Exception as exc:

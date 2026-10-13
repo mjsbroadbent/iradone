@@ -2,14 +2,15 @@ name: IradOne newsroom
 
 on:
   schedule:
-    # 00:17, 08:17 and 16:17 UTC = 06:17, 14:17 and 22:17 Irad Time (UTC+6)
-    - cron: "17 */8 * * *"
+    # Hourly from 08:41 to 21:41 Irad Time (UTC+6). Each run first checks, for free,
+    # whether today's story is due; most runs stop there. See "cadence" in config.json.
+    - cron: "41 2-15 * * *"
   workflow_dispatch:
     inputs:
-      max:
-        description: "Stories to publish this run"
-        required: false
-        default: "3"
+      force:
+        description: "Publish a story now, ignoring the daily cadence"
+        type: boolean
+        default: true
 
 permissions:
   contents: write
@@ -26,7 +27,23 @@ jobs:
       - name: Check out the site
         uses: actions/checkout@v4
 
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Is a story due?
+        id: check
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ "${{ inputs.force }}" = "true" ]; then
+            echo "Manual run: publishing now."
+            echo "due=true" >> "$GITHUB_OUTPUT"
+          else
+            python newsroom/newsroom.py due
+          fi
+
       - name: Check out the Irad lore
+        if: steps.check.outputs.due == 'true'
         uses: actions/checkout@v4
         with:
           repository: mjsbroadbent/irad_persona_skill
@@ -36,15 +53,12 @@ jobs:
             canon.md
           sparse-checkout-cone-mode: false
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-
       - name: Install dependencies
+        if: steps.check.outputs.due == 'true'
         run: pip install -r newsroom/requirements.txt
 
       - name: Write the news
+        if: steps.check.outputs.due == 'true'
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           LORE_DIR: _lore
@@ -53,10 +67,10 @@ jobs:
             echo "::error::Add an ANTHROPIC_API_KEY repository secret (Settings > Secrets and variables > Actions)."
             exit 1
           fi
-          python newsroom/newsroom.py run --max "${{ github.event.inputs.max || '3' }}"
+          python newsroom/newsroom.py run --force
 
       - name: Publish
-        if: always()
+        if: always() && steps.check.outputs.due == 'true'
         run: |
           git config user.name "IradOne Newsroom"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -66,4 +80,5 @@ jobs:
             exit 0
           fi
           git commit -m "Newsroom: $(date -u +'%Y-%m-%d %H:%M') UTC"
+          git pull --rebase --autostash origin main
           git push
