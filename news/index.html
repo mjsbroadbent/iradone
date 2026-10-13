@@ -23,13 +23,17 @@
         <a href="../index.html"><img src="../iradone.png" alt="IradOne"></a>
         <p>IradOne Online</p>
       </div>
-      <nav>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Menu"><i class="fas fa-bars" aria-hidden="true"></i><span>Menu</span></button>
+      <nav id="site-nav">
         <ul>
-          <li><a href="../index.html#home">Home</a></li>
+          <li><a href="../index.html">Home</a></li>
           <li><a href="../news/index.html">News</a></li>
-          <li><a href="../index.html#schedule">TV Schedule</a></li>
+          <li><a href="../sport/index.html">Sport</a></li>
+          <li><a href="../index.html#schedule">TV Guide</a></li>
+          <li><a href="../shows/index.html">Shows</a></li>
+          <li><a href="../radio/index.html">Radio</a></li>
           <li><a href="../index.html#live">Live TV</a></li>
-          <li><a href="../index.html#contact">Contact</a></li>
+          <li><a href="../index.html#about">About</a></li>
         </ul>
       </nav>
       <div class="social-icons">
@@ -95,11 +99,12 @@
       <section class="archive">
         <h1>IradOne News</h1>
         <p class="story-dek">The latest from Talas, Nurzhan, Iyık Janyl and the region.</p>
+        <nav class="section-bar" aria-label="News sections"><a href="index.html" class="active">All</a><a href="section/agriculture.html">Agriculture <span>1</span></a><a href="section/culture.html">Culture <span>3</span></a><a href="section/economy.html">Economy <span>3</span></a><a href="section/energy.html">Energy <span>1</span></a><a href="section/environment.html">Environment <span>1</span></a><a href="section/regional.html">Regional <span>1</span></a><a href="section/society.html">Society <span>1</span></a></nav>
         <ul class="archive-list">
         <li class="archive-item">
           <a href="2026-10-13-sary-bulak-antimony-works-and-chatkal-smelter-set-for-phased-reopening.html"><img src="../photos/mailuu-suu.jpg" alt="" loading="lazy"></a>
           <div>
-            <p class="story-kicker">Economy &middot; October 13, 2026</p>
+            <p class="story-kicker"><a href="section/economy.html">Economy</a> &middot; October 13, 2026</p>
             <h3><a href="2026-10-13-sary-bulak-antimony-works-and-chatkal-smelter-set-for-phased-reopening.html">Sary-Bulak Antimony Works and Chatkal Smelter Set for Phased Reopening</a></h3>
             <p>Lieutenant Governor Aidar Maksat told workers in Sary-Bulak that idled lines will restart in stages, with hiring from Lower Naryn and Chu.</p>
           </div>
@@ -107,7 +112,7 @@
         <li class="archive-item">
           <a href="2026-10-13-toktogul-upgrade-lifts-capacity-to-1-440-mw-strengthening-irad-s-power.html"><img src="../photos/toktogul-autumn.jpg" alt="" loading="lazy"></a>
           <div>
-            <p class="story-kicker">Energy &middot; October 13, 2026</p>
+            <p class="story-kicker"><a href="section/energy.html">Energy</a> &middot; October 13, 2026</p>
             <h3><a href="2026-10-13-toktogul-upgrade-lifts-capacity-to-1-440-mw-strengthening-irad-s-power.html">Toktogul Upgrade Lifts Capacity to 1,440 MW, Strengthening Irad&#x27;s Power Exports</a></h3>
             <p>The refitted Toktogul generating hall now delivers 240 MW more than its former 1,200 MW rating, and officials say the gain will move through the ISEZ switchyard under the Naryn Protocol.</p>
           </div>
@@ -115,7 +120,7 @@
         <li class="archive-item">
           <a href="2026-10-13-kazakh-flaxseed-exports-hit-record-putting-irad-s-trucking-corridors-i.html"><img src="../photos/freight-steppe.jpg" alt="" loading="lazy"></a>
           <div>
-            <p class="story-kicker">Economy &middot; October 13, 2026</p>
+            <p class="story-kicker"><a href="section/economy.html">Economy</a> &middot; October 13, 2026</p>
             <h3><a href="2026-10-13-kazakh-flaxseed-exports-hit-record-putting-irad-s-trucking-corridors-i.html">Kazakh Flaxseed Exports Hit Record, Putting Irad&#x27;s Trucking Corridors in Demand</a></h3>
             <p>Neighbouring Kazakhstan&#x27;s near-1.3-million-tonne flaxseed season has pushed oilseed cargo towards southern routes, and Irad&#x27;s hauliers and the Talas North Terminal are feeling it.</p>
           </div>
@@ -123,7 +128,7 @@
         <li class="archive-item">
           <a href="2026-10-09-kara-khanid-coins-found-at-rabat-i-safed.html"><img src="../photos/caravanserai.jpg" alt="" loading="lazy"></a>
           <div>
-            <p class="story-kicker">Culture &middot; October 9, 2026</p>
+            <p class="story-kicker"><a href="section/culture.html">Culture</a> &middot; October 9, 2026</p>
             <h3><a href="2026-10-09-kara-khanid-coins-found-at-rabat-i-safed.html">Kara-Khanid Coins Found at Rabat-i-Safed</a></h3>
             <p>Talas State University archaeologists have recovered 10th- and 11th-century coins, a cauldron fragment and storage jars at the Silk Road caravanserai.</p>
           </div>
@@ -131,7 +136,7 @@
         <li class="archive-item">
           <a href="2026-10-07-national-komuz-competition-to-honour-aigul-choro-kyzy.html"><img src="../photos/komuz-players.jpg" alt="" loading="lazy"></a>
           <div>
-            <p class="story-kicker">Culture &middot; October 7, 2026</p>
+            <p class="story-kicker"><a href="section/culture.html">Culture</a> &middot; October 7, 2026</p>
             <h3><a href="2026-10-07-national-komuz-competition-to-honour-aigul-choro-kyzy.html">National Komuz Competition to Honour Aigul Choro kyzy</a></h3>
             <p>Players of all ages are invited to Talas for an open competition marking 90 years since the birth of the ethnomusicologist who recorded Irad&#x27;s music on the summer pastures.</p>
           </div>
@@ -139,7 +144,7 @@
         <li class="archive-item">
           <a href="2026-10-06-lieutenant-governor-opens-solar-powered-school-in-nurzhan.html"><img src="../photos/apartment-blocks.jpg" alt="" loading="lazy"></a>
           <div>
-            <p class="story-kicker">Society &middot; October 6, 2026</p>
+            <p class="story-kicker"><a href="section/society.html">Society</a> &middot; October 6, 2026</p>
             <h3><a href="2026-10-06-lieutenant-governor-opens-solar-powered-school-in-nurzhan.html">Lieutenant Governor Opens Solar-Powered School in Nurzhan</a></h3>
             <p>The Navbahor district school is one of twelve opened this year, with eighteen more schools and kindergartens due before the end of December.</p>
           </div>
@@ -147,7 +152,7 @@
         <li class="archive-item">
           <a href="2026-10-01-tremor-felt-across-the-fergana-rim-no-damage-reported.html"><img src="../photos/tash-komur.jpg" alt="" loading="lazy"></a>
           <div>
-            <p class="story-kicker">Environment &middot; October 1, 2026</p>
+            <p class="story-kicker"><a href="section/environment.html">Environment</a> &middot; October 1, 2026</p>
             <h3><a href="2026-10-01-tremor-felt-across-the-fergana-rim-no-damage-reported.html">Tremor Felt Across the Fergana Rim; No Damage Reported</a></h3>
             <p>A magnitude 4.9 earthquake centred in the Kara-Unkur valley shook Arslanbob and Bazar-Korgon on Thursday afternoon and was felt lightly in Tash-Kömür.</p>
           </div>
@@ -155,7 +160,7 @@
         <li class="archive-item">
           <a href="2026-09-21-akyel-colt-fetches-record-1-million-at-talas-autumn-sale.html"><img src="../photos/akyel-golden.jpg" alt="" loading="lazy"></a>
           <div>
-            <p class="story-kicker">Agriculture &middot; September 21, 2026</p>
+            <p class="story-kicker"><a href="section/agriculture.html">Agriculture</a> &middot; September 21, 2026</p>
             <h3><a href="2026-09-21-akyel-colt-fetches-record-1-million-at-talas-autumn-sale.html">Akyel Colt Fetches Record $1 Million at Talas Autumn Sale</a></h3>
             <p>A two-year-old golden Akyel set a new national price at the Akyel Syndicate&#x27;s autumn sale, as buyers from five countries crowded the State Hippodrome.</p>
           </div>
@@ -163,7 +168,7 @@
         <li class="archive-item">
           <a href="2025-03-05-irad-s-gdp-growth-exceeds-expectations.html"><img src="../photos/nurzhan-refinery.jpg" alt="" loading="lazy"></a>
           <div>
-            <p class="story-kicker">Economy &middot; March 5, 2025</p>
+            <p class="story-kicker"><a href="section/economy.html">Economy</a> &middot; March 5, 2025</p>
             <h3><a href="2025-03-05-irad-s-gdp-growth-exceeds-expectations.html">Irad&#x27;s GDP Growth Exceeds Expectations</a></h3>
             <p>Official figures show the ISEZ economy grew 1.5% last year, ahead of forecasts, on beef exports and refinery output.</p>
           </div>
@@ -171,7 +176,7 @@
         <li class="archive-item">
           <a href="2025-02-18-talas-hosts-international-film-festival.html"><img src="../photos/talas-skyline.jpg" alt="" loading="lazy"></a>
           <div>
-            <p class="story-kicker">Culture &middot; February 18, 2025</p>
+            <p class="story-kicker"><a href="section/culture.html">Culture</a> &middot; February 18, 2025</p>
             <h3><a href="2025-02-18-talas-hosts-international-film-festival.html">Talas Hosts International Film Festival</a></h3>
             <p>The Irad Film Society&#x27;s biennial festival opens with films from more than five countries and a restored Iradi Western.</p>
           </div>
@@ -179,7 +184,7 @@
         <li class="archive-item">
           <a href="2025-02-10-irad-and-uzbekistan-strengthen-bilateral-relations.html"><img src="../photos/freight-loco.jpg" alt="" loading="lazy"></a>
           <div>
-            <p class="story-kicker">Regional &middot; February 10, 2025</p>
+            <p class="story-kicker"><a href="section/regional.html">Regional</a> &middot; February 10, 2025</p>
             <h3><a href="2025-02-10-irad-and-uzbekistan-strengthen-bilateral-relations.html">Irad and Uzbekistan Strengthen Bilateral Relations</a></h3>
             <p>Talas and Tashkent sign a trade and border-coordination memorandum, the first since the 2018 rangeland clashes.</p>
           </div>
@@ -211,6 +216,7 @@
       </div>
     </footer>
   </div>
+  <script src="../site.js"></script>
   <script src="../info.js"></script>
 </body>
 </html>

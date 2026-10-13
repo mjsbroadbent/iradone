@@ -1,0 +1,455 @@
+{
+  "_readme": "Data for the sport section (sport.js). Results are generated from the date, the same for everyone, and never change once played. strength (0-1) tilts results towards stronger teams and horses. Edit names, venues and race titles freely.",
+  "ulak": {
+    "name": "National Ulak Tartysh League",
+    "organiser": "National Equestrian Sports Directorate",
+    "season": {
+      "start": {
+        "month": 9,
+        "weekday": "sat",
+        "n": 2
+      },
+      "end_month": 2,
+      "break": [
+        "12-20",
+        "01-15"
+      ]
+    },
+    "kickoff": "21:00",
+    "conferences": [
+      {
+        "name": "ISEZ Conference",
+        "teams": [
+          {
+            "name": "Talas",
+            "ground": "Irad State Hippodrome",
+            "strength": 0.75
+          },
+          {
+            "name": "Köhne Diz",
+            "ground": "Old City ground, Talas",
+            "strength": 0.55
+          },
+          {
+            "name": "Nurzhan",
+            "ground": "Chu plain ground, Nurzhan",
+            "strength": 0.6
+          },
+          {
+            "name": "Dastgoh",
+            "ground": "Dastgoh works ground, Nurzhan",
+            "strength": 0.4
+          },
+          {
+            "name": "Iyık Janyl",
+            "ground": "Foothill ground, Iyık Janyl",
+            "strength": 0.6
+          },
+          {
+            "name": "Kara-Buura",
+            "ground": "Kyzyl-Adyr ground",
+            "strength": 0.7
+          },
+          {
+            "name": "Chu",
+            "ground": "Chu District ground",
+            "strength": 0.5
+          },
+          {
+            "name": "Sary-Bulak",
+            "ground": "Sary-Bulak ground",
+            "strength": 0.45
+          },
+          {
+            "name": "Lower Naryn",
+            "ground": "Tash-Kömür ground",
+            "strength": 0.55
+          },
+          {
+            "name": "Kara-Bulak",
+            "ground": "Kara-Bulak ground",
+            "strength": 0.5
+          },
+          {
+            "name": "Semiz",
+            "ground": "Semiz ground",
+            "strength": 0.35
+          }
+        ]
+      },
+      {
+        "name": "Highland Conference",
+        "teams": [
+          {
+            "name": "Tanıp",
+            "ground": "Upper Kara-Suu",
+            "strength": 0.85
+          },
+          {
+            "name": "Karakoyun",
+            "ground": "Kara-Koyun Valley",
+            "strength": 0.75
+          },
+          {
+            "name": "Akjele",
+            "ground": "Upper Besh-Tash",
+            "strength": 0.6
+          },
+          {
+            "name": "Boztorgoy",
+            "ground": "Moiynkum winter grounds",
+            "strength": 0.8
+          },
+          {
+            "name": "Kökjal",
+            "ground": "Toktogul basin",
+            "strength": 0.55
+          },
+          {
+            "name": "Chubar",
+            "ground": "Bazar-Korgon",
+            "strength": 0.5
+          },
+          {
+            "name": "Sarybagysh",
+            "ground": "Chatkal valley",
+            "strength": 0.65
+          },
+          {
+            "name": "Naiman",
+            "ground": "Naiman grounds",
+            "strength": 0.45
+          },
+          {
+            "name": "Talas Alatau Select",
+            "ground": "Talas Alatau",
+            "strength": 0.5
+          },
+          {
+            "name": "Karatau Select",
+            "ground": "Karatau foothills",
+            "strength": 0.45
+          },
+          {
+            "name": "Chatkal Highlands Select",
+            "ground": "Upper Chatkal",
+            "strength": 0.5
+          },
+          {
+            "name": "Toktogul–Naryn Select",
+            "ground": "Toktogul basin",
+            "strength": 0.4
+          },
+          {
+            "name": "Fergana Rim Select",
+            "ground": "Fergana Rim",
+            "strength": 0.45
+          }
+        ]
+      }
+    ],
+    "cup": {
+      "name": "President's Cup",
+      "venue": "Irad State Hippodrome",
+      "qualifiers": 4
+    }
+  },
+  "racing": {
+    "venue": "Irad State Hippodrome",
+    "days": [
+      "wed",
+      "fri"
+    ],
+    "first_race": "19:00",
+    "races_per_meeting": 6,
+    "race_types": [
+      {
+        "name": "Talas Stakes",
+        "breed": "Akyel",
+        "distance": 2000
+      },
+      {
+        "name": "Golden Hoof Mile",
+        "breed": "Akyel",
+        "distance": 1600
+      },
+      {
+        "name": "Kara-Bulak Cup",
+        "breed": "Akyel",
+        "distance": 2400
+      },
+      {
+        "name": "Two-Year-Old Plate",
+        "breed": "Akyel",
+        "distance": 1200
+      },
+      {
+        "name": "Hippodrome Handicap",
+        "breed": "Akyel",
+        "distance": 1800
+      },
+      {
+        "name": "Doran Sprint",
+        "breed": "Akyel",
+        "distance": 1000
+      },
+      {
+        "name": "Chongtor Mountain Sprint",
+        "breed": "Chongtor",
+        "distance": 1000
+      },
+      {
+        "name": "Chongtor Stayers' Race",
+        "breed": "Chongtor",
+        "distance": 3200
+      },
+      {
+        "name": "Bayge",
+        "breed": "Chongtor",
+        "distance": 4000
+      },
+      {
+        "name": "Alatau Trophy",
+        "breed": "Akyel",
+        "distance": 2200
+      }
+    ],
+    "name_first": [
+      "Ak",
+      "Kara",
+      "Kök",
+      "Altyn",
+      "Kyzyl",
+      "Boz",
+      "Kümüsh",
+      "Sary",
+      "Jez",
+      "Ala",
+      "Chabdar",
+      "Tor"
+    ],
+    "name_second": [
+      "Tulpar",
+      "Börü",
+      "Kush",
+      "Jel",
+      "Tuyak",
+      "Kanat",
+      "Jyldyz",
+      "Ay",
+      "Shamal",
+      "Bulut",
+      "Asman",
+      "Arstan",
+      "Kashka",
+      "Sumbul",
+      "Jebe"
+    ],
+    "english_names": [
+      "Talas Dawn",
+      "Starlight Run",
+      "Silk Road Express",
+      "Prairie Wind",
+      "Chicago Gold",
+      "Liberty Bell",
+      "Pole Star",
+      "Fergana Dream",
+      "High Pasture",
+      "Winter Gallop",
+      "Copper Kettle",
+      "Hippodrome Hero",
+      "Juniper Smoke",
+      "Morning Bata",
+      "River Talas",
+      "Snowline"
+    ],
+    "jockeys": [
+      "Aibek Toktonaliev",
+      "Nurlan Asanbaev",
+      "Ermek Jumabaev",
+      "Bolot Kadyr uulu",
+      "Timur Saparov",
+      "Daniyar Osmonov",
+      "Kanat Alay uulu",
+      "Azamat Beishen uulu",
+      "Ruslan Ibraimov",
+      "Emil Jeenaliev",
+      "Bakai Osmon uulu",
+      "Aida Seitkazieva",
+      "Marat Akmatov",
+      "Ulan Sydyk uulu"
+    ],
+    "trainers": [
+      "Kubat Alymkulov",
+      "Svetlana Orlova",
+      "Asan Myrza uulu",
+      "Jamilya Karimova",
+      "Andrei Kim",
+      "Tilek Turdubaev",
+      "Gulnara Isakova",
+      "Rafael Morales"
+    ],
+    "owners": [
+      "Akyel Syndicate",
+      "Kara-Bulak Stud",
+      "Chu Valley Stud",
+      "Old City Stables",
+      "Semiz Stables",
+      "Alatau Heights Stud",
+      "Talasbank Racing",
+      "Kyzyl-Adyr Herders' Cooperative"
+    ]
+  },
+  "football": {
+    "name": "Irad League",
+    "season": {
+      "start": {
+        "month": 3,
+        "weekday": "sat",
+        "n": 1
+      },
+      "rounds": 27,
+      "rest_every": 4
+    },
+    "derby": [
+      "Neftchi Nurzhan",
+      "Tulpar Talas"
+    ],
+    "clubs": [
+      {
+        "name": "Neftchi Nurzhan",
+        "strength": 0.82
+      },
+      {
+        "name": "Tulpar Talas",
+        "strength": 0.8
+      },
+      {
+        "name": "Temirjolchu Nurzhan",
+        "strength": 0.6
+      },
+      {
+        "name": "Attelkom Talas",
+        "strength": 0.58
+      },
+      {
+        "name": "Universitet Talas",
+        "strength": 0.48
+      },
+      {
+        "name": "Surma Chatkal",
+        "strength": 0.47
+      },
+      {
+        "name": "Dastgoh Nurzhan",
+        "strength": 0.42
+      },
+      {
+        "name": "FC Iyık Janyl",
+        "strength": 0.4
+      },
+      {
+        "name": "Kara-Buura",
+        "strength": 0.38
+      },
+      {
+        "name": "Naryn Tash-Kömür",
+        "strength": 0.35
+      }
+    ]
+  },
+  "events": [
+    {
+      "name": "President's Cup final",
+      "rule": {
+        "first_weekday_after": "03-11",
+        "weekday": "sat"
+      },
+      "where": "Irad State Hippodrome, Talas",
+      "what": "The ulak tartysh championship final, in Irad Day week."
+    },
+    {
+      "name": "Irad Day horse games",
+      "rule": {
+        "date": "03-11"
+      },
+      "where": "Talas",
+      "what": "Kyz kuu and oodarysh after the parade."
+    },
+    {
+      "name": "Nooruz races",
+      "rule": {
+        "date": "03-21"
+      },
+      "where": "Valley grounds across the ISEZ",
+      "what": "Spring races and tyin emmei."
+    },
+    {
+      "name": "St. Gewargis horse blessing",
+      "rule": {
+        "date": "04-23"
+      },
+      "where": "Talas Alatau",
+      "what": "Herds and riders blessed on the feast of the mounted saint."
+    },
+    {
+      "name": "Akyel spring sale",
+      "rule": {
+        "nth": 3,
+        "weekday": "sun",
+        "month": 4
+      },
+      "where": "Irad State Hippodrome",
+      "what": "The Akyel Syndicate's spring auction."
+    },
+    {
+      "name": "At chabysh championship",
+      "rule": {
+        "nth": 4,
+        "weekday": "sun",
+        "month": 5
+      },
+      "where": "Chu steppe course",
+      "what": "The national long-distance race, 40 km across the steppe."
+    },
+    {
+      "name": "Kurultai games",
+      "rule": {
+        "nth": 2,
+        "weekday": "sat",
+        "month": 8
+      },
+      "where": "Aksay Plateau",
+      "what": "Ulak tartysh and horse games at the summer Kurultai."
+    },
+    {
+      "name": "Akyel autumn sale",
+      "rule": {
+        "nth": 3,
+        "weekday": "sun",
+        "month": 9
+      },
+      "where": "Irad State Hippodrome",
+      "what": "The Akyel Syndicate's autumn auction."
+    },
+    {
+      "name": "Ulak league opens",
+      "rule": {
+        "nth": 2,
+        "weekday": "sat",
+        "month": 9
+      },
+      "where": "Grounds across Irad",
+      "what": "The first round of the National Ulak Tartysh League."
+    },
+    {
+      "name": "Salburun eagle-hunting festival",
+      "rule": {
+        "last_weekday": "sat",
+        "month": 10
+      },
+      "where": "Pastures outside Talas",
+      "what": "Berkutchi from both sides of the line fly their golden eagles."
+    }
+  ]
+}

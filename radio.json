@@ -1,0 +1,548 @@
+{
+  "_readme": "Radio Irad programme data, in the same format as schedule.json (see newsroom/README.md, TV schedule). Times are Irad Time; the radio day runs 05:00 to 05:00.",
+  "shows": {
+    "signon": {
+      "title": "Sign On",
+      "desc": "Radio Irad opens with The Spirit of Irad."
+    },
+    "signoff": {
+      "title": "Close Down",
+      "desc": "Radio Irad closes for the night with The Spirit of Irad."
+    },
+    "farm_weather": {
+      "title": "Farm and Weather",
+      "desc": "Weather for the valleys and the passes, water releases on the Chu and the Naryn, and the morning's feed and livestock prices.",
+      "detail": {
+        "type": "pool",
+        "pool": "farm_items",
+        "prefix": "Also: "
+      }
+    },
+    "talas_morning": {
+      "title": "Talas Morning",
+      "desc": "The breakfast show: music, roads, guests and OneNews on the hour.",
+      "detail": {
+        "type": "pool",
+        "pool": "morning_guests",
+        "prefix": "Guest: "
+      }
+    },
+    "iradi_lessons": {
+      "title": "Tilge Kaytuu",
+      "subtitle": "Back to the Language",
+      "desc": "Fifteen minutes of everyday Iradi for learners, part of the language revival.",
+      "detail": {
+        "type": "series",
+        "start": "2026-01-05",
+        "every": [
+          "mon",
+          "tue",
+          "wed",
+          "thu",
+          "fri"
+        ],
+        "pool": "lessons",
+        "label": "Lesson"
+      }
+    },
+    "bazaar_hour": {
+      "title": "The Bazaar Hour",
+      "desc": "Prices, shopping and household money, with reporters at the Bazar-i Kalan.",
+      "detail": {
+        "type": "pool",
+        "pool": "bazaar_topics",
+        "prefix": "Today: "
+      }
+    },
+    "country_road": {
+      "title": "Country Road",
+      "desc": "Iradi country-folk, from the Swift Hooves records to today's pickers."
+    },
+    "news_noon": {
+      "title": "OneNews at Noon",
+      "desc": "The midday news from IradOne's newsroom in Talas."
+    },
+    "agri_bulletin": {
+      "title": "Agricultural Bulletin",
+      "desc": "Grain, cotton and feedlot prices, pasture and water reports, and veterinary notices."
+    },
+    "requests": {
+      "title": "Afternoon Requests",
+      "desc": "Listeners' songs and dedications, by phone and SMS."
+    },
+    "book_at_three": {
+      "title": "Book at Three",
+      "desc": "A serial reading from Iradi literature.",
+      "detail": {
+        "type": "series",
+        "start": "2026-01-05",
+        "every": [
+          "mon",
+          "tue",
+          "wed",
+          "thu",
+          "fri"
+        ],
+        "pool": "readings",
+        "parts_per_item": 10
+      }
+    },
+    "mor_pop_hour": {
+      "title": "Mor-Pop Hour",
+      "desc": "The newest Mor-Pop and Iradi pop."
+    },
+    "talas_drive": {
+      "title": "Talas Drive",
+      "desc": "The drive-time show: roads and passes, the day's news and music for the commute."
+    },
+    "news_evening": {
+      "title": "OneNews Evening",
+      "desc": "The evening news and the next day's weather."
+    },
+    "herders_hour": {
+      "title": "Malchylar Saaty",
+      "subtitle": "The Herders' Hour",
+      "desc": "Messages, family news and market prices for herding families on the summer and winter pastures, in Iradi.",
+      "detail": {
+        "type": "pool",
+        "pool": "herders_items",
+        "prefix": "Tonight: "
+      }
+    },
+    "sports_desk": {
+      "title": "Sports Desk",
+      "desc": "Hippodrome results, the ulak tartysh league and the day's football."
+    },
+    "news_eight_sim": {
+      "title": "OneNews at Eight",
+      "desc": "The main evening bulletin, shared with IradOne television."
+    },
+    "kechki_jomok": {
+      "title": "Kechki Jomok",
+      "subtitle": "Evening Tales",
+      "desc": "Bards, küü for the komuz and listeners' genealogies, on Radio Irad since 1994.",
+      "detail": {
+        "type": "pool",
+        "pool": "jomok_themes",
+        "prefix": "Tonight: "
+      }
+    },
+    "news_late": {
+      "title": "OneNews Late",
+      "desc": "The day's news in brief."
+    },
+    "night_steppe": {
+      "title": "Night Steppe",
+      "desc": "Quiet music through the night."
+    },
+    "saturday_market": {
+      "title": "Saturday Market",
+      "desc": "A morning at the bazaar: produce, prices and the people who sell them."
+    },
+    "farm_week": {
+      "title": "The Farming Week",
+      "desc": "The week in agriculture, with the Talas valley feedlots and the Chu basin growers."
+    },
+    "ulak_radio": {
+      "title": "Ulak Tartysh Live",
+      "desc": "Full commentary from tonight's league match.",
+      "detail": {
+        "type": "sport",
+        "kind": "ulak"
+      }
+    },
+    "sunday_qurbana": {
+      "title": "Sunday Qurbana",
+      "desc": "The Divine Liturgy of the Syro-Iradi Catholic Church, on radio.",
+      "detail": {
+        "type": "pool",
+        "pool": "parishes",
+        "prefix": "From "
+      }
+    },
+    "hymns": {
+      "title": "Hymns of the Star",
+      "desc": "Liturgical singing and Mor-Folk hymns."
+    },
+    "swift_sunday": {
+      "title": "Swift Hooves Sunday",
+      "desc": "Three hours of Iradi country-folk."
+    },
+    "week_in_review": {
+      "title": "The Week in Irad",
+      "desc": "The week's news, with the IradOne correspondents."
+    },
+    "irad_day_radio": {
+      "title": "Irad Day Live",
+      "desc": "Commentary from the flag ceremony and parade in Talas."
+    },
+    "easter_radio": {
+      "title": "Kyamta: The Resurrection",
+      "desc": "The Easter Divine Liturgy from Iyık Janyl."
+    },
+    "janyl_radio": {
+      "title": "Feast of St. Janyl",
+      "desc": "The feast-day liturgy from Iyık Janyl."
+    },
+    "new_year_radio": {
+      "title": "New Year's Eve",
+      "desc": "Music to midnight and the Governor's New Year message."
+    },
+    "election_radio": {
+      "title": "Election Night 2027",
+      "desc": "Results as they come in from the Territorial Election Commission."
+    }
+  },
+  "grids": {
+    "weekday": [
+      {
+        "t": "05:30",
+        "show": "signon"
+      },
+      {
+        "t": "05:35",
+        "show": "farm_weather"
+      },
+      {
+        "t": "06:00",
+        "show": "talas_morning"
+      },
+      {
+        "t": "09:00",
+        "show": "iradi_lessons"
+      },
+      {
+        "t": "09:15",
+        "show": "bazaar_hour"
+      },
+      {
+        "t": "10:00",
+        "show": "country_road"
+      },
+      {
+        "t": "12:00",
+        "show": "news_noon"
+      },
+      {
+        "t": "12:30",
+        "show": "agri_bulletin"
+      },
+      {
+        "t": "13:00",
+        "show": "requests"
+      },
+      {
+        "t": "15:00",
+        "show": "book_at_three"
+      },
+      {
+        "t": "15:30",
+        "show": "mor_pop_hour"
+      },
+      {
+        "t": "16:30",
+        "show": "talas_drive"
+      },
+      {
+        "t": "18:00",
+        "show": "news_evening"
+      },
+      {
+        "t": "18:30",
+        "show": "herders_hour"
+      },
+      {
+        "t": "19:30",
+        "show": "sports_desk"
+      },
+      {
+        "t": "20:00",
+        "show": "news_eight_sim"
+      },
+      {
+        "t": "20:30",
+        "show": "kechki_jomok"
+      },
+      {
+        "t": "22:00",
+        "show": "news_late"
+      },
+      {
+        "t": "22:15",
+        "show": "night_steppe"
+      },
+      {
+        "t": "01:00",
+        "show": "signoff"
+      }
+    ],
+    "saturday": [
+      {
+        "t": "06:00",
+        "show": "signon"
+      },
+      {
+        "t": "06:05",
+        "show": "farm_weather"
+      },
+      {
+        "t": "06:30",
+        "show": "farm_week"
+      },
+      {
+        "t": "07:30",
+        "show": "saturday_market"
+      },
+      {
+        "t": "09:00",
+        "show": "country_road"
+      },
+      {
+        "t": "12:00",
+        "show": "news_noon"
+      },
+      {
+        "t": "12:30",
+        "show": "requests"
+      },
+      {
+        "t": "15:00",
+        "show": "mor_pop_hour"
+      },
+      {
+        "t": "17:00",
+        "show": "sports_desk"
+      },
+      {
+        "t": "18:00",
+        "show": "news_evening"
+      },
+      {
+        "t": "18:30",
+        "show": "herders_hour"
+      },
+      {
+        "t": "19:30",
+        "show": "kechki_jomok"
+      },
+      {
+        "t": "21:00",
+        "show": "ulak_radio"
+      },
+      {
+        "t": "23:00",
+        "show": "news_late"
+      },
+      {
+        "t": "23:15",
+        "show": "night_steppe"
+      },
+      {
+        "t": "01:00",
+        "show": "signoff"
+      }
+    ],
+    "sunday": [
+      {
+        "t": "06:30",
+        "show": "signon"
+      },
+      {
+        "t": "06:35",
+        "show": "hymns"
+      },
+      {
+        "t": "08:00",
+        "show": "sunday_qurbana"
+      },
+      {
+        "t": "09:30",
+        "show": "swift_sunday"
+      },
+      {
+        "t": "12:30",
+        "show": "week_in_review"
+      },
+      {
+        "t": "13:30",
+        "show": "requests"
+      },
+      {
+        "t": "16:00",
+        "show": "mor_pop_hour"
+      },
+      {
+        "t": "17:00",
+        "show": "sports_desk"
+      },
+      {
+        "t": "18:00",
+        "show": "news_evening"
+      },
+      {
+        "t": "18:30",
+        "show": "herders_hour"
+      },
+      {
+        "t": "19:30",
+        "show": "kechki_jomok"
+      },
+      {
+        "t": "22:00",
+        "show": "news_late"
+      },
+      {
+        "t": "22:15",
+        "show": "night_steppe"
+      },
+      {
+        "t": "01:00",
+        "show": "signoff"
+      }
+    ]
+  },
+  "specials": [
+    {
+      "name": "Irad Day",
+      "date": "03-11",
+      "slots": [
+        {
+          "t": "09:00",
+          "until": "12:00",
+          "show": "irad_day_radio"
+        }
+      ]
+    },
+    {
+      "name": "Easter",
+      "easter": 0,
+      "slots": [
+        {
+          "t": "08:00",
+          "until": "11:30",
+          "show": "easter_radio"
+        }
+      ]
+    },
+    {
+      "name": "Feast of St. Janyl",
+      "date": "08-24",
+      "slots": [
+        {
+          "t": "08:00",
+          "until": "11:30",
+          "show": "janyl_radio"
+        }
+      ]
+    },
+    {
+      "name": "New Year's Eve",
+      "date": "12-31",
+      "slots": [
+        {
+          "t": "22:15",
+          "until": "01:00",
+          "show": "new_year_radio"
+        }
+      ]
+    },
+    {
+      "name": "Election 2027",
+      "date": "2027-11-02",
+      "slots": [
+        {
+          "t": "20:30",
+          "until": "01:00",
+          "show": "election_radio"
+        }
+      ]
+    }
+  ],
+  "pools": {
+    "farm_items": [
+      "snow forecast for the Otmek Pass",
+      "hay prices at the Kara-Buura market",
+      "the Naryn release schedule",
+      "frost warning for the Chu orchards",
+      "feeder cattle prices at the Chu yards",
+      "the autumn vaccination round",
+      "wool prices",
+      "sugar beet deliveries to the Chu mill",
+      "grain at the Talas elevator"
+    ],
+    "morning_guests": [
+      "a Talas State University economist",
+      "the Silk Road Arena groundsman",
+      "a Semiz baker",
+      "a traffic officer on the Trans-Talas Highway",
+      "a Nurzhan Polytechnic student team",
+      "the Bazar-i Kalan market manager",
+      "a felt maker from Kyzyl-Adyr",
+      "a school director in Iyık Janyl",
+      "a beekeeper from the Talas Alatau"
+    ],
+    "lessons": [
+      "Greetings and blessings",
+      "Numbers at the bazaar",
+      "Asking the way",
+      "Family words",
+      "At the doctor's",
+      "Days, months and the müchöl",
+      "In the yurt",
+      "Horse words",
+      "Weather talk",
+      "At the toi",
+      "Polite requests",
+      "Telling the time",
+      "The kitchen",
+      "On the bus",
+      "Proverbs"
+    ],
+    "bazaar_topics": [
+      "the price of flour",
+      "winter coal",
+      "school uniforms",
+      "dried apricots and raisins",
+      "phone tariffs",
+      "rents in Talas",
+      "meat prices before the toi season",
+      "the cost of a wedding"
+    ],
+    "readings": [
+      "Kemel Ishakov, Kök Jal (Grey Mane)",
+      "Kemel Ishakov, Akyrky Ashuu (The Last Pass)",
+      "Kemel Ishakov, Ünsüz Koñguroo (The Silent Bell)",
+      "Kemel Ishakov, Ak Bulut (White Cloud)",
+      "Saira Kurmanbek kyzy, Suu Jolu (Water Road)",
+      "Temirlan Omurbekov, Mikrorayon"
+    ],
+    "herders_items": [
+      "messages for families on the Aksay pastures",
+      "the autumn return from the zhayloo",
+      "prices at the Chu livestock yards",
+      "veterinary notices",
+      "a new baby on the Besh-Tash pastures",
+      "a wedding in the Kara-Koyun valley",
+      "snow on the high passes",
+      "lost and found: horses and sheep"
+    ],
+    "jomok_themes": [
+      "genealogies of the Talas Alatau clans",
+      "küü for the first snow",
+      "songs of the 1916 flight",
+      "laments and blessings",
+      "the legend of Janyl",
+      "horseback songs of the Chatkal",
+      "riddles and proverbs from listeners",
+      "an aytysh between two young bards",
+      "stories of the winged horse"
+    ],
+    "parishes": [
+      "the Cathedral of St. Janyl, Iyık Janyl",
+      "the Church of St. Yuhanna, Talas",
+      "the Church of St. Tomas, Talas",
+      "a parish church in Nurzhan"
+    ]
+  },
+  "films": {}
+}

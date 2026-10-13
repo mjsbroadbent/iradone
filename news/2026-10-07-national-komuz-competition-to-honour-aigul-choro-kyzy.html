@@ -23,13 +23,17 @@
         <a href="../index.html"><img src="../iradone.png" alt="IradOne"></a>
         <p>IradOne Online</p>
       </div>
-      <nav>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Menu"><i class="fas fa-bars" aria-hidden="true"></i><span>Menu</span></button>
+      <nav id="site-nav">
         <ul>
-          <li><a href="../index.html#home">Home</a></li>
+          <li><a href="../index.html">Home</a></li>
           <li><a href="../news/index.html">News</a></li>
-          <li><a href="../index.html#schedule">TV Schedule</a></li>
+          <li><a href="../sport/index.html">Sport</a></li>
+          <li><a href="../index.html#schedule">TV Guide</a></li>
+          <li><a href="../shows/index.html">Shows</a></li>
+          <li><a href="../radio/index.html">Radio</a></li>
           <li><a href="../index.html#live">Live TV</a></li>
-          <li><a href="../index.html#contact">Contact</a></li>
+          <li><a href="../index.html#about">About</a></li>
         </ul>
       </nav>
       <div class="social-icons">
@@ -93,7 +97,7 @@
 
     <main class="story-page">
       <article class="story">
-        <p class="story-kicker"><a href="index.html">News</a> &middot; Culture</p>
+        <p class="story-kicker"><a href="index.html">News</a> &middot; <a href="section/culture.html">Culture</a></p>
         <h1>National Komuz Competition to Honour Aigul Choro kyzy</h1>
         <p class="story-dek">Players of all ages are invited to Talas for an open competition marking 90 years since the birth of the ethnomusicologist who recorded Irad&#x27;s music on the summer pastures.</p>
         <p class="story-meta">Published: October 7, 2026 &middot; OneNews</p>
@@ -107,8 +111,9 @@
           <p>Among the first to apply was Kanykei Satybekova, sixteen, from Kyzyl-Adyr, who learned the komuz from her grandfather. &quot;He says the instrument has three strings so that it can&#x27;t lie,&quot; she said. &quot;I just hope my hands don&#x27;t shake.&quot;</p>
           <p>Application forms are available from district culture offices and at the university.</p>
         </div>
-        <p class="story-tags"><span class="story-tag">komuz</span><span class="story-tag">music</span><span class="story-tag">Aigul Choro kyzy</span><span class="story-tag">Talas</span></p>
+        <p class="story-tags"><a class="story-tag" href="tag/komuz.html">komuz</a><a class="story-tag" href="tag/music.html">music</a><a class="story-tag" href="tag/aigul-choro-kyzy.html">Aigul Choro kyzy</a><a class="story-tag" href="tag/talas.html">Talas</a></p>
       <p class="story-source">Inspired by real reporting: <a href="https://en.kabar.kg/news/national-komuz-playerscompetition-to-be-held-in-bishkek/" rel="nofollow noopener" target="_blank">National komuz players&#x27; competition to be held in Bishkek</a> (Kabar). This IradOne story is fiction.</p>
+        <div class="ad-slot ad-box" data-size="box"></div>
         <section class="story-more">
           <h2>More from IradOne</h2>
           <ul>
@@ -144,6 +149,7 @@
       </div>
     </footer>
   </div>
+  <script src="../site.js"></script>
   <script src="../info.js"></script>
 </body>
 </html>

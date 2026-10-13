@@ -1,330 +1,1546 @@
 {
   "_readme": "IradOne programme data. schedule.js builds each day from this file, the same for every visitor. Times are Irad Time (UTC+6), 24-hour; times before 05:00 belong to the previous broadcast day. See newsroom/README.md (TV schedule) for how slots, rotations, episodes and specials work.",
-
   "shows": {
-    "signon": {"title": "Sign On", "desc": "The broadcast day opens with the national anthem, The Spirit of Irad."},
-    "signoff": {"title": "Sign Off", "desc": "The channel closes for the night with The Spirit of Irad."},
-
-    "morning_news": {"title": "OneNews Morning", "desc": "Daily news updates covering local and international events, with weather for the valleys and the passes."},
-    "midday_news": {"title": "OneNews Midday", "desc": "Comprehensive news update covering politics, economy and culture."},
-    "afternoon_news": {"title": "OneNews Afternoon", "desc": "A brief news update with a focus on stories and community events that matter to you."},
-    "news_at_eight": {"title": "OneNews at Eight", "desc": "The main English-language evening bulletin, live from the Alikhan Media Center in Talas.", "detail": {"type": "headline", "prefix": "Leading tonight: "}},
-    "kechki": {"title": "Kechki Jañylyktar", "subtitle": "Evening News in Iradi", "desc": "The day's news in Iradi, following OneNews at Eight."},
-    "late_news": {"title": "OneNews Late", "desc": "Summary of the day's top stories and events."},
-    "week_in_irad": {"title": "OneWeek", "desc": "The week's main stories, with interviews from Talas, Nurzhan and Iyık Janyl."},
-
-    "onebreakfast": {"title": "OneBreakfast with Anara", "desc": "A light-hearted morning show with music, interviews and lifestyle tips.", "detail": {"type": "pool", "pool": "breakfast_guests", "prefix": "Today: "}},
-    "onebreakfast_weekend": {"title": "OneBreakfast Weekend", "desc": "Anara's weekend edition: markets, music and the week's lighter side.", "detail": {"type": "pool", "pool": "breakfast_guests", "prefix": "Today: "}},
-    "voices_of_janyl": {"title": "Voices of Janyl", "desc": "Talk show featuring discussions on current events, social and religious issues.", "detail": {"type": "pool", "pool": "talk_topics", "prefix": "Today: "}},
-    "debate_one": {"title": "OneDebate", "desc": "IradOne's prime-time current-affairs panel.", "detail": {"type": "headline_or_pool", "pool": "debate_topics", "prefix": "Tonight: ", "max_age_days": 3}},
-    "onetruth": {"title": "OneTruth", "desc": "IradOne's premier journalism programme highlighting local issues.", "detail": {"type": "pool", "pool": "onetruth_topics", "prefix": "This week: "}},
-    "business_irad": {"title": "OneBusiness", "desc": "Markets, the som, oil and feedlot prices, with guests from Talasbank and the Bank of Irad."},
-    "nurzhan_today": {"title": "Nurzhan Today", "desc": "Regional magazine from IradOne's Nurzhan studio: the refinery city, its neighbourhoods and its football."},
-    "from_iyik_janyl": {"title": "From Iyık Janyl", "desc": "Regional magazine from the holy city: pilgrims, the seminary, and life in the Fergana foothills."},
-    "la_colonia": {"title": "La Colonia", "desc": "Bilingual English and Spanish magazine from Semiz: food, music, families and the week's news from the district."},
-    "weekend_guide": {"title": "Weekend Guide", "desc": "Concerts, markets, races and what's on across the ISEZ this weekend."},
-
-    "follow_white_rider": {"title": "Follow the White Rider", "desc": "Educational and entertaining Christian programme for kids, including cartoons and learning shows.", "detail": {"type": "pool", "pool": "white_rider_stories", "prefix": "Today's story: "}},
-    "koyon": {"title": "Koyon Teşigi", "subtitle": "The Rabbit Hole", "desc": "An Iradi-language children's programme featuring music, stories and crafts."},
-    "tulpar_tales": {"title": "Tulpar Tales", "desc": "Animated adventures of Kanat, a winged colt who carries messages across the mountains.", "detail": {"type": "series", "start": "2024-01-06", "every": ["sat"], "pool": "tulpar_episodes"}},
-    "jyldyz_jolu": {"title": "Jyldyz Jolu", "subtitle": "Star Road", "desc": "The youth talent show that launched Altyn Muuz. Singers, dancers and komuz players from across the ISEZ.", "detail": {"type": "series", "start": "2026-03-07", "every": ["sat"], "label": "Week"}},
-    "foal_zone": {"title": "Foal Zone", "desc": "Comedy show for teenagers, covering topics like education, horses and careers."},
-
-    "star_leads": {"title": "The Star Leads the Way", "desc": "A documentary series exploring the history and traditions of Irad.", "detail": {"type": "series", "start": "2025-01-06", "every": ["mon", "sun"], "pool": "star_episodes"}},
-    "alatau": {"title": "Seasons of the Talas Alatau", "desc": "Nature series from IradOne's documentary unit, following a year in the range above Talas.", "detail": {"type": "series", "start": "2025-01-07", "every": ["tue"], "pool": "alatau_episodes"}},
-    "besh_tash": {"title": "Besh-Tash", "desc": "Nature series from Besh-Tash National Park, 20 km south of Talas.", "detail": {"type": "series", "start": "2025-01-08", "every": ["wed", "sat"], "pool": "besh_tash_episodes"}},
-    "hands_of_irad": {"title": "Hands of Irad", "desc": "Craftspeople at work: saddlers, felt makers, silversmiths and instrument makers.", "detail": {"type": "series", "start": "2025-01-07", "every": ["tue", "thu"], "pool": "hands_episodes"}},
-    "from_the_archive": {"title": "From the Archive", "desc": "Restored programmes from IradOne's archive, back to the 1960s.", "detail": {"type": "pool", "pool": "archive_items", "prefix": "Today: "}},
-    "world_of_animals": {"title": "In the World of Animals", "desc": "Russian television programme dedicated to zoology and wildlife research."},
-    "urkun_doc": {"title": "Urkun: The Lost Tribes of 1916", "desc": "Remembrance documentary on the 1916 revolt and the flight over the passes, shown each year on 15 August."},
-
-    "cook_ayyub": {"title": "Cook with Ayyub", "desc": "A cooking show featuring traditional recipes and culinary techniques.", "detail": {"type": "pool", "pool": "ayyub_dishes", "prefix": "Today: "}},
-    "baking_zarina": {"title": "Baking with Zarina", "desc": "Baking programme featuring traditional recipes and culinary techniques.", "detail": {"type": "pool", "pool": "zarina_bakes", "prefix": "Today: "}},
-    "field_and_herd": {"title": "Field and Herd", "desc": "The farming programme: pastures, feed and grain prices, water schedules and the week at the Talas valley feedlots."},
-
-    "ickenge": {"title": "İçkenge Attı Jetelep", "subtitle": "Lead a Horse to Drink", "desc": "A popular Iradi-language drama series about family.", "detail": {"type": "serial", "start": "2021-09-06", "every": ["mon", "tue", "wed", "thu", "fri"], "pool": "ickenge_synopses", "first_episode": 1}},
-    "ickenge_omnibus": {"title": "İçkenge Attı Jetelep: The Week", "subtitle": "Lead a Horse to Drink", "desc": "All of this week's episodes in one sitting."},
-    "kuda": {"title": "Kuda", "subtitle": "The In-Laws", "desc": "Bilingual sitcom. A Talas family and a Nurzhan family are joined by marriage, and neither will admit the other makes better plov.", "detail": {"type": "series", "start": "2025-09-01", "every": ["mon", "wed"], "pool": "kuda_episodes"}},
-    "kuda_repeat": {"title": "Kuda", "subtitle": "The In-Laws", "desc": "Another chance to see this week's episodes of the bilingual sitcom."},
-    "patrol": {"title": "Patrol: Kara-Bulak", "desc": "Drama following a Gendarmerie post on the Talas road.", "detail": {"type": "series", "start": "2025-09-02", "every": ["tue"], "pool": "patrol_episodes"}},
-    "akyrky_ashuu": {"title": "Akyrky Ashuu", "subtitle": "The Last Pass", "desc": "IradOne's 2016 serial of Kemel Ishakov's novel: Bermet and her grandfather in the flight of 1916.", "detail": {"type": "series", "start": "2026-01-07", "every": ["wed"], "pool": "ashuu_parts", "label": "Part"}},
-    "friends": {"title": "Friends", "desc": "Very high-quality comedy series, featuring American actors and stories."},
-    "kim_bilet": {"title": "Kim Bilet?", "subtitle": "Who Knows?", "desc": "Iradi-language quiz. Three contestants, one golden horseshoe."},
-    "kim_bilet_special": {"title": "Kim Bilet? Saturday Special", "desc": "Families and work teams compete for the Saturday jackpot."},
-
-    "sports_highlights": {"title": "OneSport Highlights", "desc": "A recap of the latest sports events, including football, horse racing and more."},
-    "racing_live": {"title": "OneSport Live: Horse Racing", "desc": "Live coverage of horse races from the Irad State Hippodrome."},
-    "ulak_live": {"title": "OneSport Live: Ulak Tartysh", "desc": "Live coverage of ulak tartysh matches."},
-    "games_live": {"title": "OneSport Live: Horse Games", "desc": "Live equestrian sport from across the ISEZ.", "detail": {"type": "pool", "pool": "horse_games", "prefix": "Tonight: "}},
-    "form_guide": {"title": "Hippodrome Form Guide", "desc": "Trainers and tipsters preview tonight's card at the State Hippodrome."},
-    "hippodrome_weekly": {"title": "Hippodrome Weekly", "desc": "Equestrian sport magazine: racing, ulak tartysh and the Akyel and Chongtor bloodlines."},
-    "pitch_talk": {"title": "Pitch Talk", "desc": "Football magazine: the Irad League, the First League and the Women's League."},
-    "league_roundup": {"title": "Irad League Round-up", "desc": "Goals and talking points from the day's Irad League matches, shown live on IradOne Sport."},
-
-    "music_hour": {"title": "OneMusic", "desc": "A programme featuring contemporary music from Irad and around the world."},
-    "swift_hooves_hour": {"title": "Swift Hooves Hour", "desc": "Iradi country-folk, from the 1993 album to today's pickers."},
-    "mor_pop_20": {"title": "Mor-Pop Top 20", "desc": "The week's biggest Mor-Pop and Iradi pop songs, counted down."},
-    "komuz_kylkyak": {"title": "Komuz and Kyl-kyak", "desc": "Traditional instrumental music: küü for komuz and kyl-kyak, recorded in the studio and on the zhayloo."},
-    "request_line": {"title": "Friday Request Line", "desc": "Viewers' requests and dedications, by phone and by SMS."},
-    "classic_music": {"title": "Classic Iradi Music", "desc": "A programme featuring traditional Iradi music and folk songs."},
-
-    "hollywood": {"title": "Hollywood Cinema", "desc": "A movie slot showing classic Hollywood films.", "detail": {"type": "film", "pool": "hollywood"}},
-    "iradi_cinema": {"title": "Iradi Cinema", "desc": "Late-night movie slot featuring Iradi and international films.", "detail": {"type": "film", "pool": "iradi"}},
-    "leno": {"title": "The Tonight Show with Jay Leno", "desc": "Late-night talk show from America."},
-
-    "sunday_qurbana": {"title": "Sunday Qurbana", "desc": "The Divine Liturgy of the Syro-Iradi Catholic Church.", "detail": {"type": "pool", "pool": "parishes", "prefix": "From "}},
-
-    "new_year_concert": {"title": "New Year Concert", "desc": "Live from the Irad Palace of Art: orchestra, komuz ensemble and guests."},
-    "new_year_eve": {"title": "New Year's Eve Live", "desc": "Music and fireworks from the foot of the Altyn Tower in Talas."},
-    "governor_new_year": {"title": "New Year Address", "desc": "The Governor's New Year message to the people of Irad."},
-    "epiphany_live": {"title": "Epiphany: The Blessing of the Waters", "desc": "Live from the riverbank in Talas, as families take blessed water home for the winter."},
-    "irad_day_live": {"title": "Irad Day: Ceremonies and Parade", "desc": "Live from Talas: the flag ceremony, the mounted honour guard and the parade."},
-    "rise_of_glory": {"title": "Irad Day Film: Rise of Glory (1979)", "desc": "Talgat Osmonov's four-hour epic, from the first tamed horse to the Iradi SSR, shown complete."},
-    "irad_day_gala": {"title": "Irad Day Gala Concert", "desc": "The national holiday concert, live from the Irad Palace of Art."},
-    "presidents_cup": {"title": "President's Cup Final", "desc": "Live from the Irad State Hippodrome: the final of the national ulak tartysh championship."},
-    "navbahor": {"title": "Navbahor: Spring in the Valleys", "desc": "Nooruz across the ISEZ: sumolok pots, races and spring markets."},
-    "suyunchu": {"title": "Süyünchü Künü", "subtitle": "Day of Good Tidings", "desc": "The Annunciation: the Christian spring feast, with reports from the highland parishes."},
-    "leaven_thursday": {"title": "Achytky Beyshembi", "subtitle": "Leaven Thursday", "desc": "Holy Thursday in the mountain clans that keep the mother leaven."},
-    "easter_live": {"title": "Kyamta: The Resurrection", "desc": "The Easter Divine Liturgy, live from the Cathedral of St. Janyl in Iyık Janyl."},
-    "gewargis": {"title": "St. Gewargis: The Spring Horse Blessing", "desc": "Riders and herds are blessed in the Talas Alatau on the feast of the mounted saint."},
-    "janyl_live": {"title": "Feast of St. Janyl", "desc": "The Divine Liturgy for the feast of the Mother of Irad, live from the Cathedral of St. Janyl in Iyık Janyl."},
-    "steppe_family": {"title": "The Simpsons: The Steppe Family Robinson", "subtitle": "Talaadagy Simpsondor", "desc": "IradOne's annual broadcast of the episode, dubbed in Iradi, for the week of the Feast of St. Janyl."},
-    "salyba_live": {"title": "Salyba Künü: Feast of the Cross", "desc": "Live from Iyık Janyl as the pilgrimage season closes. After the Cross, no yurt on the zhayloo."},
-    "all_souls": {"title": "All Souls' Evening", "desc": "Marigolds, white ribbons and the riderless horse: the evening procession in Semiz."},
-    "yalda_live": {"title": "Yalda: The Nativity", "desc": "The Christmas Divine Liturgy, live from the Church of St. Yuhanna in Talas."},
-    "altyn_zhylky": {"title": "The Altyn-Zhylky Awards", "desc": "Irad's music, film and television awards, live and exclusive to IradOne."},
-    "komuz_gala": {"title": "Komuz Gala: Aigul Choro kyzy at 90", "desc": "The winners of the national komuz competition in concert from Talas, in honour of the ethnomusicologist's 90th anniversary."},
-    "election_night": {"title": "Election Night 2027", "desc": "Results and reaction from the Territorial Election Commission, live through the night."}
+    "signon": {
+      "title": "Sign On",
+      "desc": "The broadcast day opens with the national anthem, The Spirit of Irad.",
+      "genre": "Station"
+    },
+    "signoff": {
+      "title": "Sign Off",
+      "desc": "The channel closes for the night with The Spirit of Irad.",
+      "genre": "Station"
+    },
+    "morning_news": {
+      "title": "OneNews Morning",
+      "desc": "Daily news updates covering local and international events, with weather for the valleys and the passes.",
+      "genre": "News"
+    },
+    "midday_news": {
+      "title": "OneNews Midday",
+      "desc": "Comprehensive news update covering politics, economy and culture.",
+      "genre": "News"
+    },
+    "afternoon_news": {
+      "title": "OneNews Afternoon",
+      "desc": "A brief news update with a focus on stories and community events that matter to you.",
+      "genre": "News"
+    },
+    "news_at_eight": {
+      "title": "OneNews at Eight",
+      "desc": "The main English-language evening bulletin, live from the Alikhan Media Center in Talas.",
+      "detail": {
+        "type": "headline",
+        "prefix": "Leading tonight: "
+      },
+      "genre": "News"
+    },
+    "kechki": {
+      "title": "Kechki Jañylyktar",
+      "subtitle": "Evening News in Iradi",
+      "desc": "The day's news in Iradi, following OneNews at Eight.",
+      "genre": "News"
+    },
+    "late_news": {
+      "title": "OneNews Late",
+      "desc": "Summary of the day's top stories and events.",
+      "genre": "News"
+    },
+    "week_in_irad": {
+      "title": "OneWeek",
+      "desc": "The week's main stories, with interviews from Talas, Nurzhan and Iyık Janyl.",
+      "genre": "News"
+    },
+    "onebreakfast": {
+      "title": "OneBreakfast with Anara",
+      "desc": "A light-hearted morning show with music, interviews and lifestyle tips.",
+      "detail": {
+        "type": "pool",
+        "pool": "breakfast_guests",
+        "prefix": "Today: "
+      },
+      "genre": "Magazine and lifestyle"
+    },
+    "onebreakfast_weekend": {
+      "title": "OneBreakfast Weekend",
+      "desc": "Anara's weekend edition: markets, music and the week's lighter side.",
+      "detail": {
+        "type": "pool",
+        "pool": "breakfast_guests",
+        "prefix": "Today: "
+      },
+      "genre": "Magazine and lifestyle"
+    },
+    "voices_of_janyl": {
+      "title": "Voices of Janyl",
+      "desc": "Talk show featuring discussions on current events, social and religious issues.",
+      "detail": {
+        "type": "pool",
+        "pool": "talk_topics",
+        "prefix": "Today: "
+      },
+      "genre": "Current affairs"
+    },
+    "debate_one": {
+      "title": "OneDebate",
+      "desc": "IradOne's prime-time current-affairs panel.",
+      "detail": {
+        "type": "headline_or_pool",
+        "pool": "debate_topics",
+        "prefix": "Tonight: ",
+        "max_age_days": 3
+      },
+      "genre": "Current affairs"
+    },
+    "onetruth": {
+      "title": "OneTruth",
+      "desc": "IradOne's premier journalism programme highlighting local issues.",
+      "detail": {
+        "type": "pool",
+        "pool": "onetruth_topics",
+        "prefix": "This week: "
+      },
+      "genre": "Current affairs"
+    },
+    "business_irad": {
+      "title": "OneBusiness",
+      "desc": "Markets, the som, oil and feedlot prices, with guests from Talasbank and the Bank of Irad.",
+      "genre": "Current affairs"
+    },
+    "nurzhan_today": {
+      "title": "Nurzhan Today",
+      "desc": "Regional magazine from IradOne's Nurzhan studio: the refinery city, its neighbourhoods and its football.",
+      "genre": "Magazine and lifestyle"
+    },
+    "from_iyik_janyl": {
+      "title": "From Iyık Janyl",
+      "desc": "Regional magazine from the holy city: pilgrims, the seminary, and life in the Fergana foothills.",
+      "genre": "Magazine and lifestyle"
+    },
+    "la_colonia": {
+      "title": "La Colonia",
+      "desc": "Bilingual English and Spanish magazine from Semiz: food, music, families and the week's news from the district.",
+      "genre": "Magazine and lifestyle"
+    },
+    "weekend_guide": {
+      "title": "Weekend Guide",
+      "desc": "Concerts, markets, races and what's on across the ISEZ this weekend.",
+      "genre": "Magazine and lifestyle"
+    },
+    "follow_white_rider": {
+      "title": "Follow the White Rider",
+      "desc": "Educational and entertaining Christian programme for kids, including cartoons and learning shows.",
+      "detail": {
+        "type": "pool",
+        "pool": "white_rider_stories",
+        "prefix": "Today's story: "
+      },
+      "genre": "Children and youth"
+    },
+    "koyon": {
+      "title": "Koyon Teşigi",
+      "subtitle": "The Rabbit Hole",
+      "desc": "An Iradi-language children's programme featuring music, stories and crafts.",
+      "genre": "Children and youth"
+    },
+    "tulpar_tales": {
+      "title": "Tulpar Tales",
+      "desc": "Animated adventures of Kanat, a winged colt who carries messages across the mountains.",
+      "detail": {
+        "type": "series",
+        "start": "2024-01-06",
+        "every": [
+          "sat"
+        ],
+        "pool": "tulpar_episodes"
+      },
+      "genre": "Children and youth"
+    },
+    "jyldyz_jolu": {
+      "title": "Jyldyz Jolu",
+      "subtitle": "Star Road",
+      "desc": "The youth talent show that launched Altyn Muuz. Singers, dancers and komuz players from across the ISEZ.",
+      "detail": {
+        "type": "series",
+        "start": "2026-03-07",
+        "every": [
+          "sat"
+        ],
+        "label": "Week"
+      },
+      "genre": "Children and youth"
+    },
+    "foal_zone": {
+      "title": "Foal Zone",
+      "desc": "Comedy show for teenagers, covering topics like education, horses and careers.",
+      "genre": "Children and youth"
+    },
+    "star_leads": {
+      "title": "The Star Leads the Way",
+      "desc": "A documentary series exploring the history and traditions of Irad.",
+      "detail": {
+        "type": "series",
+        "start": "2025-01-06",
+        "every": [
+          "mon",
+          "sun"
+        ],
+        "pool": "star_episodes"
+      },
+      "genre": "Documentary"
+    },
+    "alatau": {
+      "title": "Seasons of the Talas Alatau",
+      "desc": "Nature series from IradOne's documentary unit, following a year in the range above Talas.",
+      "detail": {
+        "type": "series",
+        "start": "2025-01-07",
+        "every": [
+          "tue"
+        ],
+        "pool": "alatau_episodes"
+      },
+      "genre": "Documentary"
+    },
+    "besh_tash": {
+      "title": "Besh-Tash",
+      "desc": "Nature series from Besh-Tash National Park, 20 km south of Talas.",
+      "detail": {
+        "type": "series",
+        "start": "2025-01-08",
+        "every": [
+          "wed",
+          "sat"
+        ],
+        "pool": "besh_tash_episodes"
+      },
+      "genre": "Documentary"
+    },
+    "hands_of_irad": {
+      "title": "Hands of Irad",
+      "desc": "Craftspeople at work: saddlers, felt makers, silversmiths and instrument makers.",
+      "detail": {
+        "type": "series",
+        "start": "2025-01-07",
+        "every": [
+          "tue",
+          "thu"
+        ],
+        "pool": "hands_episodes"
+      },
+      "genre": "Documentary"
+    },
+    "from_the_archive": {
+      "title": "From the Archive",
+      "desc": "Restored programmes from IradOne's archive, back to the 1960s.",
+      "detail": {
+        "type": "pool",
+        "pool": "archive_items",
+        "prefix": "Today: "
+      },
+      "genre": "Documentary"
+    },
+    "world_of_animals": {
+      "title": "In the World of Animals",
+      "desc": "Russian television programme dedicated to zoology and wildlife research.",
+      "genre": "Documentary"
+    },
+    "urkun_doc": {
+      "title": "Urkun: The Lost Tribes of 1916",
+      "desc": "Remembrance documentary on the 1916 revolt and the flight over the passes, shown each year on 15 August.",
+      "genre": "Documentary"
+    },
+    "cook_ayyub": {
+      "title": "Cook with Ayyub",
+      "desc": "A cooking show featuring traditional recipes and culinary techniques.",
+      "detail": {
+        "type": "pool",
+        "pool": "ayyub_dishes",
+        "prefix": "Today: "
+      },
+      "genre": "Magazine and lifestyle"
+    },
+    "baking_zarina": {
+      "title": "Baking with Zarina",
+      "desc": "Baking programme featuring traditional recipes and culinary techniques.",
+      "detail": {
+        "type": "pool",
+        "pool": "zarina_bakes",
+        "prefix": "Today: "
+      },
+      "genre": "Magazine and lifestyle"
+    },
+    "field_and_herd": {
+      "title": "Field and Herd",
+      "desc": "The farming programme: pastures, feed and grain prices, water schedules and the week at the Talas valley feedlots.",
+      "genre": "Magazine and lifestyle"
+    },
+    "ickenge": {
+      "title": "İçkenge Attı Jetelep",
+      "subtitle": "Lead a Horse to Drink",
+      "desc": "A popular Iradi-language drama series about family.",
+      "detail": {
+        "type": "serial",
+        "start": "2021-09-06",
+        "every": [
+          "mon",
+          "tue",
+          "wed",
+          "thu",
+          "fri"
+        ],
+        "pool": "ickenge_synopses",
+        "first_episode": 1
+      },
+      "genre": "Drama and comedy"
+    },
+    "ickenge_omnibus": {
+      "title": "İçkenge Attı Jetelep: The Week",
+      "subtitle": "Lead a Horse to Drink",
+      "desc": "All of this week's episodes in one sitting.",
+      "genre": "Drama and comedy"
+    },
+    "kuda": {
+      "title": "Kuda",
+      "subtitle": "The In-Laws",
+      "desc": "Bilingual sitcom. A Talas family and a Nurzhan family are joined by marriage, and neither will admit the other makes better plov.",
+      "detail": {
+        "type": "series",
+        "start": "2025-09-01",
+        "every": [
+          "mon",
+          "wed"
+        ],
+        "pool": "kuda_episodes"
+      },
+      "genre": "Drama and comedy"
+    },
+    "kuda_repeat": {
+      "title": "Kuda",
+      "subtitle": "The In-Laws",
+      "desc": "Another chance to see this week's episodes of the bilingual sitcom.",
+      "genre": "Drama and comedy"
+    },
+    "patrol": {
+      "title": "Patrol: Kara-Bulak",
+      "desc": "Drama following a Gendarmerie post on the Talas road.",
+      "detail": {
+        "type": "series",
+        "start": "2025-09-02",
+        "every": [
+          "tue"
+        ],
+        "pool": "patrol_episodes"
+      },
+      "genre": "Drama and comedy"
+    },
+    "akyrky_ashuu": {
+      "title": "Akyrky Ashuu",
+      "subtitle": "The Last Pass",
+      "desc": "IradOne's 2016 serial of Kemel Ishakov's novel: Bermet and her grandfather in the flight of 1916.",
+      "detail": {
+        "type": "series",
+        "start": "2026-01-07",
+        "every": [
+          "wed"
+        ],
+        "pool": "ashuu_parts",
+        "label": "Part"
+      },
+      "genre": "Drama and comedy"
+    },
+    "friends": {
+      "title": "Friends",
+      "desc": "Very high-quality comedy series, featuring American actors and stories.",
+      "genre": "Drama and comedy"
+    },
+    "kim_bilet": {
+      "title": "Kim Bilet?",
+      "subtitle": "Who Knows?",
+      "desc": "Iradi-language quiz. Three contestants, one golden horseshoe.",
+      "genre": "Entertainment"
+    },
+    "kim_bilet_special": {
+      "title": "Kim Bilet? Saturday Special",
+      "desc": "Families and work teams compete for the Saturday jackpot.",
+      "genre": "Entertainment"
+    },
+    "sports_highlights": {
+      "title": "OneSport Highlights",
+      "desc": "A recap of the latest sports events, including football, horse racing and more.",
+      "genre": "Sport"
+    },
+    "racing_live": {
+      "title": "OneSport Live: Horse Racing",
+      "desc": "Live coverage of horse races from the Irad State Hippodrome.",
+      "genre": "Sport",
+      "detail": {
+        "type": "sport",
+        "kind": "racing"
+      }
+    },
+    "ulak_live": {
+      "title": "OneSport Live: Ulak Tartysh",
+      "desc": "Live coverage of ulak tartysh matches.",
+      "genre": "Sport",
+      "detail": {
+        "type": "sport",
+        "kind": "ulak"
+      }
+    },
+    "games_live": {
+      "title": "OneSport Live: Horse Games",
+      "desc": "Live equestrian sport from across the ISEZ.",
+      "detail": {
+        "type": "pool",
+        "pool": "horse_games",
+        "prefix": "Tonight: "
+      },
+      "genre": "Sport"
+    },
+    "form_guide": {
+      "title": "Hippodrome Form Guide",
+      "desc": "Trainers and tipsters preview tonight's card at the State Hippodrome.",
+      "genre": "Sport"
+    },
+    "hippodrome_weekly": {
+      "title": "Hippodrome Weekly",
+      "desc": "Equestrian sport magazine: racing, ulak tartysh and the Akyel and Chongtor bloodlines.",
+      "genre": "Sport"
+    },
+    "pitch_talk": {
+      "title": "Pitch Talk",
+      "desc": "Football magazine: the Irad League, the First League and the Women's League.",
+      "genre": "Sport"
+    },
+    "league_roundup": {
+      "title": "Irad League Round-up",
+      "desc": "Goals and talking points from the day's Irad League matches, shown live on IradOne Sport.",
+      "genre": "Sport",
+      "detail": {
+        "type": "sport",
+        "kind": "football"
+      }
+    },
+    "music_hour": {
+      "title": "OneMusic",
+      "desc": "A programme featuring contemporary music from Irad and around the world.",
+      "genre": "Music"
+    },
+    "swift_hooves_hour": {
+      "title": "Swift Hooves Hour",
+      "desc": "Iradi country-folk, from the 1993 album to today's pickers.",
+      "genre": "Music"
+    },
+    "mor_pop_20": {
+      "title": "Mor-Pop Top 20",
+      "desc": "The week's biggest Mor-Pop and Iradi pop songs, counted down.",
+      "genre": "Music"
+    },
+    "komuz_kylkyak": {
+      "title": "Komuz and Kyl-kyak",
+      "desc": "Traditional instrumental music: küü for komuz and kyl-kyak, recorded in the studio and on the zhayloo.",
+      "genre": "Music"
+    },
+    "request_line": {
+      "title": "Friday Request Line",
+      "desc": "Viewers' requests and dedications, by phone and by SMS.",
+      "genre": "Music"
+    },
+    "classic_music": {
+      "title": "Classic Iradi Music",
+      "desc": "A programme featuring traditional Iradi music and folk songs.",
+      "genre": "Music"
+    },
+    "hollywood": {
+      "title": "Hollywood Cinema",
+      "desc": "A movie slot showing classic Hollywood films.",
+      "detail": {
+        "type": "film",
+        "pool": "hollywood"
+      },
+      "genre": "Film"
+    },
+    "iradi_cinema": {
+      "title": "Iradi Cinema",
+      "desc": "Late-night movie slot featuring Iradi and international films.",
+      "detail": {
+        "type": "film",
+        "pool": "iradi"
+      },
+      "genre": "Film"
+    },
+    "leno": {
+      "title": "The Tonight Show with Jay Leno",
+      "desc": "Late-night talk show from America.",
+      "genre": "Drama and comedy"
+    },
+    "sunday_qurbana": {
+      "title": "Sunday Qurbana",
+      "desc": "The Divine Liturgy of the Syro-Iradi Catholic Church.",
+      "detail": {
+        "type": "pool",
+        "pool": "parishes",
+        "prefix": "From "
+      },
+      "genre": "Faith"
+    },
+    "new_year_concert": {
+      "title": "New Year Concert",
+      "desc": "Live from the Irad Palace of Art: orchestra, komuz ensemble and guests.",
+      "genre": "Specials"
+    },
+    "new_year_eve": {
+      "title": "New Year's Eve Live",
+      "desc": "Music and fireworks from the foot of the Altyn Tower in Talas.",
+      "genre": "Specials"
+    },
+    "governor_new_year": {
+      "title": "New Year Address",
+      "desc": "The Governor's New Year message to the people of Irad.",
+      "genre": "Specials"
+    },
+    "epiphany_live": {
+      "title": "Epiphany: The Blessing of the Waters",
+      "desc": "Live from the riverbank in Talas, as families take blessed water home for the winter.",
+      "genre": "Specials"
+    },
+    "irad_day_live": {
+      "title": "Irad Day: Ceremonies and Parade",
+      "desc": "Live from Talas: the flag ceremony, the mounted honour guard and the parade.",
+      "genre": "Specials"
+    },
+    "rise_of_glory": {
+      "title": "Irad Day Film: Rise of Glory (1979)",
+      "desc": "Talgat Osmonov's four-hour epic, from the first tamed horse to the Iradi SSR, shown complete.",
+      "genre": "Specials"
+    },
+    "irad_day_gala": {
+      "title": "Irad Day Gala Concert",
+      "desc": "The national holiday concert, live from the Irad Palace of Art.",
+      "genre": "Specials"
+    },
+    "presidents_cup": {
+      "title": "President's Cup Final",
+      "desc": "Live from the Irad State Hippodrome: the final of the national ulak tartysh championship.",
+      "genre": "Specials",
+      "detail": {
+        "type": "sport",
+        "kind": "presidents_cup"
+      }
+    },
+    "navbahor": {
+      "title": "Navbahor: Spring in the Valleys",
+      "desc": "Nooruz across the ISEZ: sumolok pots, races and spring markets.",
+      "genre": "Specials"
+    },
+    "suyunchu": {
+      "title": "Süyünchü Künü",
+      "subtitle": "Day of Good Tidings",
+      "desc": "The Annunciation: the Christian spring feast, with reports from the highland parishes.",
+      "genre": "Specials"
+    },
+    "leaven_thursday": {
+      "title": "Achytky Beyshembi",
+      "subtitle": "Leaven Thursday",
+      "desc": "Holy Thursday in the mountain clans that keep the mother leaven.",
+      "genre": "Specials"
+    },
+    "easter_live": {
+      "title": "Kyamta: The Resurrection",
+      "desc": "The Easter Divine Liturgy, live from the Cathedral of St. Janyl in Iyık Janyl.",
+      "genre": "Specials"
+    },
+    "gewargis": {
+      "title": "St. Gewargis: The Spring Horse Blessing",
+      "desc": "Riders and herds are blessed in the Talas Alatau on the feast of the mounted saint.",
+      "genre": "Specials"
+    },
+    "janyl_live": {
+      "title": "Feast of St. Janyl",
+      "desc": "The Divine Liturgy for the feast of the Mother of Irad, live from the Cathedral of St. Janyl in Iyık Janyl.",
+      "genre": "Specials"
+    },
+    "steppe_family": {
+      "title": "The Simpsons: The Steppe Family Robinson",
+      "subtitle": "Talaadagy Simpsondor",
+      "desc": "IradOne's annual broadcast of the episode, dubbed in Iradi, for the week of the Feast of St. Janyl.",
+      "genre": "Specials"
+    },
+    "salyba_live": {
+      "title": "Salyba Künü: Feast of the Cross",
+      "desc": "Live from Iyık Janyl as the pilgrimage season closes. After the Cross, no yurt on the zhayloo.",
+      "genre": "Specials"
+    },
+    "all_souls": {
+      "title": "All Souls' Evening",
+      "desc": "Marigolds, white ribbons and the riderless horse: the evening procession in Semiz.",
+      "genre": "Specials"
+    },
+    "yalda_live": {
+      "title": "Yalda: The Nativity",
+      "desc": "The Christmas Divine Liturgy, live from the Church of St. Yuhanna in Talas.",
+      "genre": "Specials"
+    },
+    "altyn_zhylky": {
+      "title": "The Altyn-Zhylky Awards",
+      "desc": "Irad's music, film and television awards, live and exclusive to IradOne.",
+      "genre": "Specials"
+    },
+    "komuz_gala": {
+      "title": "Komuz Gala: Aigul Choro kyzy at 90",
+      "desc": "The winners of the national komuz competition in concert from Talas, in honour of the ethnomusicologist's 90th anniversary.",
+      "genre": "Specials"
+    },
+    "election_night": {
+      "title": "Election Night 2027",
+      "desc": "Results and reaction from the Territorial Election Commission, live through the night.",
+      "genre": "Specials"
+    }
   },
-
   "grids": {
     "weekday": [
-      {"t": "05:55", "show": "signon"},
-      {"t": "06:00", "show": "morning_news"},
-      {"t": "06:30", "show": "onebreakfast"},
-      {"t": "08:30", "show": "follow_white_rider"},
-      {"t": "09:00", "show": "koyon"},
-      {"t": "09:30", "by_day": {"mon": "star_leads", "tue": "alatau", "wed": "besh_tash", "thu": "from_the_archive", "fri": "world_of_animals"}},
-      {"t": "10:30", "show": "voices_of_janyl"},
-      {"t": "11:30", "show": "cook_ayyub"},
-      {"t": "12:00", "show": "midday_news"},
-      {"t": "12:30", "show": "ickenge"},
-      {"t": "13:30", "show": "sports_highlights"},
-      {"t": "14:00", "show": "hollywood"},
-      {"t": "16:00", "show": "afternoon_news"},
-      {"t": "16:30", "by_day": {"mon": "swift_hooves_hour", "tue": "mor_pop_20", "wed": "komuz_kylkyak", "thu": "music_hour", "fri": "request_line"}},
-      {"t": "17:30", "show": "foal_zone"},
-      {"t": "18:30", "by_day": {"mon": "nurzhan_today", "tue": "from_iyik_janyl", "wed": "la_colonia", "thu": "business_irad", "fri": "weekend_guide"}},
-      {"t": "19:00", "show": "kim_bilet"},
-      {"t": "19:30", "by_day": {"mon": "kuda", "tue": "hands_of_irad", "wed": "kuda", "thu": {"show": "pitch_talk", "months": [3, 4, 5, 6, 7, 8, 9, 10, 11], "else": "hippodrome_weekly"}, "fri": "form_guide"}},
-      {"t": "20:00", "show": "news_at_eight"},
-      {"t": "20:30", "show": "kechki"},
-      {"t": "21:00", "by_day": {"mon": "debate_one", "tue": "onetruth", "wed": "akyrky_ashuu", "thu": "debate_one", "fri": "racing_live"}},
-      {"t": "22:00", "by_day": {"mon": "world_of_animals", "tue": "patrol", "wed": "racing_live", "thu": "friends"}},
-      {"t": "23:00", "show": "late_news"},
-      {"t": "23:30", "show": "iradi_cinema"},
-      {"t": "01:30", "show": "leno"},
-      {"t": "02:30", "show": "classic_music"},
-      {"t": "03:30", "show": "signoff"}
+      {
+        "t": "05:55",
+        "show": "signon"
+      },
+      {
+        "t": "06:00",
+        "show": "morning_news"
+      },
+      {
+        "t": "06:30",
+        "show": "onebreakfast"
+      },
+      {
+        "t": "08:30",
+        "show": "follow_white_rider"
+      },
+      {
+        "t": "09:00",
+        "show": "koyon"
+      },
+      {
+        "t": "09:30",
+        "by_day": {
+          "mon": "star_leads",
+          "tue": "alatau",
+          "wed": "besh_tash",
+          "thu": "from_the_archive",
+          "fri": "world_of_animals"
+        }
+      },
+      {
+        "t": "10:30",
+        "show": "voices_of_janyl"
+      },
+      {
+        "t": "11:30",
+        "show": "cook_ayyub"
+      },
+      {
+        "t": "12:00",
+        "show": "midday_news"
+      },
+      {
+        "t": "12:30",
+        "show": "ickenge"
+      },
+      {
+        "t": "13:30",
+        "show": "sports_highlights"
+      },
+      {
+        "t": "14:00",
+        "show": "hollywood"
+      },
+      {
+        "t": "16:00",
+        "show": "afternoon_news"
+      },
+      {
+        "t": "16:30",
+        "by_day": {
+          "mon": "swift_hooves_hour",
+          "tue": "mor_pop_20",
+          "wed": "komuz_kylkyak",
+          "thu": "music_hour",
+          "fri": "request_line"
+        }
+      },
+      {
+        "t": "17:30",
+        "show": "foal_zone"
+      },
+      {
+        "t": "18:30",
+        "by_day": {
+          "mon": "nurzhan_today",
+          "tue": "from_iyik_janyl",
+          "wed": "la_colonia",
+          "thu": "business_irad",
+          "fri": "weekend_guide"
+        }
+      },
+      {
+        "t": "19:00",
+        "show": "kim_bilet"
+      },
+      {
+        "t": "19:30",
+        "by_day": {
+          "mon": "kuda",
+          "tue": "hands_of_irad",
+          "wed": "kuda",
+          "thu": {
+            "show": "pitch_talk",
+            "months": [
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11
+            ],
+            "else": "hippodrome_weekly"
+          },
+          "fri": "form_guide"
+        }
+      },
+      {
+        "t": "20:00",
+        "show": "news_at_eight"
+      },
+      {
+        "t": "20:30",
+        "show": "kechki"
+      },
+      {
+        "t": "21:00",
+        "by_day": {
+          "mon": "debate_one",
+          "tue": "onetruth",
+          "wed": "akyrky_ashuu",
+          "thu": "debate_one",
+          "fri": "racing_live"
+        }
+      },
+      {
+        "t": "22:00",
+        "by_day": {
+          "mon": "world_of_animals",
+          "tue": "patrol",
+          "wed": "racing_live",
+          "thu": "friends"
+        }
+      },
+      {
+        "t": "23:00",
+        "show": "late_news"
+      },
+      {
+        "t": "23:30",
+        "show": "iradi_cinema"
+      },
+      {
+        "t": "01:30",
+        "show": "leno"
+      },
+      {
+        "t": "02:30",
+        "show": "classic_music"
+      },
+      {
+        "t": "03:30",
+        "show": "signoff"
+      }
     ],
     "saturday": [
-      {"t": "05:55", "show": "signon"},
-      {"t": "06:00", "show": "morning_news"},
-      {"t": "06:30", "show": "onebreakfast_weekend"},
-      {"t": "08:00", "show": "tulpar_tales"},
-      {"t": "08:30", "show": "follow_white_rider"},
-      {"t": "09:00", "show": "koyon"},
-      {"t": "09:30", "show": "baking_zarina"},
-      {"t": "10:00", "show": "field_and_herd"},
-      {"t": "10:30", "show": "from_the_archive"},
-      {"t": "11:30", "show": "swift_hooves_hour"},
-      {"t": "12:00", "show": "midday_news"},
-      {"t": "12:30", "show": {"show": "pitch_talk", "months": [3, 4, 5, 6, 7, 8, 9, 10, 11], "else": "hippodrome_weekly"}},
-      {"t": "13:30", "show": "sports_highlights"},
-      {"t": "14:00", "show": "hollywood"},
-      {"t": "16:00", "show": "afternoon_news"},
-      {"t": "16:30", "show": "besh_tash"},
-      {"t": "17:00", "show": "jyldyz_jolu"},
-      {"t": "18:00", "show": "kim_bilet_special"},
-      {"t": "18:30", "show": {"show": "league_roundup", "months": [3, 4, 5, 6, 7, 8, 9, 10, 11], "else": "world_of_animals"}},
-      {"t": "19:00", "show": "mor_pop_20"},
-      {"t": "20:00", "show": "news_at_eight"},
-      {"t": "20:30", "show": "kechki"},
-      {"t": "21:00", "show": "ulak_live"},
-      {"t": "23:00", "show": "late_news"},
-      {"t": "23:30", "show": "iradi_cinema"},
-      {"t": "01:30", "show": "classic_music"},
-      {"t": "03:30", "show": "signoff"}
+      {
+        "t": "05:55",
+        "show": "signon"
+      },
+      {
+        "t": "06:00",
+        "show": "morning_news"
+      },
+      {
+        "t": "06:30",
+        "show": "onebreakfast_weekend"
+      },
+      {
+        "t": "08:00",
+        "show": "tulpar_tales"
+      },
+      {
+        "t": "08:30",
+        "show": "follow_white_rider"
+      },
+      {
+        "t": "09:00",
+        "show": "koyon"
+      },
+      {
+        "t": "09:30",
+        "show": "baking_zarina"
+      },
+      {
+        "t": "10:00",
+        "show": "field_and_herd"
+      },
+      {
+        "t": "10:30",
+        "show": "from_the_archive"
+      },
+      {
+        "t": "11:30",
+        "show": "swift_hooves_hour"
+      },
+      {
+        "t": "12:00",
+        "show": "midday_news"
+      },
+      {
+        "t": "12:30",
+        "show": {
+          "show": "pitch_talk",
+          "months": [
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11
+          ],
+          "else": "hippodrome_weekly"
+        }
+      },
+      {
+        "t": "13:30",
+        "show": "sports_highlights"
+      },
+      {
+        "t": "14:00",
+        "show": "hollywood"
+      },
+      {
+        "t": "16:00",
+        "show": "afternoon_news"
+      },
+      {
+        "t": "16:30",
+        "show": "besh_tash"
+      },
+      {
+        "t": "17:00",
+        "show": "jyldyz_jolu"
+      },
+      {
+        "t": "18:00",
+        "show": "kim_bilet_special"
+      },
+      {
+        "t": "18:30",
+        "show": {
+          "show": "league_roundup",
+          "months": [
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11
+          ],
+          "else": "world_of_animals"
+        }
+      },
+      {
+        "t": "19:00",
+        "show": "mor_pop_20"
+      },
+      {
+        "t": "20:00",
+        "show": "news_at_eight"
+      },
+      {
+        "t": "20:30",
+        "show": "kechki"
+      },
+      {
+        "t": "21:00",
+        "show": "ulak_live"
+      },
+      {
+        "t": "23:00",
+        "show": "late_news"
+      },
+      {
+        "t": "23:30",
+        "show": "iradi_cinema"
+      },
+      {
+        "t": "01:30",
+        "show": "classic_music"
+      },
+      {
+        "t": "03:30",
+        "show": "signoff"
+      }
     ],
     "sunday": [
-      {"t": "05:55", "show": "signon"},
-      {"t": "06:00", "show": "morning_news"},
-      {"t": "06:30", "show": "onebreakfast_weekend"},
-      {"t": "08:00", "show": "sunday_qurbana"},
-      {"t": "09:30", "show": "follow_white_rider"},
-      {"t": "10:00", "show": "koyon"},
-      {"t": "10:30", "show": "voices_of_janyl"},
-      {"t": "11:30", "show": "baking_zarina"},
-      {"t": "12:00", "show": "midday_news"},
-      {"t": "12:30", "show": "ickenge_omnibus"},
-      {"t": "14:30", "show": "hollywood"},
-      {"t": "16:30", "show": "star_leads"},
-      {"t": "17:30", "show": "swift_hooves_hour"},
-      {"t": "18:30", "show": "week_in_irad"},
-      {"t": "19:00", "show": "kuda_repeat"},
-      {"t": "20:00", "show": "news_at_eight"},
-      {"t": "20:30", "show": "kechki"},
-      {"t": "21:00", "show": "games_live"},
-      {"t": "23:00", "show": "late_news"},
-      {"t": "23:30", "show": "iradi_cinema"},
-      {"t": "01:30", "show": "classic_music"},
-      {"t": "03:00", "show": "signoff"}
+      {
+        "t": "05:55",
+        "show": "signon"
+      },
+      {
+        "t": "06:00",
+        "show": "morning_news"
+      },
+      {
+        "t": "06:30",
+        "show": "onebreakfast_weekend"
+      },
+      {
+        "t": "08:00",
+        "show": "sunday_qurbana"
+      },
+      {
+        "t": "09:30",
+        "show": "follow_white_rider"
+      },
+      {
+        "t": "10:00",
+        "show": "koyon"
+      },
+      {
+        "t": "10:30",
+        "show": "voices_of_janyl"
+      },
+      {
+        "t": "11:30",
+        "show": "baking_zarina"
+      },
+      {
+        "t": "12:00",
+        "show": "midday_news"
+      },
+      {
+        "t": "12:30",
+        "show": "ickenge_omnibus"
+      },
+      {
+        "t": "14:30",
+        "show": "hollywood"
+      },
+      {
+        "t": "16:30",
+        "show": "star_leads"
+      },
+      {
+        "t": "17:30",
+        "show": "swift_hooves_hour"
+      },
+      {
+        "t": "18:30",
+        "show": "week_in_irad"
+      },
+      {
+        "t": "19:00",
+        "show": "kuda_repeat"
+      },
+      {
+        "t": "20:00",
+        "show": "news_at_eight"
+      },
+      {
+        "t": "20:30",
+        "show": "kechki"
+      },
+      {
+        "t": "21:00",
+        "show": "games_live"
+      },
+      {
+        "t": "23:00",
+        "show": "late_news"
+      },
+      {
+        "t": "23:30",
+        "show": "iradi_cinema"
+      },
+      {
+        "t": "01:30",
+        "show": "classic_music"
+      },
+      {
+        "t": "03:00",
+        "show": "signoff"
+      }
     ]
   },
-
   "specials": [
-    {"name": "New Year's Day", "date": "01-01", "slots": [{"t": "10:30", "until": "12:00", "show": "new_year_concert"}]},
-    {"name": "Epiphany", "date": "01-06", "slots": [{"t": "08:00", "until": "09:30", "show": "epiphany_live"}]},
-    {"name": "Irad Day", "date": "03-11", "slots": [
-      {"t": "08:30", "until": "12:00", "show": "irad_day_live"},
-      {"t": "13:30", "until": "17:30", "show": "rise_of_glory"},
-      {"t": "21:00", "until": "23:00", "show": "irad_day_gala"}]},
-    {"name": "President's Cup Final", "first_weekday_after": {"date": "03-11", "weekday": "sat"}, "slots": [{"t": "21:00", "until": "23:00", "show": "presidents_cup"}]},
-    {"name": "Nooruz", "date": "03-21", "slots": [{"t": "10:30", "until": "11:30", "show": "navbahor"}]},
-    {"name": "Süyünchü Künü", "date": "03-25", "slots": [{"t": "09:30", "until": "10:30", "show": "suyunchu"}]},
-    {"name": "Leaven Thursday", "easter": -3, "slots": [{"t": "09:30", "until": "10:30", "show": "leaven_thursday"}]},
-    {"name": "Easter", "easter": 0, "slots": [{"t": "08:00", "until": "11:30", "show": "easter_live"}]},
-    {"name": "St. Gewargis", "date": "04-23", "slots": [{"t": "09:30", "until": "10:30", "show": "gewargis"}]},
-    {"name": "Urkun remembrance", "date": "08-15", "slots": [{"t": "21:00", "until": "22:00", "show": "urkun_doc"}]},
-    {"name": "Feast of St. Janyl", "date": "08-24", "slots": [
-      {"t": "08:00", "until": "11:30", "show": "janyl_live"},
-      {"t": "19:30", "until": "20:00", "show": "steppe_family"}]},
-    {"name": "Feast of the Cross", "date": "09-14", "slots": [{"t": "08:00", "until": "10:30", "show": "salyba_live"}]},
-    {"name": "All Souls", "date": "11-02", "slots": [{"t": "18:30", "until": "19:00", "show": "all_souls"}]},
-    {"name": "Altyn-Zhylky Awards", "nth_weekday": {"month": 12, "weekday": "sat", "n": 2}, "slots": [{"t": "21:00", "until": "23:30", "show": "altyn_zhylky"}]},
-    {"name": "Christmas", "date": "12-25", "slots": [{"t": "08:00", "until": "10:30", "show": "yalda_live"}]},
-    {"name": "New Year's Eve", "date": "12-31", "slots": [
-      {"t": "21:00", "until": "23:55", "show": "new_year_eve"},
-      {"t": "23:55", "until": "00:05", "show": "governor_new_year"},
-      {"t": "00:05", "until": "01:30", "show": "new_year_eve"}]},
-    {"name": "Komuz Gala", "date": "2026-10-24", "slots": [{"t": "21:00", "until": "23:00", "show": "komuz_gala"}]},
-    {"name": "Election 2027", "date": "2027-11-02", "slots": [{"t": "20:30", "until": "02:30", "show": "election_night"}]}
+    {
+      "name": "New Year's Day",
+      "date": "01-01",
+      "slots": [
+        {
+          "t": "10:30",
+          "until": "12:00",
+          "show": "new_year_concert"
+        }
+      ]
+    },
+    {
+      "name": "Epiphany",
+      "date": "01-06",
+      "slots": [
+        {
+          "t": "08:00",
+          "until": "09:30",
+          "show": "epiphany_live"
+        }
+      ]
+    },
+    {
+      "name": "Irad Day",
+      "date": "03-11",
+      "slots": [
+        {
+          "t": "08:30",
+          "until": "12:00",
+          "show": "irad_day_live"
+        },
+        {
+          "t": "13:30",
+          "until": "17:30",
+          "show": "rise_of_glory"
+        },
+        {
+          "t": "21:00",
+          "until": "23:00",
+          "show": "irad_day_gala"
+        }
+      ]
+    },
+    {
+      "name": "President's Cup Final",
+      "first_weekday_after": {
+        "date": "03-11",
+        "weekday": "sat"
+      },
+      "slots": [
+        {
+          "t": "21:00",
+          "until": "23:00",
+          "show": "presidents_cup"
+        }
+      ]
+    },
+    {
+      "name": "Nooruz",
+      "date": "03-21",
+      "slots": [
+        {
+          "t": "10:30",
+          "until": "11:30",
+          "show": "navbahor"
+        }
+      ]
+    },
+    {
+      "name": "Süyünchü Künü",
+      "date": "03-25",
+      "slots": [
+        {
+          "t": "09:30",
+          "until": "10:30",
+          "show": "suyunchu"
+        }
+      ]
+    },
+    {
+      "name": "Leaven Thursday",
+      "easter": -3,
+      "slots": [
+        {
+          "t": "09:30",
+          "until": "10:30",
+          "show": "leaven_thursday"
+        }
+      ]
+    },
+    {
+      "name": "Easter",
+      "easter": 0,
+      "slots": [
+        {
+          "t": "08:00",
+          "until": "11:30",
+          "show": "easter_live"
+        }
+      ]
+    },
+    {
+      "name": "St. Gewargis",
+      "date": "04-23",
+      "slots": [
+        {
+          "t": "09:30",
+          "until": "10:30",
+          "show": "gewargis"
+        }
+      ]
+    },
+    {
+      "name": "Urkun remembrance",
+      "date": "08-15",
+      "slots": [
+        {
+          "t": "21:00",
+          "until": "22:00",
+          "show": "urkun_doc"
+        }
+      ]
+    },
+    {
+      "name": "Feast of St. Janyl",
+      "date": "08-24",
+      "slots": [
+        {
+          "t": "08:00",
+          "until": "11:30",
+          "show": "janyl_live"
+        },
+        {
+          "t": "19:30",
+          "until": "20:00",
+          "show": "steppe_family"
+        }
+      ]
+    },
+    {
+      "name": "Feast of the Cross",
+      "date": "09-14",
+      "slots": [
+        {
+          "t": "08:00",
+          "until": "10:30",
+          "show": "salyba_live"
+        }
+      ]
+    },
+    {
+      "name": "All Souls",
+      "date": "11-02",
+      "slots": [
+        {
+          "t": "18:30",
+          "until": "19:00",
+          "show": "all_souls"
+        }
+      ]
+    },
+    {
+      "name": "Altyn-Zhylky Awards",
+      "nth_weekday": {
+        "month": 12,
+        "weekday": "sat",
+        "n": 2
+      },
+      "slots": [
+        {
+          "t": "21:00",
+          "until": "23:30",
+          "show": "altyn_zhylky"
+        }
+      ]
+    },
+    {
+      "name": "Christmas",
+      "date": "12-25",
+      "slots": [
+        {
+          "t": "08:00",
+          "until": "10:30",
+          "show": "yalda_live"
+        }
+      ]
+    },
+    {
+      "name": "New Year's Eve",
+      "date": "12-31",
+      "slots": [
+        {
+          "t": "21:00",
+          "until": "23:55",
+          "show": "new_year_eve"
+        },
+        {
+          "t": "23:55",
+          "until": "00:05",
+          "show": "governor_new_year"
+        },
+        {
+          "t": "00:05",
+          "until": "01:30",
+          "show": "new_year_eve"
+        }
+      ]
+    },
+    {
+      "name": "Komuz Gala",
+      "date": "2026-10-24",
+      "slots": [
+        {
+          "t": "21:00",
+          "until": "23:00",
+          "show": "komuz_gala"
+        }
+      ]
+    },
+    {
+      "name": "Election 2027",
+      "date": "2027-11-02",
+      "slots": [
+        {
+          "t": "20:30",
+          "until": "02:30",
+          "show": "election_night"
+        }
+      ]
+    }
   ],
-
   "pools": {
     "breakfast_guests": [
-      "the week's weather on the passes", "a Talas florist on the autumn markets", "Tulpar Talas's youth coach", "pet care with a Kara-Bulak vet",
-      "the Talas Herald's crossword setter", "budget wedding ideas", "a Semiz chef's breakfast tacos", "the Karakush fan club",
-      "a komuz maker from Kyzyl-Adyr", "keeping warm in a Nurzhan flat", "TSU's first-year students", "the Bazar-i Kalan's best dried apricots",
-      "a mountain rescue volunteer", "home remedies with Jasil", "the oldest taxi driver in Talas", "stargazing over the Aksay Plateau"
+      "the week's weather on the passes",
+      "a Talas florist on the autumn markets",
+      "Tulpar Talas's youth coach",
+      "pet care with a Kara-Bulak vet",
+      "the Talas Herald's crossword setter",
+      "budget wedding ideas",
+      "a Semiz chef's breakfast tacos",
+      "the Karakush fan club",
+      "a komuz maker from Kyzyl-Adyr",
+      "keeping warm in a Nurzhan flat",
+      "TSU's first-year students",
+      "the Bazar-i Kalan's best dried apricots",
+      "a mountain rescue volunteer",
+      "home remedies with Jasil",
+      "the oldest taxi driver in Talas",
+      "stargazing over the Aksay Plateau"
     ],
     "talk_topics": [
-      "Should Iradi be compulsory in Nurzhan schools?", "The cost of a wedding toi", "Grandparents raising children while parents work abroad",
-      "Name days and birthdays: which matters more?", "Faith and the young: who still keeps the savma?", "Can a city flat ever feel like a yurt?",
-      "Mixed marriages between Talas and Nurzhan families", "Is Mor-Pop good for the language?", "Caring for elderly parents",
-      "Returnees from America: settling in at Alatau Heights", "Neighbours, noise and the five-storey blocks", "What makes a good godparent?",
-      "Kalym today: tradition or burden?", "Phones at the dinner table", "Volunteering at the St. Luka Mission"
+      "Should Iradi be compulsory in Nurzhan schools?",
+      "The cost of a wedding toi",
+      "Grandparents raising children while parents work abroad",
+      "Name days and birthdays: which matters more?",
+      "Faith and the young: who still keeps the savma?",
+      "Can a city flat ever feel like a yurt?",
+      "Mixed marriages between Talas and Nurzhan families",
+      "Is Mor-Pop good for the language?",
+      "Caring for elderly parents",
+      "Returnees from America: settling in at Alatau Heights",
+      "Neighbours, noise and the five-storey blocks",
+      "What makes a good godparent?",
+      "Kalym today: tradition or burden?",
+      "Phones at the dinner table",
+      "Volunteering at the St. Luka Mission"
     ],
     "debate_topics": [
-      "Is the som peg still right for Irad?", "Who should pay for Nurzhan's heating mains?", "Remittances: blessing or dependence?",
-      "Water for the Chu valley this summer", "Startups and the licensing rules", "Foreign investment and local jobs",
-      "Are the feedlots good neighbours?", "The Naryn Protocol renewal in 2027", "Should Talas build a metro?",
-      "English, Iradi or Russian in the Mejlis?", "Antimony, China and the export controls", "Fuel prices and the refinery"
+      "Is the som peg still right for Irad?",
+      "Who should pay for Nurzhan's heating mains?",
+      "Remittances: blessing or dependence?",
+      "Water for the Chu valley this summer",
+      "Startups and the licensing rules",
+      "Foreign investment and local jobs",
+      "Are the feedlots good neighbours?",
+      "The Naryn Protocol renewal in 2027",
+      "Should Talas build a metro?",
+      "English, Iradi or Russian in the Mejlis?",
+      "Antimony, China and the export controls",
+      "Fuel prices and the refinery"
     ],
     "onetruth_topics": [
-      "The bus routes nobody uses", "Inside Nurzhan Refinery No. 1", "Who repairs the irrigation canals?", "The rising price of hay",
-      "A day with the Talas ambulance service", "The empty villages of the Chu plain", "Cross-border trucking and the queues at the Kazakh frontier",
-      "Schools short of Iradi teachers", "How safe are the five-storey blocks?", "The cost of a hospital bed", "Antimony country",
-      "Where Irad's rubbish goes", "Talas rents and the new towers", "The women running the Bazar-i Kalan"
+      "The bus routes nobody uses",
+      "Inside Nurzhan Refinery No. 1",
+      "Who repairs the irrigation canals?",
+      "The rising price of hay",
+      "A day with the Talas ambulance service",
+      "The empty villages of the Chu plain",
+      "Cross-border trucking and the queues at the Kazakh frontier",
+      "Schools short of Iradi teachers",
+      "How safe are the five-storey blocks?",
+      "The cost of a hospital bed",
+      "Antimony country",
+      "Where Irad's rubbish goes",
+      "Talas rents and the new towers",
+      "The women running the Bazar-i Kalan"
     ],
     "white_rider_stories": [
-      "Janyl's bread", "The lost foal", "St. Yuhanna and the river", "Why we light the arsha", "The star that never moves",
-      "Sharing at the toi", "Noah and the animals", "The good neighbour", "The boy who said thank you", "St. Toma the traveller",
-      "The milk offering", "The shepherd and the hundredth sheep"
+      "Janyl's bread",
+      "The lost foal",
+      "St. Yuhanna and the river",
+      "Why we light the arsha",
+      "The star that never moves",
+      "Sharing at the toi",
+      "Noah and the animals",
+      "The good neighbour",
+      "The boy who said thank you",
+      "St. Toma the traveller",
+      "The milk offering",
+      "The shepherd and the hundredth sheep"
     ],
     "tulpar_episodes": [
-      "The Message for Grandmother", "Kanat and the Snow Leopard", "The Bridge at Kara-Suu", "A Feather for the Eagle", "The Night Market",
-      "Lost in the Juniper Wood", "The Race to the Pass", "Kanat Learns to Land", "The Golden Horseshoe", "The Yurt in the Clouds",
-      "Marmot Trouble", "The Longest Night", "A Letter to the Star"
+      "The Message for Grandmother",
+      "Kanat and the Snow Leopard",
+      "The Bridge at Kara-Suu",
+      "A Feather for the Eagle",
+      "The Night Market",
+      "Lost in the Juniper Wood",
+      "The Race to the Pass",
+      "Kanat Learns to Land",
+      "The Golden Horseshoe",
+      "The Yurt in the Clouds",
+      "Marmot Trouble",
+      "The Longest Night",
+      "A Letter to the Star"
     ],
     "star_episodes": [
-      "Where the Horse Was Tamed", "The Heavenly Horses", "Talas, 751", "The Caravanserai of Rabat-i-Safed", "Janyl, Mother of Irad",
-      "The Coming of the Iradis", "The Charter of 1727", "The Citadel of Talas", "Urkun: 1916", "Orientalis Stella",
-      "The Virgin Lands", "Building Toktogul", "The Road to the Fergana Gateway", "The Kariz of Kok-Tash"
+      "Where the Horse Was Tamed",
+      "The Heavenly Horses",
+      "Talas, 751",
+      "The Caravanserai of Rabat-i-Safed",
+      "Janyl, Mother of Irad",
+      "The Coming of the Iradis",
+      "The Charter of 1727",
+      "The Citadel of Talas",
+      "Urkun: 1916",
+      "Orientalis Stella",
+      "The Virgin Lands",
+      "Building Toktogul",
+      "The Road to the Fergana Gateway",
+      "The Kariz of Kok-Tash"
     ],
     "alatau_episodes": [
-      "The Snow Leopard's Winter", "Juniper Slopes", "Marmot Meadows", "The Argali Rut", "Golden Eagles", "The Retreating Ice",
-      "Spring Floods", "The Summer Pastures", "Wolves of the High Valleys", "The First Snow"
+      "The Snow Leopard's Winter",
+      "Juniper Slopes",
+      "Marmot Meadows",
+      "The Argali Rut",
+      "Golden Eagles",
+      "The Retreating Ice",
+      "Spring Floods",
+      "The Summer Pastures",
+      "Wolves of the High Valleys",
+      "The First Snow"
     ],
     "besh_tash_episodes": [
-      "The Five Stones", "The Lake in Autumn", "Rangers of Besh-Tash", "Night in the Park", "The Wildflower Month",
-      "Brown Bears", "The Rivers Below", "A Year of Birds"
+      "The Five Stones",
+      "The Lake in Autumn",
+      "Rangers of Besh-Tash",
+      "Night in the Park",
+      "The Wildflower Month",
+      "Brown Bears",
+      "The Rivers Below",
+      "A Year of Birds"
     ],
     "hands_episodes": [
-      "The Saddler's Guild", "Felt: Making a Shyrdak", "The Ak-Kalpak", "Building a Komuz", "Silver and Carnelian",
-      "The Tündük", "The Eagle Hunter's Glove", "Copper in the Misgaron", "The Whip Maker", "Weaving the Yurt Bands"
+      "The Saddler's Guild",
+      "Felt: Making a Shyrdak",
+      "The Ak-Kalpak",
+      "Building a Komuz",
+      "Silver and Carnelian",
+      "The Tündük",
+      "The Eagle Hunter's Glove",
+      "Copper in the Misgaron",
+      "The Whip Maker",
+      "Weaving the Yurt Bands"
     ],
     "archive_items": [
-      "Talasfilm newsreels, 1962", "a 1971 concert from the Talas Philharmonic", "folk dances recorded in Iyık Janyl, 1968",
-      "the 1974 refinery expansion", "a 1966 interview with Kemel Ishakov", "aytysh poets in Talas, 1977",
-      "harvest festival in the Chu valley, 1969", "children's television, 1979", "the Irad Day parade of 1993"
+      "Talasfilm newsreels, 1962",
+      "a 1971 concert from the Talas Philharmonic",
+      "folk dances recorded in Iyık Janyl, 1968",
+      "the 1974 refinery expansion",
+      "a 1966 interview with Kemel Ishakov",
+      "aytysh poets in Talas, 1977",
+      "harvest festival in the Chu valley, 1969",
+      "children's television, 1979",
+      "the Irad Day parade of 1993"
     ],
     "ayyub_dishes": [
-      "beshbarmak with lamb", "kuurdak", "Koryoin laghman", "Irad paloosu", "özbek paloo for a wedding cauldron", "manty",
-      "beet suzma", "beef kazy", "samsa from the tandyr", "jügörü porridge", "lamb shorpo", "stuffed peppers, Nurzhan style",
-      "Semiz tamales", "boorsok for a toi"
+      "beshbarmak with lamb",
+      "kuurdak",
+      "Koryoin laghman",
+      "Irad paloosu",
+      "özbek paloo for a wedding cauldron",
+      "manty",
+      "beet suzma",
+      "beef kazy",
+      "samsa from the tandyr",
+      "jügörü porridge",
+      "lamb shorpo",
+      "stuffed peppers, Nurzhan style",
+      "Semiz tamales",
+      "boorsok for a toi"
     ],
     "zarina_bakes": [
-      "kümöch", "boorsok", "tandyr nan", "apricot pie", "medovik honey cake", "Semiz conchas", "walnut halva",
-      "an American apple pie from Alatau Heights", "kulich", "chak-chak"
+      "kümöch",
+      "boorsok",
+      "tandyr nan",
+      "apricot pie",
+      "medovik honey cake",
+      "Semiz conchas",
+      "walnut halva",
+      "an American apple pie from Alatau Heights",
+      "kulich",
+      "chak-chak"
     ],
     "ickenge_synopses": [
-      "Aiperi tells her father she has taken a job in Talas.", "Nurlan finds a buyer for the grey mare and keeps it from his mother.",
-      "The family gathers for Grandmother Gülzat's name day.", "A storm brings down the stable roof.", "Bakyt refuses the feedlot's offer for the lower field.",
-      "Aiperi's new boss asks too many questions about her family.", "The kuda arrive early, and the plov is not ready.", "Nurlan is caught racing on the Talas road.",
-      "An old letter turns up in the chest by the stove.", "Gülzat's sister comes home from Russia after eleven years.", "The grey mare goes missing.",
-      "Bakyt and his brother settle an old debt.", "The priest visits, and nobody tells him about the horse.", "Aiperi brings someone home to meet the family.",
-      "The water schedule changes, and the neighbours quarrel.", "A wedding is called off.", "Nurlan finally tells the truth.", "Winter comes early to the valley."
+      "Aiperi tells her father she has taken a job in Talas.",
+      "Nurlan finds a buyer for the grey mare and keeps it from his mother.",
+      "The family gathers for Grandmother Gülzat's name day.",
+      "A storm brings down the stable roof.",
+      "Bakyt refuses the feedlot's offer for the lower field.",
+      "Aiperi's new boss asks too many questions about her family.",
+      "The kuda arrive early, and the plov is not ready.",
+      "Nurlan is caught racing on the Talas road.",
+      "An old letter turns up in the chest by the stove.",
+      "Gülzat's sister comes home from Russia after eleven years.",
+      "The grey mare goes missing.",
+      "Bakyt and his brother settle an old debt.",
+      "The priest visits, and nobody tells him about the horse.",
+      "Aiperi brings someone home to meet the family.",
+      "The water schedule changes, and the neighbours quarrel.",
+      "A wedding is called off.",
+      "Nurlan finally tells the truth.",
+      "Winter comes early to the valley."
     ],
     "kuda_episodes": [
-      "The Engagement Dinner", "Two Kinds of Plov", "The Dacha", "Name Day", "Grandfather Learns English", "Kara-Ak Derby",
-      "The Wrong Present", "Moving Day", "The Russian Christmas", "The Mother-in-Law's Recipe", "The Baby Is Coming", "Who Holds the Baby?"
+      "The Engagement Dinner",
+      "Two Kinds of Plov",
+      "The Dacha",
+      "Name Day",
+      "Grandfather Learns English",
+      "Kara-Ak Derby",
+      "The Wrong Present",
+      "Moving Day",
+      "The Russian Christmas",
+      "The Mother-in-Law's Recipe",
+      "The Baby Is Coming",
+      "Who Holds the Baby?"
     ],
     "patrol_episodes": [
-      "Night Shift", "The Missing Lorry", "Snow on the Pass", "A Lost Child", "The Wedding Convoy", "Counterfeit Som",
-      "The Hay Thieves", "A Quiet Village", "Old Friends", "The Long Road Home"
+      "Night Shift",
+      "The Missing Lorry",
+      "Snow on the Pass",
+      "A Lost Child",
+      "The Wedding Convoy",
+      "Counterfeit Som",
+      "The Hay Thieves",
+      "A Quiet Village",
+      "Old Friends",
+      "The Long Road Home"
     ],
     "ashuu_parts": [
-      "The Decree", "Leaving the Valley", "The Pass", "Ice", "The Road to Kashgar", "Strangers' Winter", "The Way Back", "The Rider in White"
+      "The Decree",
+      "Leaving the Valley",
+      "The Pass",
+      "Ice",
+      "The Road to Kashgar",
+      "Strangers' Winter",
+      "The Way Back",
+      "The Rider in White"
     ],
     "horse_games": [
-      "kyz kuu from the Chu valley", "oodarysh, mounted wrestling", "tyin emmei, the coin pick at a gallop", "at chabysh, the 30 km endurance race",
-      "ulak tartysh from Kyzyl-Adyr", "the Akyel parade and show ring"
+      "kyz kuu from the Chu valley",
+      "oodarysh, mounted wrestling",
+      "tyin emmei, the coin pick at a gallop",
+      "at chabysh, the 30 km endurance race",
+      "ulak tartysh from Kyzyl-Adyr",
+      "the Akyel parade and show ring"
     ],
     "parishes": [
-      "the Cathedral of St. Janyl, Iyık Janyl", "the Church of St. Yuhanna, Talas", "the Church of St. Tomas, Talas", "a parish church in Nurzhan"
+      "the Cathedral of St. Janyl, Iyık Janyl",
+      "the Church of St. Yuhanna, Talas",
+      "the Church of St. Tomas, Talas",
+      "a parish church in Nurzhan"
     ]
   },
-
   "films": {
     "hollywood": [
-      "Clear and Present Danger (1994)", "The Shawshank Redemption (1994)", "Pulp Fiction (1994)", "Forrest Gump (1994)", "The Lion King (1994)",
-      "Jurassic Park (1993)", "Schindler's List (1993)", "The Fugitive (1993)", "Groundhog Day (1993)", "Sleepless in Seattle (1993)",
-      "The Firm (1993)", "Philadelphia (1993)", "The Nightmare Before Christmas (1993)", "Dazed and Confused (1993)", "True Romance (1993)",
-      "Menace II Society (1993)", "The Sandlot (1993)", "Demolition Man (1993)", "Tombstone (1993)", "The Piano (1993)",
-      "In the Line of Fire (1993)", "The Age of Innocence (1993)", "Carlito's Way (1993)", "What's Eating Gilbert Grape (1993)",
-      "The Remains of the Day (1993)", "The Joy Luck Club (1993)", "Rudy (1993)", "The Secret Garden (1993)", "The Three Musketeers (1993)",
-      "The Pelican Brief (1993)", "A Bronx Tale (1993)"
+      "Clear and Present Danger (1994)",
+      "The Shawshank Redemption (1994)",
+      "Pulp Fiction (1994)",
+      "Forrest Gump (1994)",
+      "The Lion King (1994)",
+      "Jurassic Park (1993)",
+      "Schindler's List (1993)",
+      "The Fugitive (1993)",
+      "Groundhog Day (1993)",
+      "Sleepless in Seattle (1993)",
+      "The Firm (1993)",
+      "Philadelphia (1993)",
+      "The Nightmare Before Christmas (1993)",
+      "Dazed and Confused (1993)",
+      "True Romance (1993)",
+      "Menace II Society (1993)",
+      "The Sandlot (1993)",
+      "Demolition Man (1993)",
+      "Tombstone (1993)",
+      "The Piano (1993)",
+      "In the Line of Fire (1993)",
+      "The Age of Innocence (1993)",
+      "Carlito's Way (1993)",
+      "What's Eating Gilbert Grape (1993)",
+      "The Remains of the Day (1993)",
+      "The Joy Luck Club (1993)",
+      "Rudy (1993)",
+      "The Secret Garden (1993)",
+      "The Three Musketeers (1993)",
+      "The Pelican Brief (1993)",
+      "A Bronx Tale (1993)"
     ],
     "iradi": [
-      "Yol (1982) Turkey", "Once Upon a Time in Anatolia (2011) Turkey", "Winter Sleep (2014) Turkey", "The Bandit (1996) Turkey", "Mustang (2015) Turkey",
-      "The Mirror (1975) Russia", "Stalker (1979) Russia", "Leviathan (2014) Russia", "Brother (1997) Russia", "The Return (2003) Russia",
-      "Tulpan (2008) Kazakhstan", "The Gift to Stalin (2008) Kazakhstan", "Kelin (2009) Kazakhstan", "Shal (2012) Kazakhstan", "The Road to Mother (2016) Kazakhstan",
-      "Kurmanjan Datka: Queen of the Mountains (2014) Kyrgyzstan", "The Light Thief (2010) Kyrgyzstan", "Heavenly Nomadic (2015) Kyrgyzstan",
-      "Salam, New York (2013) Kyrgyzstan", "The Father (2021) Kyrgyzstan",
-      "The Deserted Station (2002) Iran", "A Separation (2011) Iran", "The Salesman (2016) Iran", "About Elly (2009) Iran", "The White Balloon (1995) Iran",
-      "Zarina (1968) Irad", "Desert Sun's Rebellion (1979) Irad", "Desert Blue (1981) Irad", "Vengeance Rider (1983) Irad",
-      "Visions of Irad (1984) Irad", "Guide of the Sands (1986) Irad", "Journey of the Steppes (1988) Irad"
+      "Yol (1982) Turkey",
+      "Once Upon a Time in Anatolia (2011) Turkey",
+      "Winter Sleep (2014) Turkey",
+      "The Bandit (1996) Turkey",
+      "Mustang (2015) Turkey",
+      "The Mirror (1975) Russia",
+      "Stalker (1979) Russia",
+      "Leviathan (2014) Russia",
+      "Brother (1997) Russia",
+      "The Return (2003) Russia",
+      "Tulpan (2008) Kazakhstan",
+      "The Gift to Stalin (2008) Kazakhstan",
+      "Kelin (2009) Kazakhstan",
+      "Shal (2012) Kazakhstan",
+      "The Road to Mother (2016) Kazakhstan",
+      "Kurmanjan Datka: Queen of the Mountains (2014) Kyrgyzstan",
+      "The Light Thief (2010) Kyrgyzstan",
+      "Heavenly Nomadic (2015) Kyrgyzstan",
+      "Salam, New York (2013) Kyrgyzstan",
+      "The Father (2021) Kyrgyzstan",
+      "The Deserted Station (2002) Iran",
+      "A Separation (2011) Iran",
+      "The Salesman (2016) Iran",
+      "About Elly (2009) Iran",
+      "The White Balloon (1995) Iran",
+      "Zarina (1968) Irad",
+      "Desert Sun's Rebellion (1979) Irad",
+      "Desert Blue (1981) Irad",
+      "Vengeance Rider (1983) Irad",
+      "Visions of Irad (1984) Irad",
+      "Guide of the Sands (1986) Irad",
+      "Journey of the Steppes (1988) Irad"
     ]
   }
 }

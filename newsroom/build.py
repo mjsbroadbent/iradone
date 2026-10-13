@@ -11,6 +11,7 @@ import datetime as dt
 import html
 import json
 import re
+import unicodedata
 from pathlib import Path
 from xml.sax.saxutils import escape as xml_escape
 
@@ -28,6 +29,11 @@ CREDITS = json.loads(CREDITS_FILE.read_text(encoding="utf-8")) if CREDITS_FILE.e
 TICKER_LEN = 15
 TOP_STORIES = 6
 LEAD_STORIES = 3
+
+
+def slugify(text: str) -> str:
+    text = unicodedata.normalize("NFKD", text).encode("ascii", "ignore").decode()
+    return re.sub(r"[^a-zA-Z0-9]+", "-", text).strip("-").lower() or "x"
 
 
 def esc(s: str) -> str:
@@ -115,13 +121,16 @@ def card_html(a: dict, base: str) -> str:
 
 
 def page(title: str, description: str, canonical: str, content: str, arts: list[dict],
-         og_image: str, og_type: str = "website", og_title: str | None = None) -> str:
-    base = "../"
+         og_image: str, og_type: str = "website", og_title: str | None = None,
+         base: str = "../", scripts: tuple[str, ...] = ()) -> str:
+    """Wrap content in the site template. `base` is the path from the page up to
+    the site root ("" for root pages, "../" one folder down, "../../" two)."""
+    extra = "".join(f'\n  <script src="{base}{s}"></script>' for s in scripts)
     values = {
         "title": esc(title), "description": esc(description), "canonical": esc(canonical),
         "og_title": esc(og_title or title), "og_image": esc(og_image), "og_type": og_type,
         "base": base, "ticker": ticker_html(arts, base), "content": content,
-        "year": str(dt.date.today().year),
+        "year": str(dt.date.today().year), "scripts": extra,
     }
     return re.sub(r"\{\{(\w+)\}\}", lambda m: values[m.group(1)], TEMPLATE)
 
@@ -140,9 +149,9 @@ def article_page(a: dict, arts: list[dict]) -> str:
         source_html = (f'\n      <p class="story-source">Inspired by real reporting: '
                        f'<a href="{esc(src["url"])}" rel="nofollow noopener" target="_blank">'
                        f'{esc(src["title"])}</a> ({esc(src["name"])}). This IradOne story is fiction.</p>')
-    tags = "".join(f'<span class="story-tag">{esc(t)}</span>' for t in a.get("tags", []))
+    tags = "".join(f'<a class="story-tag" href="tag/{slugify(t)}.html">{esc(t)}</a>' for t in a.get("tags", []))
     content = f"""      <article class="story">
-        <p class="story-kicker"><a href="index.html">News</a> &middot; {esc(a['category'])}</p>
+        <p class="story-kicker"><a href="index.html">News</a> &middot; <a href="section/{slugify(a['category'])}.html">{esc(a['category'])}</a></p>
         <h1>{esc(a['headline'])}</h1>
         <p class="story-dek">{inline(a['dek'])}</p>
         <p class="story-meta">Published: {nice_date(a['published'])} &middot; OneNews</p>
@@ -152,6 +161,7 @@ def article_page(a: dict, arts: list[dict]) -> str:
           {chr(10).join('          ' + b for b in body).strip()}
         </div>
         <p class="story-tags">{tags}</p>{source_html}
+        <div class="ad-slot ad-box" data-size="box"></div>
         <section class="story-more">
           <h2>More from IradOne</h2>
           <ul>
@@ -163,31 +173,85 @@ def article_page(a: dict, arts: list[dict]) -> str:
                 f"{SITE}/{a['image']}", "article", a["headline"])
 
 
-def archive_page(arts: list[dict]) -> str:
-    rows = "\n".join(
+def archive_rows(items: list[dict], news: str, root: str) -> str:
+    """`news` is the path to the news folder, `root` the path to the site root."""
+    return "\n".join(
         f"""        <li class="archive-item">
-          <a href="{a['slug']}.html"><img src="../{esc(a['image'])}" alt="" loading="lazy"></a>
+          <a href="{news}{a['slug']}.html"><img src="{root}{esc(a['image'])}" alt="" loading="lazy"></a>
           <div>
-            <p class="story-kicker">{esc(a['category'])} &middot; {nice_date(a['published'])}</p>
-            <h3><a href="{a['slug']}.html">{esc(a['headline'])}</a></h3>
+            <p class="story-kicker"><a href="{news}section/{slugify(a['category'])}.html">{esc(a['category'])}</a> &middot; {nice_date(a['published'])}</p>
+            <h3><a href="{news}{a['slug']}.html">{esc(a['headline'])}</a></h3>
             <p>{inline(a['dek'])}</p>
           </div>
-        </li>""" for a in arts)
+        </li>""" for a in items)
+
+
+def section_bar(arts: list[dict], news: str, current: str | None = None) -> str:
+    counts: dict[str, int] = {}
+    for a in arts:
+        counts[a["category"]] = counts.get(a["category"], 0) + 1
+    links = [f'<a href="{news}index.html"{" class=\"active\"" if current is None else ""}>All</a>']
+    for cat in sorted(counts):
+        cls = ' class="active"' if cat == current else ""
+        links.append(f'<a href="{news}section/{slugify(cat)}.html"{cls}>{esc(cat)} <span>{counts[cat]}</span></a>')
+    return '        <nav class="section-bar" aria-label="News sections">' + "".join(links) + "</nav>"
+
+
+def archive_page(arts: list[dict]) -> str:
     content = f"""      <section class="archive">
         <h1>IradOne News</h1>
         <p class="story-dek">The latest from Talas, Nurzhan, Iyık Janyl and the region.</p>
+{section_bar(arts, "")}
         <ul class="archive-list">
-{rows}
+{archive_rows(arts, "", "../")}
         </ul>
       </section>"""
     return page("News | IradOne Online", "The latest news from IradOne Online in Talas.",
                 f"{SITE}/news/index.html", content, arts, f"{SITE}/iradone.png")
 
 
+def section_page(cat: str, arts: list[dict]) -> str:
+    items = [a for a in arts if a["category"] == cat]
+    content = f"""      <section class="archive">
+        <p class="story-kicker"><a href="../index.html">News</a></p>
+        <h1>{esc(cat)}</h1>
+{section_bar(arts, "../", cat)}
+        <ul class="archive-list">
+{archive_rows(items, "../", "../../")}
+        </ul>
+      </section>"""
+    return page(f"{cat} | IradOne News", f"{cat} news from IradOne Online.",
+                f"{SITE}/news/section/{slugify(cat)}.html", content, arts, f"{SITE}/iradone.png", base="../../")
+
+
+def tag_page(tag: str, items: list[dict], arts: list[dict]) -> str:
+    content = f"""      <section class="archive">
+        <p class="story-kicker"><a href="../index.html">News</a> &middot; Topic</p>
+        <h1>{esc(tag)}</h1>
+        <p class="story-dek">{len(items)} {"story" if len(items) == 1 else "stories"} tagged {esc(tag)}.</p>
+        <ul class="archive-list">
+{archive_rows(items, "../", "../../")}
+        </ul>
+      </section>"""
+    return page(f"{tag} | IradOne News", f"IradOne stories about {tag}.",
+                f"{SITE}/news/tag/{slugify(tag)}.html", content, arts, f"{SITE}/iradone.png", base="../../")
+
+
+def tag_index(arts: list[dict]) -> dict[str, list[dict]]:
+    tags: dict[str, list[dict]] = {}
+    names: dict[str, str] = {}
+    for a in arts:
+        for t in a.get("tags", []):
+            key = slugify(t)
+            names.setdefault(key, t)
+            tags.setdefault(key, []).append(a)
+    return {names[k]: v for k, v in tags.items()}
+
+
 def credits_page(arts: list[dict]) -> str:
     rows = "\n".join(
         f"""        <li class="credit-item">
-          <img src="../{esc(path)}" alt="{esc(c.get('alt', ''))}" loading="lazy">
+          <img src="{esc(path)}" alt="{esc(c.get('alt', ''))}" loading="lazy">
           <div>
             <p><strong>{esc(c.get('alt', ''))}</strong></p>
             {credit_html(path, '../', 'credit-line')}
@@ -200,10 +264,8 @@ def credits_page(arts: list[dict]) -> str:
 {rows}
         </ul>
       </section>"""
-    html_out = page("Photo credits | IradOne Online", "Credits for photographs used on IradOne.",
-                    f"{SITE}/credits.html", content, arts, f"{SITE}/iradone.png")
-    # This page lives at the site root, so its relative links go up zero levels, not one.
-    return html_out.replace('="../', '="')
+    return page("Photo credits | IradOne Online", "Credits for photographs used on IradOne.",
+                f"{SITE}/credits.html", content, arts, f"{SITE}/iradone.png", base="")
 
 
 def feed_xml(arts: list[dict]) -> str:
@@ -231,9 +293,10 @@ def feed_xml(arts: list[dict]) -> str:
 """
 
 
-def sitemap(arts: list[dict]) -> str:
+def sitemap(arts: list[dict], extra: list[str]) -> str:
     urls = [(f"{SITE}/", None), (f"{SITE}/news/index.html", arts[0]["published"][:10] if arts else None)]
     urls += [(f"{SITE}/news/{a['slug']}.html", a["published"][:10]) for a in arts]
+    urls += [(f"{SITE}/{p}", None) for p in extra]
     body = "\n".join(f"  <url><loc>{u}</loc>{f'<lastmod>{m}</lastmod>' if m else ''}</url>" for u, m in urls)
     return f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n{body}\n</urlset>\n'
 
@@ -261,11 +324,32 @@ def build():
         write(NEWS / f"{a['slug']}.html", article_page(a, arts))
     write(NEWS / "index.html", archive_page(arts))
     write(ROOT / "credits.html", credits_page(arts))
+    extra = []
+
+    sections = sorted({a["category"] for a in arts})
+    keep_sections = {f"{slugify(c)}.html" for c in sections}
+    for old in (NEWS / "section").glob("*.html"):
+        if old.name not in keep_sections:
+            old.unlink()
+    for cat in sections:
+        write(NEWS / "section" / f"{slugify(cat)}.html", section_page(cat, arts))
+        extra.append(f"news/section/{slugify(cat)}.html")
+
+    tags = tag_index(arts)
+    keep_tags = {f"{slugify(t)}.html" for t in tags}
+    for old in (NEWS / "tag").glob("*.html"):
+        if old.name not in keep_tags:
+            old.unlink()
+    for t, items in tags.items():
+        write(NEWS / "tag" / f"{slugify(t)}.html", tag_page(t, items, arts))
+
+    import pages  # programme pages, radio and sport (newsroom/pages.py)
+    extra += pages.build_all(arts, page, write)
     summary = [{k: a[k] for k in ("slug", "headline", "dek", "ticker", "category", "dateline", "image", "published")}
                for a in arts]
     write(NEWS / "index.json", json.dumps(summary, ensure_ascii=False, indent=1) + "\n")
     write(NEWS / "feed.xml", feed_xml(arts))
-    write(ROOT / "sitemap.xml", sitemap(arts))
+    write(ROOT / "sitemap.xml", sitemap(arts, extra))
 
     index = (ROOT / "index.html").read_text(encoding="utf-8")
     index = replace_between(index, "TICKER", ticker_html(arts, ""))

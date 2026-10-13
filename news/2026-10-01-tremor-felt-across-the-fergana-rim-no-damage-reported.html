@@ -23,13 +23,17 @@
         <a href="../index.html"><img src="../iradone.png" alt="IradOne"></a>
         <p>IradOne Online</p>
       </div>
-      <nav>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Menu"><i class="fas fa-bars" aria-hidden="true"></i><span>Menu</span></button>
+      <nav id="site-nav">
         <ul>
-          <li><a href="../index.html#home">Home</a></li>
+          <li><a href="../index.html">Home</a></li>
           <li><a href="../news/index.html">News</a></li>
-          <li><a href="../index.html#schedule">TV Schedule</a></li>
+          <li><a href="../sport/index.html">Sport</a></li>
+          <li><a href="../index.html#schedule">TV Guide</a></li>
+          <li><a href="../shows/index.html">Shows</a></li>
+          <li><a href="../radio/index.html">Radio</a></li>
           <li><a href="../index.html#live">Live TV</a></li>
-          <li><a href="../index.html#contact">Contact</a></li>
+          <li><a href="../index.html#about">About</a></li>
         </ul>
       </nav>
       <div class="social-icons">
@@ -93,7 +97,7 @@
 
     <main class="story-page">
       <article class="story">
-        <p class="story-kicker"><a href="index.html">News</a> &middot; Environment</p>
+        <p class="story-kicker"><a href="index.html">News</a> &middot; <a href="section/environment.html">Environment</a></p>
         <h1>Tremor Felt Across the Fergana Rim; No Damage Reported</h1>
         <p class="story-dek">A magnitude 4.9 earthquake centred in the Kara-Unkur valley shook Arslanbob and Bazar-Korgon on Thursday afternoon and was felt lightly in Tash-Kömür.</p>
         <p class="story-meta">Published: October 1, 2026 &middot; OneNews</p>
@@ -107,8 +111,9 @@
           <p>Zhoomart Nurdin uulu, who runs a walnut stall at the Bazar-Korgon market, said the tremor lasted only a few seconds. &quot;The walnuts rolled off the table,&quot; he said. &quot;Then everyone laughed and picked them up.&quot;</p>
           <p>The emergency service reminded residents in older mudbrick houses to check walls and chimneys before the heating season and to report cracks to their local administration.</p>
         </div>
-        <p class="story-tags"><span class="story-tag">earthquake</span><span class="story-tag">Lower Naryn</span><span class="story-tag">Fergana Rim</span><span class="story-tag">Arslanbob</span></p>
+        <p class="story-tags"><a class="story-tag" href="tag/earthquake.html">earthquake</a><a class="story-tag" href="tag/lower-naryn.html">Lower Naryn</a><a class="story-tag" href="tag/fergana-rim.html">Fergana Rim</a><a class="story-tag" href="tag/arslanbob.html">Arslanbob</a></p>
       <p class="story-source">Inspired by real reporting: <a href="https://en.tengrinews.kz/sng/two-earthquakes-occurred-in-kyrgyzstan-within-24-hours-273958/" rel="nofollow noopener" target="_blank">Two earthquakes occurred in Kyrgyzstan within 24 hours</a> (Tengrinews). This IradOne story is fiction.</p>
+        <div class="ad-slot ad-box" data-size="box"></div>
         <section class="story-more">
           <h2>More from IradOne</h2>
           <ul>
@@ -144,6 +149,7 @@
       </div>
     </footer>
   </div>
+  <script src="../site.js"></script>
   <script src="../info.js"></script>
 </body>
 </html>

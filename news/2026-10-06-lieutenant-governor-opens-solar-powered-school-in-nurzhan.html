@@ -23,13 +23,17 @@
         <a href="../index.html"><img src="../iradone.png" alt="IradOne"></a>
         <p>IradOne Online</p>
       </div>
-      <nav>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Menu"><i class="fas fa-bars" aria-hidden="true"></i><span>Menu</span></button>
+      <nav id="site-nav">
         <ul>
-          <li><a href="../index.html#home">Home</a></li>
+          <li><a href="../index.html">Home</a></li>
           <li><a href="../news/index.html">News</a></li>
-          <li><a href="../index.html#schedule">TV Schedule</a></li>
+          <li><a href="../sport/index.html">Sport</a></li>
+          <li><a href="../index.html#schedule">TV Guide</a></li>
+          <li><a href="../shows/index.html">Shows</a></li>
+          <li><a href="../radio/index.html">Radio</a></li>
           <li><a href="../index.html#live">Live TV</a></li>
-          <li><a href="../index.html#contact">Contact</a></li>
+          <li><a href="../index.html#about">About</a></li>
         </ul>
       </nav>
       <div class="social-icons">
@@ -93,7 +97,7 @@
 
     <main class="story-page">
       <article class="story">
-        <p class="story-kicker"><a href="index.html">News</a> &middot; Society</p>
+        <p class="story-kicker"><a href="index.html">News</a> &middot; <a href="section/society.html">Society</a></p>
         <h1>Lieutenant Governor Opens Solar-Powered School in Nurzhan</h1>
         <p class="story-dek">The Navbahor district school is one of twelve opened this year, with eighteen more schools and kindergartens due before the end of December.</p>
         <p class="story-meta">Published: October 6, 2026 &middot; OneNews</p>
@@ -107,8 +111,9 @@
           <p>For families in Navbahor, where many children have studied in double shifts in Soviet-era buildings, the change is immediate. &quot;My son used to start at two in the afternoon,&quot; said Talant Abdykerimov, a refinery fitter. &quot;Now he will be home before dark.&quot;</p>
           <p>The next openings are planned in Talas later this month.</p>
         </div>
-        <p class="story-tags"><span class="story-tag">education</span><span class="story-tag">Nurzhan</span><span class="story-tag">Aidar Maksat</span><span class="story-tag">solar</span></p>
+        <p class="story-tags"><a class="story-tag" href="tag/education.html">education</a><a class="story-tag" href="tag/nurzhan.html">Nurzhan</a><a class="story-tag" href="tag/aidar-maksat.html">Aidar Maksat</a><a class="story-tag" href="tag/solar.html">solar</a></p>
       <p class="story-source">Inspired by real reporting: <a href="https://en.kabar.kg/news/kyrgyzstan-to-commission-about-100-schools-by-year-end/" rel="nofollow noopener" target="_blank">Kyrgyzstan to commission about 100 schools by year-end</a> (Kabar). This IradOne story is fiction.</p>
+        <div class="ad-slot ad-box" data-size="box"></div>
         <section class="story-more">
           <h2>More from IradOne</h2>
           <ul>
@@ -144,6 +149,7 @@
       </div>
     </footer>
   </div>
+  <script src="../site.js"></script>
   <script src="../info.js"></script>
 </body>
 </html>

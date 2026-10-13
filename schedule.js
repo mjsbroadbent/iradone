@@ -151,9 +151,13 @@
         var n = airingsSince(parseYmd(d.start), d.every, date);
         if (n < 1) return null;
         if (!pool) return (d.label || "Episode") + " " + n;
-        var len = pool.length, idx = (n - 1) % len;
-        if (d.label === "Part") return "Part " + (idx + 1) + ": " + pool[idx];
-        return "Ep. " + (idx + 1) + ": " + pool[idx];
+        var len = pool.length;
+        if (d.parts_per_item) {  // a serial reading: several parts per book
+          var ppi = d.parts_per_item;
+          return pool[Math.floor((n - 1) / ppi) % len] + ", part " + ((n - 1) % ppi + 1) + " of " + ppi;
+        }
+        var idx = (n - 1) % len;
+        return (d.label || "Ep.") + " " + (idx + 1) + ": " + pool[idx];
       }
       case "serial": {
         var ep = airingsSince(parseYmd(d.start), d.every, date) + (d.first_episode || 1) - 1;
@@ -163,6 +167,10 @@
       case "headline": {
         var h = headlineFor(news, date, 1, today);
         return h ? (d.prefix || "") + h.headline : null;
+      }
+      case "sport": {
+        var sp = global.IradSport;
+        return sp && sp.tvDetail ? sp.tvDetail(d.kind, date) : null;
       }
       case "headline_or_pool": {
         var hh = headlineFor(news, date, d.max_age_days || 3, today);
@@ -237,13 +245,14 @@
     return e;
   }
 
-  function render(root, data, news) {
-    var tabs = root.querySelector("#schedule-tabs");
-    var body = root.querySelector("#schedule-day tbody");
+  function render(root, data, news, links) {
+    var tabs = root.querySelector(".schedule-tabs");
+    var body = root.querySelector(".schedule-day tbody");
     var banner = root.querySelector(".schedule-special");
     var bt = broadcastToday();
     var days = [];
-    for (var i = 0; i < 7; i++) days.push(addDays(bt.date, i));
+    var count = parseInt(root.getAttribute("data-days") || "7", 10);
+    for (var i = 0; i < count; i++) days.push(addDays(bt.date, i));
 
     function show(index) {
       var date = days[index];
@@ -267,7 +276,15 @@
         var tdTime = el("td", "slot-time", s.time);
         if (onNow) tdTime.appendChild(el("span", "on-now-badge", "On now"));
         var tdProg = el("td", "slot-title");
-        tdProg.appendChild(el("strong", null, s.title));
+        var name = el("strong", null, s.title);
+        if (links && s.id !== "signon" && s.id !== "signoff") {
+          var a = el("a", "slot-link");
+          a.href = links + s.id + ".html";
+          a.appendChild(name);
+          tdProg.appendChild(a);
+        } else {
+          tdProg.appendChild(name);
+        }
         if (s.subtitle) tdProg.appendChild(el("span", "slot-subtitle", s.subtitle));
         var tdDesc = el("td", "slot-desc");
         if (s.detail) tdDesc.appendChild(el("span", "slot-detail", s.detail));
@@ -290,23 +307,67 @@
     show(0);
   }
 
-  function init() {
-    var root = document.getElementById("schedule");
-    if (!root || !root.querySelector("#schedule-tabs")) return;
-    var getJson = function (url) {
-      return fetch(url, { cache: "no-cache" }).then(function (r) { if (!r.ok) throw new Error(url); return r.json(); });
-    };
-    Promise.all([getJson("schedule.json"), getJson("news/index.json").catch(function () { return []; })])
-      .then(function (res) { render(root, res[0], res[1]); })
+  // Upcoming airings of one programme, for its programme page.
+  function renderAirings(root, data, news, showId) {
+    var bt = broadcastToday();
+    var list = root.querySelector(".airings-list");
+    var found = [];
+    var horizon = parseInt(root.getAttribute("data-horizon") || "14", 10);
+    for (var i = 0; i < 400 && (i < horizon || !found.length); i++) {
+      var date = addDays(bt.date, i);
+      var day = buildDay(data, date, news, bt.date);
+      day.slots.forEach(function (s) {
+        if (s.id !== showId || s.detail === "Continued") return;
+        if (i === 0 && s.end <= bt.minute) return;  // already over today
+        found.push({ i: i, date: date, slot: s });
+      });
+    }
+    list.innerHTML = "";
+    if (!found.length) {
+      list.appendChild(el("li", null, "No airings in the coming year."));
+      return;
+    }
+    found.slice(0, 12).forEach(function (f) {
+      var li = el("li");
+      var when = f.i === 0 ? "Today" : f.i === 1 ? "Tomorrow" :
+        DAY_NAMES[f.date.getUTCDay()] + " " + f.date.getUTCDate() + " " + MONTHS[f.date.getUTCMonth()];
+      li.appendChild(el("span", "airing-when", when + ", " + f.slot.time));
+      if (f.slot.detail) li.appendChild(el("span", "airing-detail", f.slot.detail));
+      if (f.i === 0 && bt.minute >= f.slot.start && bt.minute < f.slot.end) li.appendChild(el("span", "on-now-badge", "On now"));
+      list.appendChild(li);
+    });
+  }
+
+  function getJson(url) {
+    return fetch(url, { cache: "no-cache" }).then(function (r) { if (!r.ok) throw new Error(url); return r.json(); });
+  }
+
+  function sportReady() {
+    // The TV guide can show tonight's fixtures when the sport engine is on the page.
+    return global.IradSport && global.IradSport.ready ? global.IradSport.ready.catch(function () {}) : Promise.resolve();
+  }
+
+  function mount(root) {
+    var src = root.getAttribute("data-src") || "schedule.json";
+    var newsUrl = root.getAttribute("data-news");
+    Promise.all([getJson(src), newsUrl ? getJson(newsUrl).catch(function () { return []; }) : [], sportReady()])
+      .then(function (res) {
+        if (root.hasAttribute("data-airings")) renderAirings(root, res[0], res[1], root.getAttribute("data-airings"));
+        else render(root, res[0], res[1], root.getAttribute("data-links"));
+      })
       .catch(function (err) {
-        var body = root.querySelector("#schedule-day tbody");
-        if (body) body.innerHTML = '<tr><td colspan="3">The schedule is unavailable right now.</td></tr>';
+        var body = root.querySelector(".schedule-day tbody, .airings-list");
+        if (body) body.innerHTML = "<li>The schedule is unavailable right now.</li>";
         if (global.console) console.error(err);
       });
   }
 
+  function init() {
+    Array.prototype.forEach.call(document.querySelectorAll("[data-schedule], [data-airings]"), mount);
+  }
+
   global.IradSchedule = { buildDay: buildDay, broadcastToday: broadcastToday, easterSunday: easterSunday,
-                          parseYmd: parseYmd, addDays: addDays, ymd: ymd };
+                          parseYmd: parseYmd, addDays: addDays, ymd: ymd, airingsSince: airingsSince };
   if (typeof document !== "undefined") {
     if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
     else init();

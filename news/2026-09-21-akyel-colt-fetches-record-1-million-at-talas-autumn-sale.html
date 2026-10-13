@@ -23,13 +23,17 @@
         <a href="../index.html"><img src="../iradone.png" alt="IradOne"></a>
         <p>IradOne Online</p>
       </div>
-      <nav>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Menu"><i class="fas fa-bars" aria-hidden="true"></i><span>Menu</span></button>
+      <nav id="site-nav">
         <ul>
-          <li><a href="../index.html#home">Home</a></li>
+          <li><a href="../index.html">Home</a></li>
           <li><a href="../news/index.html">News</a></li>
-          <li><a href="../index.html#schedule">TV Schedule</a></li>
+          <li><a href="../sport/index.html">Sport</a></li>
+          <li><a href="../index.html#schedule">TV Guide</a></li>
+          <li><a href="../shows/index.html">Shows</a></li>
+          <li><a href="../radio/index.html">Radio</a></li>
           <li><a href="../index.html#live">Live TV</a></li>
-          <li><a href="../index.html#contact">Contact</a></li>
+          <li><a href="../index.html#about">About</a></li>
         </ul>
       </nav>
       <div class="social-icons">
@@ -93,7 +97,7 @@
 
     <main class="story-page">
       <article class="story">
-        <p class="story-kicker"><a href="index.html">News</a> &middot; Agriculture</p>
+        <p class="story-kicker"><a href="index.html">News</a> &middot; <a href="section/agriculture.html">Agriculture</a></p>
         <h1>Akyel Colt Fetches Record $1 Million at Talas Autumn Sale</h1>
         <p class="story-dek">A two-year-old golden Akyel set a new national price at the Akyel Syndicate&#x27;s autumn sale, as buyers from five countries crowded the State Hippodrome.</p>
         <p class="story-meta">Published: September 21, 2026 &middot; OneNews</p>
@@ -107,8 +111,9 @@
           <p>Not everyone at the sale was buying gold. Bakai Asyl uulu, who breeds hardy Chongtor mountain horses near Kyzyl-Adyr, said demand for working horses was also strong this autumn. &quot;A golden Akyel is for the show ring,&quot; he said, smiling. &quot;For the pass in January, you still want a Chongtor.&quot;</p>
           <p>The Syndicate said the colt will stay at its stables near Talas over the winter before export, and that its spring sale is planned for April.</p>
         </div>
-        <p class="story-tags"><span class="story-tag">Akyel</span><span class="story-tag">horses</span><span class="story-tag">State Hippodrome</span><span class="story-tag">exports</span></p>
+        <p class="story-tags"><a class="story-tag" href="tag/akyel.html">Akyel</a><a class="story-tag" href="tag/horses.html">horses</a><a class="story-tag" href="tag/state-hippodrome.html">State Hippodrome</a><a class="story-tag" href="tag/exports.html">exports</a></p>
       <p class="story-source">Inspired by real reporting: <a href="https://en.tengrinews.kz/profitably/a-million-dollars-for-a-ram-an-amazing-deal-took-place-in-273718/" rel="nofollow noopener" target="_blank">A million dollars for a ram - an amazing deal took place in Kyrgyzstan</a> (Tengrinews). This IradOne story is fiction.</p>
+        <div class="ad-slot ad-box" data-size="box"></div>
         <section class="story-more">
           <h2>More from IradOne</h2>
           <ul>
@@ -144,6 +149,7 @@
       </div>
     </footer>
   </div>
+  <script src="../site.js"></script>
   <script src="../info.js"></script>
 </body>
 </html>

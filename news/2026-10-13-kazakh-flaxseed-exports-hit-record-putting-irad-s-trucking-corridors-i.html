@@ -23,13 +23,17 @@
         <a href="../index.html"><img src="../iradone.png" alt="IradOne"></a>
         <p>IradOne Online</p>
       </div>
-      <nav>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Menu"><i class="fas fa-bars" aria-hidden="true"></i><span>Menu</span></button>
+      <nav id="site-nav">
         <ul>
-          <li><a href="../index.html#home">Home</a></li>
+          <li><a href="../index.html">Home</a></li>
           <li><a href="../news/index.html">News</a></li>
-          <li><a href="../index.html#schedule">TV Schedule</a></li>
+          <li><a href="../sport/index.html">Sport</a></li>
+          <li><a href="../index.html#schedule">TV Guide</a></li>
+          <li><a href="../shows/index.html">Shows</a></li>
+          <li><a href="../radio/index.html">Radio</a></li>
           <li><a href="../index.html#live">Live TV</a></li>
-          <li><a href="../index.html#contact">Contact</a></li>
+          <li><a href="../index.html#about">About</a></li>
         </ul>
       </nav>
       <div class="social-icons">
@@ -93,7 +97,7 @@
 
     <main class="story-page">
       <article class="story">
-        <p class="story-kicker"><a href="index.html">News</a> &middot; Economy</p>
+        <p class="story-kicker"><a href="index.html">News</a> &middot; <a href="section/economy.html">Economy</a></p>
         <h1>Kazakh Flaxseed Exports Hit Record, Putting Irad&#x27;s Trucking Corridors in Demand</h1>
         <p class="story-dek">Neighbouring Kazakhstan&#x27;s near-1.3-million-tonne flaxseed season has pushed oilseed cargo towards southern routes, and Irad&#x27;s hauliers and the Talas North Terminal are feeling it.</p>
         <p class="story-meta">Published: October 13, 2026 &middot; OneNews</p>
@@ -108,8 +112,9 @@
           <p>Aigerim Satybaldieva, who follows agricultural trade finance at Talasbank, said the record Kazakh season was good news for the wider region. &quot;More cargo moving through Irad means more business for our carriers and banks,&quot; she said. &quot;But we need to keep slots open for Irad&#x27;s own shipments, especially in the harvest weeks, when Nurzhan Agro-Industrial and the grain growers of the Chu valley are all looking for trucks.&quot;</p>
           <p>Officials say the Lieutenant Governor&#x27;s office is reviewing scheduling at the terminal with Kazakh customs counterparts, under the existing border coordination arrangements. Irad Temir Jolu is also expected to offer additional wagon capacity on its Turksib section through Kara-Buura. Analysts expect the pressure to ease once Russian rail clearances improve, but forwarders in Talas say they are planning for a busy winter.</p>
         </div>
-        <p class="story-tags"><span class="story-tag">Kazakhstan</span><span class="story-tag">flaxseed</span><span class="story-tag">Trans-Chuy</span><span class="story-tag">Talas North Terminal</span><span class="story-tag">logistics</span><span class="story-tag">exports</span></p>
+        <p class="story-tags"><a class="story-tag" href="tag/kazakhstan.html">Kazakhstan</a><a class="story-tag" href="tag/flaxseed.html">flaxseed</a><a class="story-tag" href="tag/trans-chuy.html">Trans-Chuy</a><a class="story-tag" href="tag/talas-north-terminal.html">Talas North Terminal</a><a class="story-tag" href="tag/logistics.html">logistics</a><a class="story-tag" href="tag/exports.html">exports</a></p>
       <p class="story-source">Inspired by real reporting: <a href="https://timesca.com/kazakhstan-flaxseed-exports-record-2026/" rel="nofollow noopener" target="_blank">Kazakhstan Flaxseed Exports Hit Record 1.3 Million Tons</a> (The Times of Central Asia). This IradOne story is fiction.</p>
+        <div class="ad-slot ad-box" data-size="box"></div>
         <section class="story-more">
           <h2>More from IradOne</h2>
           <ul>
@@ -145,6 +150,7 @@
       </div>
     </footer>
   </div>
+  <script src="../site.js"></script>
   <script src="../info.js"></script>
 </body>
 </html>
