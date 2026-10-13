@@ -7,7 +7,8 @@
   "category": "Economy",
   "dateline": "SARY-BULAK",
   "image": "photos/mailuu-suu.jpg",
-  "published": "2026-10-13T09:22+06:00"
+  "published": "2026-10-13T09:22+06:00",
+  "source_url": "https://en.kabar.kg/news/kyrgyzstan-to-restore-antimony-and-mercury-plants-in-kadamjay-district/"
  },
  {
   "slug": "2026-10-13-toktogul-upgrade-lifts-capacity-to-1-440-mw-strengthening-irad-s-power",
@@ -17,7 +18,8 @@
   "category": "Energy",
   "dateline": "TASH-KÖMÜR",
   "image": "photos/toktogul-autumn.jpg",
-  "published": "2026-10-13T09:15+06:00"
+  "published": "2026-10-13T09:15+06:00",
+  "source_url": "https://en.kabar.kg/news/toktogul-hpp-capacity-increased-to-1440-mw-following-modernization/"
  },
  {
   "slug": "2026-10-13-kazakh-flaxseed-exports-hit-record-putting-irad-s-trucking-corridors-i",
@@ -27,7 +29,8 @@
   "category": "Economy",
   "dateline": "TALAS",
   "image": "photos/freight-steppe.jpg",
-  "published": "2026-10-13T09:08+06:00"
+  "published": "2026-10-13T09:08+06:00",
+  "source_url": "https://timesca.com/kazakhstan-flaxseed-exports-record-2026/"
  },
  {
   "slug": "2026-10-09-kara-khanid-coins-found-at-rabat-i-safed",
@@ -37,7 +40,8 @@
   "category": "Culture",
   "dateline": "TALAS",
   "image": "photos/caravanserai.jpg",
-  "published": "2026-10-09T15:10+06:00"
+  "published": "2026-10-09T15:10+06:00",
+  "source_url": "https://timesca.com/issyk-kul-medieval-coins-10th-century/"
  },
  {
   "slug": "2026-10-07-national-komuz-competition-to-honour-aigul-choro-kyzy",
@@ -47,7 +51,8 @@
   "category": "Culture",
   "dateline": "TALAS",
   "image": "photos/komuz-players.jpg",
-  "published": "2026-10-07T13:45+06:00"
+  "published": "2026-10-07T13:45+06:00",
+  "source_url": "https://en.kabar.kg/news/national-komuz-playerscompetition-to-be-held-in-bishkek/"
  },
  {
   "slug": "2026-10-06-lieutenant-governor-opens-solar-powered-school-in-nurzhan",
@@ -57,7 +62,8 @@
   "category": "Society",
   "dateline": "NURZHAN",
   "image": "photos/apartment-blocks.jpg",
-  "published": "2026-10-06T11:20+06:00"
+  "published": "2026-10-06T11:20+06:00",
+  "source_url": "https://en.kabar.kg/news/kyrgyzstan-to-commission-about-100-schools-by-year-end/"
  },
  {
   "slug": "2026-10-01-tremor-felt-across-the-fergana-rim-no-damage-reported",
@@ -67,7 +73,8 @@
   "category": "Environment",
   "dateline": "TASH-KÖMÜR",
   "image": "photos/tash-komur.jpg",
-  "published": "2026-10-01T18:05+06:00"
+  "published": "2026-10-01T18:05+06:00",
+  "source_url": "https://en.tengrinews.kz/sng/two-earthquakes-occurred-in-kyrgyzstan-within-24-hours-273958/"
  },
  {
   "slug": "2026-09-21-akyel-colt-fetches-record-1-million-at-talas-autumn-sale",
@@ -77,7 +84,8 @@
   "category": "Agriculture",
   "dateline": "TALAS",
   "image": "photos/akyel-golden.jpg",
-  "published": "2026-09-21T16:40+06:00"
+  "published": "2026-09-21T16:40+06:00",
+  "source_url": "https://en.tengrinews.kz/profitably/a-million-dollars-for-a-ram-an-amazing-deal-took-place-in-273718/"
  },
  {
   "slug": "2025-03-05-irad-s-gdp-growth-exceeds-expectations",

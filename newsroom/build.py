@@ -347,6 +347,9 @@ def build():
     extra += pages.build_all(arts, page, write)
     summary = [{k: a[k] for k in ("slug", "headline", "dek", "ticker", "category", "dateline", "image", "published")}
                for a in arts]
+    for s, a in zip(summary, arts):  # lets the Talas Herald see which real reports IradOne adapted
+        if (a.get("source") or {}).get("url"):
+            s["source_url"] = a["source"]["url"]
     write(NEWS / "index.json", json.dumps(summary, ensure_ascii=False, indent=1) + "\n")
     write(NEWS / "feed.xml", feed_xml(arts))
     write(ROOT / "sitemap.xml", sitemap(arts, extra))
