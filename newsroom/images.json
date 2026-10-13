@@ -1,0 +1,14 @@
+{
+  "_comment": "Photo pool for generated stories. Paths are relative to the site root. Add your own images to any list (or add new categories to the writer's image_category list in newsroom.py). Avoid photos of real, recognisable politicians.",
+  "politics": ["news2.webp", "large3.jpg", "imageweq5.jpg"],
+  "economy": ["news3.webp", "news2.webp", "image3.jpg"],
+  "energy": ["image6.jpg", "news1.jpg"],
+  "agriculture": ["image7.jpg", "news3.webp"],
+  "infrastructure": ["image2.jpg", "news1.jpg", "image3.jpg"],
+  "city": ["image3.jpg", "imageweq5.jpg", "large3.jpg"],
+  "environment": ["image8.jpg", "news1.jpg", "image6.jpg"],
+  "culture": ["image1.jpg", "image4.jpg"],
+  "sport": ["large2.jpg"],
+  "technology": ["image5.jpg"],
+  "regional": ["news1.jpg", "image2.jpg", "large3.jpg"]
+}

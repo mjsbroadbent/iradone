@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+<channel>
+  <title>IradOne News</title>
+  <link>https://iradone.com/news/index.html</link>
+  <description>News from IradOne Television, Talas. Fiction from the Irad worldbuilding project.</description>
+  <language>en</language>
+  <item>
+    <title>Irad's GDP Growth Exceeds Expectations</title>
+    <link>https://iradone.com/news/2025-03-05-irad-s-gdp-growth-exceeds-expectations.html</link>
+    <guid>https://iradone.com/news/2025-03-05-irad-s-gdp-growth-exceeds-expectations.html</guid>
+    <pubDate>Wed, 05 Mar 2025 12:00:00 +0600</pubDate>
+    <category>Economy</category>
+    <description>Official figures show the ISEZ economy grew 1.5% last year, ahead of forecasts, on beef exports and refinery output.</description>
+  </item>
+  <item>
+    <title>Talas Hosts International Film Festival</title>
+    <link>https://iradone.com/news/2025-02-18-talas-hosts-international-film-festival.html</link>
+    <guid>https://iradone.com/news/2025-02-18-talas-hosts-international-film-festival.html</guid>
+    <pubDate>Tue, 18 Feb 2025 12:00:00 +0600</pubDate>
+    <category>Culture</category>
+    <description>The Irad Film Society's biennial festival opens with films from more than five countries and a restored Iradi Western.</description>
+  </item>
+  <item>
+    <title>Irad and Uzbekistan Strengthen Bilateral Relations</title>
+    <link>https://iradone.com/news/2025-02-10-irad-and-uzbekistan-strengthen-bilateral-relations.html</link>
+    <guid>https://iradone.com/news/2025-02-10-irad-and-uzbekistan-strengthen-bilateral-relations.html</guid>
+    <pubDate>Mon, 10 Feb 2025 12:00:00 +0600</pubDate>
+    <category>Regional</category>
+    <description>Talas and Tashkent sign a trade and border-coordination memorandum, the first since the 2018 rangeland clashes.</description>
+  </item>
+</channel>
+</rss>

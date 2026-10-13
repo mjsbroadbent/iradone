@@ -1,0 +1,68 @@
+name: IradOne newsroom
+
+on:
+  schedule:
+    # 00:17, 08:17 and 16:17 UTC = 06:17, 14:17 and 22:17 Irad Time (UTC+6)
+    - cron: "17 */8 * * *"
+  workflow_dispatch:
+    inputs:
+      max:
+        description: "Stories to publish this run"
+        required: false
+        default: "3"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: newsroom
+  cancel-in-progress: false
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Check out the site
+        uses: actions/checkout@v4
+
+      - name: Check out the Irad lore
+        uses: actions/checkout@v4
+        with:
+          repository: mjsbroadbent/irad_persona_skill
+          path: _lore
+          sparse-checkout: |
+            quickref.md
+            canon.md
+          sparse-checkout-cone-mode: false
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install -r newsroom/requirements.txt
+
+      - name: Write the news
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          LORE_DIR: _lore
+        run: |
+          if [ -z "$ANTHROPIC_API_KEY" ]; then
+            echo "::error::Add an ANTHROPIC_API_KEY repository secret (Settings > Secrets and variables > Actions)."
+            exit 1
+          fi
+          python newsroom/newsroom.py run --max "${{ github.event.inputs.max || '3' }}"
+
+      - name: Publish
+        run: |
+          git config user.name "IradOne Newsroom"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A news index.html sitemap.xml
+          if git diff --cached --quiet; then
+            echo "Nothing new to publish."
+            exit 0
+          fi
+          git commit -m "Newsroom: $(date -u +'%Y-%m-%d %H:%M') UTC"
+          git push

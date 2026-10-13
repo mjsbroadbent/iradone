@@ -1,0 +1,32 @@
+[
+ {
+  "slug": "2025-03-05-irad-s-gdp-growth-exceeds-expectations",
+  "headline": "Irad's GDP Growth Exceeds Expectations",
+  "dek": "Official figures show the ISEZ economy grew 1.5% last year, ahead of forecasts, on beef exports and refinery output.",
+  "ticker": "ISEZ economy grew 1.5% last year, beating forecasts",
+  "category": "Economy",
+  "dateline": "TALAS",
+  "image": "news3.webp",
+  "published": "2025-03-05T12:00+06:00"
+ },
+ {
+  "slug": "2025-02-18-talas-hosts-international-film-festival",
+  "headline": "Talas Hosts International Film Festival",
+  "dek": "The Irad Film Society's biennial festival opens with films from more than five countries and a restored Iradi Western.",
+  "ticker": "Talas International Film Festival opens with restored Iradi Western",
+  "category": "Culture",
+  "dateline": "TALAS",
+  "image": "news2.webp",
+  "published": "2025-02-18T12:00+06:00"
+ },
+ {
+  "slug": "2025-02-10-irad-and-uzbekistan-strengthen-bilateral-relations",
+  "headline": "Irad and Uzbekistan Strengthen Bilateral Relations",
+  "dek": "Talas and Tashkent sign a trade and border-coordination memorandum, the first since the 2018 rangeland clashes.",
+  "ticker": "Irad and Uzbekistan sign trade and border memorandum in Talas",
+  "category": "Regional",
+  "dateline": "TALAS",
+  "image": "news1.jpg",
+  "published": "2025-02-10T12:00+06:00"
+ }
+]

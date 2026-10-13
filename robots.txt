@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://iradone.com/sitemap.xml
