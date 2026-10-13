@@ -33,3 +33,47 @@ closeButton.addEventListener('click', hidePopover);
 
 // Hide the popover when clicking outside of it
 overlay.addEventListener('click', hidePopover);
+// Lead stories slideshow (slides are written by newsroom/build.py)
+(function () {
+  const box = document.querySelector('.lead-stories');
+  if (!box) return;
+  const slides = Array.from(box.querySelectorAll('.lead-slide'));
+  const dots = box.querySelector('.lead-dots');
+  if (slides.length < 2) return;
+  let current = 0;
+  let timer = null;
+  const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const buttons = slides.map((slide, i) => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.setAttribute('role', 'tab');
+    b.setAttribute('aria-label', 'Story ' + (i + 1) + ' of ' + slides.length);
+    b.addEventListener('click', () => { show(i); restart(); });
+    dots.appendChild(b);
+    return b;
+  });
+
+  function show(i) {
+    current = (i + slides.length) % slides.length;
+    slides.forEach((s, j) => {
+      const on = j === current;
+      s.classList.toggle('active', on);
+      s.setAttribute('aria-hidden', on ? 'false' : 'true');
+      s.tabIndex = on ? 0 : -1;
+      buttons[j].setAttribute('aria-selected', on ? 'true' : 'false');
+    });
+  }
+
+  function restart() {
+    clearInterval(timer);
+    if (!reduceMotion) timer = setInterval(() => show(current + 1), 7000);
+  }
+
+  box.addEventListener('mouseenter', () => clearInterval(timer));
+  box.addEventListener('mouseleave', restart);
+  box.addEventListener('focusin', () => clearInterval(timer));
+  box.addEventListener('focusout', restart);
+  show(0);
+  restart();
+})();

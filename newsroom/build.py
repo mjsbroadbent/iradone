@@ -25,6 +25,7 @@ LEGACY_TICKER = json.loads((NEWSROOM / "legacy_ticker.json").read_text(encoding=
 
 TICKER_LEN = 15
 TOP_STORIES = 6
+LEAD_STORIES = 3
 
 
 def esc(s: str) -> str:
@@ -58,6 +59,21 @@ def ticker_html(arts: list[dict], base: str) -> str:
     # duplicated for the seamless scroll
     return "\n    " + "\n    ".join(spans) + "\n    <!-- Duplicate the content for seamless scrolling -->\n    " \
         + "\n    ".join(spans) + "\n  "
+
+
+def lead_html(arts: list[dict]) -> str:
+    slides = []
+    for i, a in enumerate(arts[:LEAD_STORIES]):
+        url = f"news/{a['slug']}.html"
+        slides.append(f"""      <a class="lead-slide{' active' if i == 0 else ''}" href="{url}">
+        <img src="{esc(a['image'])}" alt="" {'fetchpriority="high"' if i == 0 else 'loading="lazy"'}>
+        <div class="lead-caption">
+          <span class="lead-kicker">{esc(a['category'])} &middot; {nice_date(a['published'])}</span>
+          <h3>{esc(a['headline'])}</h3>
+          <p>{inline(a['dek'])}</p>
+        </div>
+      </a>""")
+    return "\n" + "\n".join(slides) + "\n"
 
 
 def card_html(a: dict, base: str) -> str:
@@ -204,6 +220,7 @@ def build():
     index = replace_between(index, "TICKER", ticker_html(arts, ""))
     cards = "\n".join(card_html(a, "") for a in arts[:TOP_STORIES])
     index = replace_between(index, "TOP", "\n" + cards + "\n  ")
+    index = replace_between(index, "LEAD", lead_html(arts))
     write(ROOT / "index.html", index)
     print(f"Built {len(arts)} articles", flush=True)
 

@@ -1,0 +1,34 @@
+name: Find photo candidates
+
+# Run by hand. Searches Wikimedia Commons for the briefs in
+# newsroom/photo_briefs.json and commits the candidates to the
+# photo-candidates branch (not main), so the site stays small.
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  find:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Search Commons and download candidates
+        run: python newsroom/photos.py
+
+      - name: Commit to the photo-candidates branch
+        run: |
+          git config user.name "IradOne Newsroom"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -B photo-candidates
+          git add photos/candidates
+          git commit -m "Photo candidates $(date -u +'%Y-%m-%d %H:%M') UTC"
+          git push --force origin photo-candidates

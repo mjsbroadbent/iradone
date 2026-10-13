@@ -1,0 +1,12 @@
+[
+  {"id": "talas-city", "want": "Talas city centre: a wide avenue or square", "queries": ["Talas Kyrgyzstan city", "Talas city street", "Talas Kyrgyzstan"]},
+  {"id": "talas-valley", "want": "Talas valley farmland with mountains behind", "queries": ["Talas valley", "Talas Region landscape", "Talas river valley fields"]},
+  {"id": "refinery", "want": "Oil refinery or tank farm (Nurzhan, NurGaz)", "queries": ["Shymkent refinery", "oil refinery Kazakhstan", "Pavlodar oil refinery", "oil refinery Russia"]},
+  {"id": "soviet-blocks", "want": "Soviet-era apartment blocks (Nurzhan housing)", "queries": ["Khrushchyovka Kyrgyzstan", "Bishkek microdistrict apartment blocks", "Taraz apartment buildings", "Soviet apartment blocks Kazakhstan"]},
+  {"id": "toktogul", "want": "Toktogul reservoir and dam", "queries": ["Toktogul Reservoir", "Toktogul Dam", "Toktogul hydroelectric"]},
+  {"id": "pass-lorries", "want": "Mountain pass road with lorries", "queries": ["Too-Ashuu pass", "Bishkek Osh road truck", "Ala-Bel pass", "Kyrgyzstan mountain road truck"]},
+  {"id": "freight-rail", "want": "Freight railway or rail yard", "queries": ["Kazakhstan freight train", "Kazakhstan Temir Zholy freight", "Turkestan-Siberia Railway", "Kyrgyz railway"]},
+  {"id": "bazaar", "want": "Covered bazaar interior", "queries": ["Osh Bazaar Bishkek", "Jayma Bazaar Osh", "Chorsu Bazaar interior", "Central Asian bazaar interior"]},
+  {"id": "ulak", "want": "Ulak tartysh / kok-boru in action", "queries": ["kok-boru", "kok boru game", "buzkashi Kyrgyzstan", "ulak tartysh"]},
+  {"id": "akyel", "want": "Golden horse (Akhal-Teke) for the Akyel", "queries": ["Akhal-Teke golden", "Akhal-Teke stallion", "Akhal-Teke"]}
+]
