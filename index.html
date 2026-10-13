@@ -75,6 +75,22 @@
   </div>
 </div>
 
+<!-- Info strip: Irad Time, weather, Bank of Irad rates (info.js) -->
+<div id="info-strip" class="info-strip">
+  <div class="info-clock">
+    <span class="info-time">--:--</span>
+    <span class="info-date"></span>
+  </div>
+  <div class="info-weather" hidden>
+    <ul class="info-weather-list"></ul>
+  </div>
+  <div class="info-rates" hidden>
+    <span class="info-label">Bank of Irad &middot; som</span>
+    <ul class="info-rates-list"></ul>
+    <a class="info-credit" href="https://www.exchangerate-api.com" rel="noopener" target="_blank">Rates by Exchange Rate API</a>
+  </div>
+</div>
+
 <!-- Popover -->
 <div id="adblock-popover" class="popover">
   <!-- Yellow Banner -->
@@ -408,6 +424,7 @@ document.addEventListener('DOMContentLoaded', () => {
     handleVideoThumbnailClick(); // Initialize grid video click handlers
 });
 </script>
+<script src="info.js"></script>
 <script src="schedule.js"></script>
 <script src="scripts.js"></script>
 </body>
