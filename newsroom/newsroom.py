@@ -246,6 +246,7 @@ class Claude:
     def __init__(self, mock: bool):
         self.mock = mock
         self.system = None
+        self.no_forced_tools: set[str] = set()
         if mock:
             return
         import anthropic  # imported here so `build` and `--mock` need no SDK
@@ -265,21 +266,35 @@ class Claude:
         ]
 
     def _call(self, model: str, tool: dict, user: str, max_tokens: int) -> dict:
-        resp = self.client.messages.create(
-            model=model,
-            max_tokens=max_tokens,
-            system=self.system,
-            tools=[tool],
-            tool_choice={"type": "tool", "name": tool["name"]},
-            messages=[{"role": "user", "content": user}],
-        )
+        import anthropic
+        kwargs = dict(model=model, max_tokens=max_tokens, system=self.system, tools=[tool])
+        if model in self.no_forced_tools:
+            resp = self._auto_tool_call(kwargs, tool, user)
+        else:
+            try:
+                resp = self.client.messages.create(
+                    **kwargs, tool_choice={"type": "tool", "name": tool["name"]},
+                    messages=[{"role": "user", "content": user}])
+            except anthropic.BadRequestError as exc:
+                if "tool_choice" not in str(exc):
+                    raise
+                # Some models don't accept a forced tool; ask for it in the message instead.
+                self.no_forced_tools.add(model)
+                resp = self._auto_tool_call(kwargs, tool, user)
         u = resp.usage
         log(f"    [{model}] in={u.input_tokens} cache_read={getattr(u, 'cache_read_input_tokens', 0)} "
             f"cache_write={getattr(u, 'cache_creation_input_tokens', 0)} out={u.output_tokens}")
         for block in resp.content:
-            if block.type == "tool_use":
+            if block.type == "tool_use" and block.name == tool["name"]:
                 return block.input
-        raise RuntimeError("model returned no tool call")
+        raise RuntimeError(f"model returned no {tool['name']} call (stop_reason={resp.stop_reason})")
+
+    def _auto_tool_call(self, kwargs: dict, tool: dict, user: str):
+        nudge = (f"\n\nRespond only by calling the {tool['name']} tool, exactly once. "
+                 "Do not reply in plain text.")
+        return self.client.messages.create(
+            **kwargs, tool_choice={"type": "auto"},
+            messages=[{"role": "user", "content": user + nudge}])
 
     def triage(self, candidates: list[dict], recent: list[str], n: int, today: str) -> list[dict]:
         if self.mock:
@@ -311,7 +326,7 @@ class Claude:
             f"Title: {item['title']}\nSummary: {item['summary']}\n</source>\n\n"
             "Write the IradOne story and file it with the file_story tool."
         )
-        return self._call(CONFIG["writer_model"], STORY_TOOL, user, 3000)
+        return self._call(CONFIG["writer_model"], STORY_TOOL, user, 6000)
 
 
 def mock_story(item: dict, pick: dict) -> dict:
