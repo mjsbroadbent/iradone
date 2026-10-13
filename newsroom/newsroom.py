@@ -314,19 +314,31 @@ class Claude:
         out = self._call(CONFIG["triage_model"], TRIAGE_TOOL, user, 1500)
         return out.get("picks", [])[:n]
 
-    def write(self, item: dict, pick: dict, recent: list[str], today: str) -> dict:
+    def write(self, item: dict, pick: dict, recent: list[str], today: str,
+              recent_people: list[str] | None = None) -> dict:
         if self.mock:
             return mock_story(item, pick)
         user = (
             f"Today is {today} (Irad Time). Treatment: **{pick['treatment']}**. Desk note: {pick['angle']}\n\n"
             f"Recent IradOne headlines (stay consistent, don't repeat):\n"
             + "\n".join(f"- {h}" for h in recent[:15]) +
+            "\n\nMinor characters already used recently (do not reuse these names):\n"
+            + (", ".join(recent_people or []) or "none") +
             "\n\nReal source item (facts only; never reuse its wording):\n"
             f"<source name=\"{item['source']}\" country=\"{item['country']}\" published=\"{item['published']}\">\n"
             f"Title: {item['title']}\nSummary: {item['summary']}\n</source>\n\n"
             "Write the IradOne story and file it with the file_story tool."
         )
         return self._call(CONFIG["writer_model"], STORY_TOOL, user, 6000)
+
+
+def recent_minor_people(articles: list[dict], n: int = 30) -> list[str]:
+    names = []
+    for a in articles[:n]:
+        for p in a.get("people_quoted", []):
+            if not p.get("canon") and p["name"] not in names:
+                names.append(p["name"])
+    return names
 
 
 def mock_story(item: dict, pick: dict) -> dict:
@@ -507,7 +519,7 @@ def run(args) -> int:
             item = candidates[pid]
             log(f"Writing: {item['title']}  [{pick['treatment']}]")
             try:
-                story = claude.write(item, pick, recent, today_str)
+                story = claude.write(item, pick, recent, today_str, recent_minor_people(articles))
             except Exception as exc:
                 log(f"  write failed: {exc.__class__.__name__}: {exc}")
                 failures += 1
