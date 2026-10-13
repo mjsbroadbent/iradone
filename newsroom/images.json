@@ -1,12 +1,17 @@
 {
   "_comment": "Photo pool for generated stories (paths from the site root). New photos go in photos/ with a credits.json entry; then add them to any list here. Avoid recognisable politicians, real flags, real place-name signs and anything showing horsemeat. image2.jpg is left out: its road sign is in Tajik.",
   "politics": [
+    "photos/talas-skyline.jpg",
+    "photos/nurzhan-square.jpg",
     "photos/apartment-blocks.jpg",
     "news2.webp",
     "large3.jpg",
     "imageweq5.jpg"
   ],
   "economy": [
+    "photos/talas-skyline.jpg",
+    "photos/livestock-bazaar.jpg",
+    "photos/bazaar-dairy.jpg",
     "photos/bazaar-produce.jpg",
     "photos/bazaar-dried-fruit.jpg",
     "photos/freight-yard.jpg",
@@ -14,12 +19,20 @@
     "image3.jpg"
   ],
   "energy": [
+    "photos/nurzhan-refinery.jpg",
+    "photos/toktogul-dam.jpg",
+    "photos/kurpsai-dam.jpg",
     "photos/refinery-dusk.jpg",
     "photos/tank-farm.jpg",
     "photos/toktogul-autumn.jpg",
     "photos/toktogul-clouds.jpg"
   ],
   "agriculture": [
+    "photos/chu-valley-fields.jpg",
+    "photos/chu-canal.jpg",
+    "photos/livestock-bazaar.jpg",
+    "photos/kymyz.jpg",
+    "photos/karakul-sheep.jpg",
     "photos/zhayloo-yurts.jpg",
     "photos/horses-pasture.jpg",
     "photos/pasture-yurt.jpg",
@@ -27,6 +40,9 @@
     "news3.webp"
   ],
   "infrastructure": [
+    "photos/chu-river-bridge.jpg",
+    "photos/chu-canal.jpg",
+    "photos/kok-art-pass.jpg",
     "photos/freight-loco.jpg",
     "photos/freight-steppe.jpg",
     "photos/freight-yard.jpg",
@@ -35,12 +51,24 @@
     "image3.jpg"
   ],
   "city": [
+    "photos/talas-skyline.jpg",
+    "photos/nurzhan-square.jpg",
+    "photos/bazar-korgon-street.jpg",
+    "photos/tash-komur.jpg",
     "photos/apartment-blocks.jpg",
     "image3.jpg",
     "imageweq5.jpg",
     "large3.jpg"
   ],
   "environment": [
+    "photos/arslanbob-walnuts.jpg",
+    "photos/sary-chelek.jpg",
+    "photos/chatkal-gorge.jpg",
+    "photos/kara-suu-canyon.jpg",
+    "photos/besh-tash-lake.jpg",
+    "photos/ibex.jpg",
+    "photos/kok-art-pass.jpg",
+    "photos/mailuu-suu.jpg",
     "photos/mountain-meadow.jpg",
     "photos/toktogul-clouds.jpg",
     "photos/mountain-pass.jpg",
@@ -48,6 +76,15 @@
     "news1.jpg"
   ],
   "culture": [
+    "photos/komuz-players.jpg",
+    "photos/shyrdak.jpg",
+    "photos/yurt.jpg",
+    "photos/caravanserai.jpg",
+    "photos/akyrtas-ruins.jpg",
+    "photos/petroglyphs.jpg",
+    "photos/golden-eagle.jpg",
+    "photos/white-rider-painting.jpg",
+    "photos/kurut.jpg",
     "image1.jpg",
     "image4.jpg",
     "photos/zhayloo-yurts.jpg"
@@ -62,6 +99,8 @@
     "image5.jpg"
   ],
   "regional": [
+    "photos/kok-art-pass.jpg",
+    "photos/tash-komur.jpg",
     "photos/mountain-pass.jpg",
     "photos/freight-steppe.jpg",
     "news1.jpg",

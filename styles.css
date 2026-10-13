@@ -1129,3 +1129,9 @@ footer {
     display: none;
   }
 }
+
+/* Uniform photo shape on Top Stories cards */
+.news-grid article img {
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+}
