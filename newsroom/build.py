@@ -159,7 +159,7 @@ def article_page(a: dict, arts: list[dict]) -> str:
           </ul>
         </section>
       </article>"""
-    return page(f"{a['headline']} | IradOne", a["dek"], f"{SITE}/news/{a['slug']}.html", content, arts,
+    return page(f"{a['headline']} | IradOne Online", a["dek"], f"{SITE}/news/{a['slug']}.html", content, arts,
                 f"{SITE}/{a['image']}", "article", a["headline"])
 
 
@@ -180,7 +180,7 @@ def archive_page(arts: list[dict]) -> str:
 {rows}
         </ul>
       </section>"""
-    return page("News | IradOne Television", "The latest news from IradOne Television in Talas.",
+    return page("News | IradOne Online", "The latest news from IradOne Online in Talas.",
                 f"{SITE}/news/index.html", content, arts, f"{SITE}/iradone.png")
 
 
@@ -200,7 +200,7 @@ def credits_page(arts: list[dict]) -> str:
 {rows}
         </ul>
       </section>"""
-    html_out = page("Photo credits | IradOne Television", "Credits for photographs used on IradOne.",
+    html_out = page("Photo credits | IradOne Online", "Credits for photographs used on IradOne.",
                     f"{SITE}/credits.html", content, arts, f"{SITE}/iradone.png")
     # This page lives at the site root, so its relative links go up zero levels, not one.
     return html_out.replace('="../', '="')
@@ -223,7 +223,7 @@ def feed_xml(arts: list[dict]) -> str:
 <channel>
   <title>IradOne News</title>
   <link>{SITE}/news/index.html</link>
-  <description>News from IradOne Television, Talas. Fiction from the Irad worldbuilding project.</description>
+  <description>News from IradOne Online, Talas. Fiction from the Irad worldbuilding project.</description>
   <language>en</language>
 {chr(10).join(items)}
 </channel>
