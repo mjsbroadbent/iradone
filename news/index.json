@@ -6,7 +6,7 @@
   "ticker": "Sary-Bulak antimony works, Chatkal smelter to restart in phases, hiring begins",
   "category": "Economy",
   "dateline": "SARY-BULAK",
-  "image": "image3.jpg",
+  "image": "news1.jpg",
   "published": "2026-10-13T09:22+06:00"
  },
  {
@@ -16,7 +16,7 @@
   "ticker": "Toktogul upgrade lifts capacity to 1,440 MW; exports to follow Naryn Protocol",
   "category": "Energy",
   "dateline": "TASH-KÖMÜR",
-  "image": "image6.jpg",
+  "image": "image8.jpg",
   "published": "2026-10-13T09:15+06:00"
  },
  {
@@ -26,8 +26,58 @@
   "ticker": "Kazakh flaxseed exports at record 1.3m tonnes; Irad trucking routes busy",
   "category": "Economy",
   "dateline": "TALAS",
-  "image": "news2.webp",
+  "image": "image3.jpg",
   "published": "2026-10-13T09:08+06:00"
+ },
+ {
+  "slug": "2026-10-09-kara-khanid-coins-found-at-rabat-i-safed",
+  "headline": "Kara-Khanid Coins Found at Rabat-i-Safed",
+  "dek": "Talas State University archaeologists have recovered 10th- and 11th-century coins, a cauldron fragment and storage jars at the Silk Road caravanserai.",
+  "ticker": "Archaeologists find Kara-Khanid coins at Rabat-i-Safed",
+  "category": "Culture",
+  "dateline": "TALAS",
+  "image": "image6.jpg",
+  "published": "2026-10-09T15:10+06:00"
+ },
+ {
+  "slug": "2026-10-07-national-komuz-competition-to-honour-aigul-choro-kyzy",
+  "headline": "National Komuz Competition to Honour Aigul Choro kyzy",
+  "dek": "Players of all ages are invited to Talas for an open competition marking 90 years since the birth of the ethnomusicologist who recorded Irad's music on the summer pastures.",
+  "ticker": "Open komuz competition in Talas marks Aigul Choro kyzy anniversary",
+  "category": "Culture",
+  "dateline": "TALAS",
+  "image": "image1.jpg",
+  "published": "2026-10-07T13:45+06:00"
+ },
+ {
+  "slug": "2026-10-06-lieutenant-governor-opens-solar-powered-school-in-nurzhan",
+  "headline": "Lieutenant Governor Opens Solar-Powered School in Nurzhan",
+  "dek": "The Navbahor district school is one of twelve opened this year, with eighteen more schools and kindergartens due before the end of December.",
+  "ticker": "New solar-powered school opens in Nurzhan; 18 more due by year-end",
+  "category": "Society",
+  "dateline": "NURZHAN",
+  "image": "imageweq5.jpg",
+  "published": "2026-10-06T11:20+06:00"
+ },
+ {
+  "slug": "2026-10-01-tremor-felt-across-the-fergana-rim-no-damage-reported",
+  "headline": "Tremor Felt Across the Fergana Rim; No Damage Reported",
+  "dek": "A magnitude 4.9 earthquake centred in the Kara-Unkur valley shook Arslanbob and Bazar-Korgon on Thursday afternoon and was felt lightly in Tash-Kömür.",
+  "ticker": "Magnitude 4.9 tremor felt in Fergana Rim; no damage reported",
+  "category": "Environment",
+  "dateline": "TASH-KÖMÜR",
+  "image": "large3.jpg",
+  "published": "2026-10-01T18:05+06:00"
+ },
+ {
+  "slug": "2026-09-21-akyel-colt-fetches-record-1-million-at-talas-autumn-sale",
+  "headline": "Akyel Colt Fetches Record $1 Million at Talas Autumn Sale",
+  "dek": "A two-year-old golden Akyel set a new national price at the Akyel Syndicate's autumn sale, as buyers from five countries crowded the State Hippodrome.",
+  "ticker": "Record $1 million for Akyel colt at Talas autumn sale",
+  "category": "Agriculture",
+  "dateline": "TALAS",
+  "image": "large2.jpg",
+  "published": "2026-09-21T16:40+06:00"
  },
  {
   "slug": "2025-03-05-irad-s-gdp-growth-exceeds-expectations",

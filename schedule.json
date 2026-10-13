@@ -93,6 +93,7 @@
     "all_souls": {"title": "All Souls' Evening", "desc": "Marigolds, white ribbons and the riderless horse: the evening procession in Semiz."},
     "yalda_live": {"title": "Yalda: The Nativity", "desc": "The Christmas Divine Liturgy, live from the Church of St. Yuhanna in Talas."},
     "altyn_zhylky": {"title": "The Altyn-Zhylky Awards", "desc": "Irad's music, film and television awards, live and exclusive to IradOne."},
+    "komuz_gala": {"title": "Komuz Gala: Aigul Choro kyzy at 90", "desc": "The winners of the national komuz competition in concert from Talas, in honour of the ethnomusicologist's 90th anniversary."},
     "election_night": {"title": "Election Night 2027", "desc": "Results and reaction from the Territorial Election Commission, live through the night."}
   },
 
@@ -206,6 +207,7 @@
       {"t": "21:00", "until": "23:55", "show": "new_year_eve"},
       {"t": "23:55", "until": "00:05", "show": "governor_new_year"},
       {"t": "00:05", "until": "01:30", "show": "new_year_eve"}]},
+    {"name": "Komuz Gala", "date": "2026-10-24", "slots": [{"t": "21:00", "until": "23:00", "show": "komuz_gala"}]},
     {"name": "Election 2027", "date": "2027-11-02", "slots": [{"t": "20:30", "until": "02:30", "show": "election_night"}]}
   ],
 

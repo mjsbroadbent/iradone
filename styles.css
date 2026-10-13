@@ -823,3 +823,14 @@ footer {
     grid-row: span 2;
   }
 }
+
+/* ---------- About ---------- */
+.about {
+  padding: 2rem;
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.about p {
+  font-size: 1.05rem;
+}
