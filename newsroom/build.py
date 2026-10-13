@@ -102,7 +102,7 @@ def article_page(a: dict, arts: list[dict]) -> str:
         <p class="story-kicker"><a href="index.html">News</a> &middot; {esc(a['category'])}</p>
         <h1>{esc(a['headline'])}</h1>
         <p class="story-dek">{inline(a['dek'])}</p>
-        <p class="story-meta">Published: {nice_date(a['published'])} &middot; IradOne News</p>
+        <p class="story-meta">Published: {nice_date(a['published'])} &middot; OneNews</p>
         <img class="story-image" src="../{esc(a['image'])}" alt="">
         <div class="story-body">
           {chr(10).join('          ' + b for b in body).strip()}
