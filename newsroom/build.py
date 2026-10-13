@@ -269,7 +269,8 @@ def build():
 
     index = (ROOT / "index.html").read_text(encoding="utf-8")
     index = replace_between(index, "TICKER", ticker_html(arts, ""))
-    cards = "\n".join(card_html(a, "") for a in arts[:TOP_STORIES])
+    # the lead slideshow already shows the newest few, so the cards carry on from there
+    cards = "\n".join(card_html(a, "") for a in arts[LEAD_STORIES:LEAD_STORIES + TOP_STORIES])
     index = replace_between(index, "TOP", "\n" + cards + "\n  ")
     index = replace_between(index, "LEAD", lead_html(arts))
     write(ROOT / "index.html", index)

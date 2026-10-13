@@ -1135,3 +1135,12 @@ footer {
   aspect-ratio: 3 / 2;
   object-fit: cover;
 }
+
+/* Lead slideshow runs straight into the story cards */
+.hero {
+  padding-bottom: 0;
+}
+
+.news {
+  padding-top: 1rem;
+}
