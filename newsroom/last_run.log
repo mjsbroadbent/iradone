@@ -1,0 +1,20 @@
+IradOne newsroom run, 2026-10-13 09:21 IRT, up to 3 stories
+Fetching feeds
+  Kabar: 50 items
+  RFE/RL Kyrgyzstan: 6 items
+  The Times of Central Asia: 10 items
+  Gazeta.uz: 20 items
+  Kun.uz: FAILED (HTTPError: HTTP Error 404: Not Found)
+  RFE/RL Kazakhstan: 7 items
+  RFE/RL Uzbekistan: 6 items
+40 fresh candidates
+    [claude-haiku-5-5] in=5311 cache_read=47052 cache_write=0 out=289
+Triage picked 3: [{"id": 14, "treatment": "domestic", "angle": "Kadamjay's antimony and mercury plants are to be restored, which in Irad maps onto the Sary-Bulak antimony works and the Chatkal smelter, a story about industrial jobs and the mining economy."}, {"id": 6, "treatment": "domestic", "angle": "A record flaxseed export year reads as an agriculture and trade success for Irad's Chu and Talas valley farmers and the Trans-Chuy trucking firms moving the crop."}, {"id": 34, "treatment": "regional", "angle": "Uzbekistan's president calls for joint action on water losses, which bears directly on the Naryn Protocol, Toktogul releases and the 2027 schedule talks."}]
+Writing: Kyrgyzstan to restore antimony and mercury plants in Kadamjay district  [domestic]
+  write failed: BadRequestError: Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'tool_choice: type "tool" and "any" are not supported for this model.'}, 'request_id': 'req_011CfyWzK9xMgfeyTJ6uQgBm'}
+Writing: Kazakhstan Flaxseed Exports Hit Record 1.3 Million Tons  [domestic]
+  write failed: BadRequestError: Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'tool_choice: type "tool" and "any" are not supported for this model.'}, 'request_id': 'req_011CfyWzKur4Fhmczg9DvgBG'}
+Writing: Water scarcity becomes increasingly serious constraint on Central Asia’s development — president of Uzbekistan  [regional]
+  write failed: BadRequestError: Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'tool_choice: type "tool" and "any" are not supported for this model.'}, 'request_id': 'req_011CfyWzLiiHUEa1xysPa24s'}
+Done: 0 new stories, 3 failed calls
+Every Claude call failed; marking the run as failed.
