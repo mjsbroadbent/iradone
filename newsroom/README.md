@@ -8,8 +8,8 @@ The workflow wakes hourly from 08:41 to 21:41 Irad Time and runs `newsroom.py du
 
 ## How a run works
 
-1. **Fetch** the feeds in `config.json` (Kabar, RFE/RL, The Times of Central Asia, Gazeta.uz, Kun.uz). Items older than 96 hours, already seen, or matching a `skip_keywords` word (deaths, attacks and similar) are dropped.
-2. **Triage**: a cheap model picks the best few items and marks each `domestic` (moved into Irad) or `regional` (reported as neighbour news with an Irad angle).
+1. **Fetch** the feeds in `config.json` (Kabar, RFE/RL, The Times of Central Asia, Gazeta.uz). Items older than 96 hours, already seen, or matching a `skip_keywords` word (deaths, attacks and similar) are dropped.
+2. **Triage**: a cheap model picks the best item, plus a spare in case the first is rejected, and marks each `domestic` (moved into Irad) or `regional` (reported as neighbour news with an Irad angle).
 3. **Write**: the writer model gets `prompts/house_style.md` plus the lore (`quickref.md` and `canon.md`, checked out from `mjsbroadbent/irad_persona_skill` on every run, so lore changes flow straight through).
 4. **Check**: a story is dropped if it names anyone on `real_people_watchlist`, reuses a run of 9+ words from the source, or is too short.
 5. **Build** (`build.py`): article pages, `news/index.html` archive, `news/index.json`, `news/feed.xml`, `sitemap.xml`, and the ticker and Top Stories on the homepage (between the `<!-- NEWS:... -->` markers in `index.html`).
