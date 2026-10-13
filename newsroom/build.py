@@ -22,6 +22,8 @@ CONFIG = json.loads((NEWSROOM / "config.json").read_text(encoding="utf-8"))
 SITE = CONFIG["site_url"].rstrip("/")
 TEMPLATE = (NEWSROOM / "templates" / "page.html").read_text(encoding="utf-8")
 LEGACY_TICKER = json.loads((NEWSROOM / "legacy_ticker.json").read_text(encoding="utf-8"))
+CREDITS_FILE = ROOT / "photos" / "credits.json"
+CREDITS = json.loads(CREDITS_FILE.read_text(encoding="utf-8")) if CREDITS_FILE.exists() else {}
 
 TICKER_LEN = 15
 TOP_STORIES = 6
@@ -40,6 +42,27 @@ def inline(s: str) -> str:
 def nice_date(iso: str) -> str:
     d = dt.datetime.fromisoformat(iso)
     return f"{d:%B} {d.day}, {d.year}"
+
+
+def credit_text(image: str) -> str | None:
+    c = CREDITS.get(image)
+    if not c:
+        return None
+    return f"Photo: {c['author']} / Wikimedia Commons, {c['licence']}"
+
+
+def credit_html(image: str, base: str, cls: str = "photo-credit") -> str:
+    c = CREDITS.get(image)
+    if not c:
+        return ""
+    lic = (f'<a href="{esc(c["licence_url"])}" rel="license noopener" target="_blank">{esc(c["licence"])}</a>'
+           if c.get("licence_url") else esc(c["licence"]))
+    return (f'<p class="{cls}">Photo: <a href="{esc(c["source"])}" rel="noopener" target="_blank">'
+            f'{esc(c["author"])}</a> / Wikimedia Commons, {lic}</p>')
+
+
+def alt_for(image: str) -> str:
+    return esc((CREDITS.get(image) or {}).get("alt", ""))
 
 
 def load() -> list[dict]:
@@ -71,7 +94,7 @@ def lead_html(arts: list[dict]) -> str:
           <span class="lead-kicker">{esc(a['category'])} &middot; {nice_date(a['published'])}</span>
           <h3>{esc(a['headline'])}</h3>
           <p>{inline(a['dek'])}</p>
-        </div>
+        </div>{('<span class="lead-credit">' + esc(credit_text(a['image'])) + '</span>') if credit_text(a['image']) else ''}
       </a>""")
     return "\n" + "\n".join(slides) + "\n"
 
@@ -119,7 +142,8 @@ def article_page(a: dict, arts: list[dict]) -> str:
         <h1>{esc(a['headline'])}</h1>
         <p class="story-dek">{inline(a['dek'])}</p>
         <p class="story-meta">Published: {nice_date(a['published'])} &middot; OneNews</p>
-        <img class="story-image" src="../{esc(a['image'])}" alt="">
+        <img class="story-image" src="../{esc(a['image'])}" alt="{alt_for(a['image'])}">
+        {credit_html(a['image'], '../')}
         <div class="story-body">
           {chr(10).join('          ' + b for b in body).strip()}
         </div>
@@ -154,6 +178,28 @@ def archive_page(arts: list[dict]) -> str:
       </section>"""
     return page("News | IradOne Television", "The latest news from IradOne Television in Talas.",
                 f"{SITE}/news/index.html", content, arts, f"{SITE}/iradone.png")
+
+
+def credits_page(arts: list[dict]) -> str:
+    rows = "\n".join(
+        f"""        <li class="credit-item">
+          <img src="../{esc(path)}" alt="{esc(c.get('alt', ''))}" loading="lazy">
+          <div>
+            <p><strong>{esc(c.get('alt', ''))}</strong></p>
+            {credit_html(path, '../', 'credit-line')}
+          </div>
+        </li>""" for path, c in sorted(CREDITS.items()))
+    content = f"""      <section class="archive">
+        <h1>Photo credits</h1>
+        <p class="story-dek">Photographs used on this site under free licences from Wikimedia Commons, with thanks to their authors.</p>
+        <ul class="credit-list">
+{rows}
+        </ul>
+      </section>"""
+    html_out = page("Photo credits | IradOne Television", "Credits for photographs used on IradOne.",
+                    f"{SITE}/credits.html", content, arts, f"{SITE}/iradone.png")
+    # This page lives at the site root, so its relative links go up zero levels, not one.
+    return html_out.replace('="../', '="')
 
 
 def feed_xml(arts: list[dict]) -> str:
@@ -210,6 +256,7 @@ def build():
     for a in arts:
         write(NEWS / f"{a['slug']}.html", article_page(a, arts))
     write(NEWS / "index.html", archive_page(arts))
+    write(ROOT / "credits.html", credits_page(arts))
     summary = [{k: a[k] for k in ("slug", "headline", "dek", "ticker", "category", "dateline", "image", "published")}
                for a in arts]
     write(NEWS / "index.json", json.dumps(summary, ensure_ascii=False, indent=1) + "\n")
