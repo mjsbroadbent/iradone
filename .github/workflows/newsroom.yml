@@ -56,10 +56,11 @@ jobs:
           python newsroom/newsroom.py run --max "${{ github.event.inputs.max || '3' }}"
 
       - name: Publish
+        if: always()
         run: |
           git config user.name "IradOne Newsroom"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -A news index.html sitemap.xml
+          git add -A news index.html sitemap.xml newsroom
           if git diff --cached --quiet; then
             echo "Nothing new to publish."
             exit 0

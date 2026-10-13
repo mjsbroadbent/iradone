@@ -49,8 +49,23 @@ CATEGORIES = ["Politics", "Economy", "Regional", "Energy", "Agriculture", "Socie
 USER_AGENT = "Mozilla/5.0 (compatible; IradOneNewsroom/1.0; +https://iradone.com)"
 
 
+RUN_LOG: list[str] = []
+
+
 def log(*args):
-    print(*args, file=sys.stderr, flush=True)
+    line = " ".join(str(a) for a in args)
+    RUN_LOG.append(line)
+    print(line, file=sys.stderr, flush=True)
+
+
+def save_run_log():
+    """Keep the latest run's log in the repo, and in the Actions run summary."""
+    text = "\n".join(RUN_LOG) + "\n"
+    (NEWSROOM / "last_run.log").write_text(text, encoding="utf-8")
+    summary = os.environ.get("GITHUB_STEP_SUMMARY")
+    if summary:
+        with open(summary, "a", encoding="utf-8") as f:
+            f.write("## IradOne newsroom run\n\n```\n" + text + "```\n")
 
 
 def now_irad() -> dt.datetime:
@@ -448,23 +463,41 @@ def run(args) -> int:
     articles = load_articles()
     recent = [a["headline"] for a in articles]
     published_new = 0
+    failures = 0
 
     if candidates and max_n > 0:
         claude = Claude(args.mock)
         today_str = f"{today:%A %d %B %Y}"
-        picks = claude.triage(candidates, recent, max_n, today_str)
+        try:
+            picks = claude.triage(candidates, recent, max_n, today_str)
+        except Exception as exc:
+            log(f"Triage failed: {exc.__class__.__name__}: {exc}")
+            picks, failures = None, 1
+        if picks is not None:
+            log(f"Triage picked {len(picks)}: " + json.dumps(picks, ensure_ascii=False))
         picked_ids = set()
-        for pick in picks:
-            if pick.get("id") not in range(len(candidates)) or pick["id"] in picked_ids:
+        for pick in picks or []:
+            try:
+                pid = int(pick.get("id"))
+            except (TypeError, ValueError):
+                log(f"  ignoring pick with bad id: {pick}")
                 continue
-            picked_ids.add(pick["id"])
-            item = candidates[pick["id"]]
+            if pid not in range(len(candidates)) or pid in picked_ids:
+                log(f"  ignoring pick with unknown or repeated id: {pick}")
+                continue
+            picked_ids.add(pid)
+            pick["id"] = pid
+            pick.setdefault("treatment", "regional")
+            pick.setdefault("angle", "")
+            item = candidates[pid]
             log(f"Writing: {item['title']}  [{pick['treatment']}]")
             try:
                 story = claude.write(item, pick, recent, today_str)
             except Exception as exc:
-                log(f"  write failed: {exc}")
-                continue  # leave unseen so a later run can retry
+                log(f"  write failed: {exc.__class__.__name__}: {exc}")
+                failures += 1
+                picked_ids.discard(pid)  # leave unseen so a later run can retry
+                continue
             problem = validate(story, item)
             key = url_key(item["url"])
             if problem:
@@ -480,9 +513,13 @@ def run(args) -> int:
                          "at": today.isoformat()}
             published_new += 1
             log(f"  published: {art['headline']}")
-        for c in candidates:  # everything triage looked at and passed over
-            seen.setdefault(url_key(c["url"]), {"decision": "passed in triage", "title": c["title"],
-                                                "at": today.isoformat()})
+        if picks and not failures:
+            # Triage worked and passed over these; don't offer them again.
+            # After any failure, leave them for the next run instead.
+            for c in candidates:
+                if c["id"] not in picked_ids:
+                    seen.setdefault(url_key(c["url"]), {"decision": "passed in triage",
+                                                        "title": c["title"], "at": today.isoformat()})
 
     if args.dry_run:
         log(f"Dry run: {published_new} stories would be published")
@@ -492,7 +529,10 @@ def run(args) -> int:
                          encoding="utf-8")
     import build  # local module
     build.build()
-    log(f"Done: {published_new} new stories")
+    log(f"Done: {published_new} new stories, {failures} failed calls")
+    if failures and not published_new:
+        log("Every Claude call failed; marking the run as failed.")
+        return 1
     return 0
 
 
@@ -511,7 +551,14 @@ def main():
         import build
         build.build()
         return 0
-    return run(args)
+    try:
+        return run(args)
+    except Exception as exc:
+        log(f"Run crashed: {exc.__class__.__name__}: {exc}")
+        raise
+    finally:
+        if not args.dry_run:
+            save_run_log()
 
 
 if __name__ == "__main__":
