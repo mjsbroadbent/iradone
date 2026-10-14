@@ -99,7 +99,7 @@
         "&longitude=" + p.map(function (x) { return x.lon; }).join(",") +
         "&elevation=" + p.map(function (x) { return x.elevation; }).join(",") +
         "&daily=snowfall_sum,precipitation_sum,temperature_2m_min,wind_gusts_10m_max&past_days=1&forecast_days=2&timezone=auto";
-      cached("iradone-passes-v1", function () {
+      cached("iradone-passes-v2", function () {
         return fetch(url).then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); });
       }).then(function (w) { render(root, config, Array.isArray(w) ? w : [w]); })
         .catch(function () { /* passes show "No report" unless season-closed */ });

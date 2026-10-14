@@ -17,7 +17,7 @@
   var CITIES = [
     { name: "Talas", lat: 42.52, lon: 72.24, elevation: 1270 },
     { name: "Nurzhan", lat: 43.2, lon: 73.0, elevation: 740 },         // lower Chu plain
-    { name: "Iyık Janyl", lat: 41.48, lon: 72.38, elevation: 1280 },   // Fergana Range foothills
+    { name: "Iyık Janyl", lat: 41.42, lon: 72.22, elevation: 650 },    // Naryn river flats below the gorge
     { name: "Tash-Kömür", lat: 41.35, lon: 72.23, elevation: 690 }
   ];
 
