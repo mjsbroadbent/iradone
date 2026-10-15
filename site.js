@@ -28,6 +28,16 @@
   var JARNAMA = "https://mjsbroadbent.github.io/jarnama/";
   var THEMES = ["current", "state"];
   var SIZES = { leaderboard: "728x90", box: "300x250" };
+  // Same rule as Jarnama's serve.js: current-era ads (or ads with no era) whose advertiser
+  // type, if any, is "state". General advertisers get in; local shops, scams and the like don't.
+  function fits(themes) {
+    var eras = ["dialup", "flash", "current"];
+    var era = themes.filter(function (t) { return eras.indexOf(t) >= 0; });
+    var type = themes.filter(function (t) { return eras.indexOf(t) < 0; });
+    return (!era.length || era.indexOf("current") >= 0) &&
+      (!type.length || type.some(function (t) { return THEMES.indexOf(t) >= 0; })) &&
+      themes.some(function (t) { return THEMES.indexOf(t) >= 0; });
+  }
 
   function getJSON(url) {
     return fetch(url, { cache: "no-cache" })
@@ -45,7 +55,7 @@
           link: a.link ? (/^https?:|^#/.test(a.link) ? a.link : base + a.link) : "#" }; });
       var network = (res[1].ads || []).filter(function (a) {
         return a.active !== false && /\.(gif|png|jpe?g|webp)$/i.test(a.file) &&
-          (a.themes || []).some(function (t) { return THEMES.indexOf(t) >= 0; }) &&
+          fits(a.themes || []) &&
           (!a.start || a.start <= today) && (!a.end || a.end >= today);
       }).map(function (a) { return { src: JARNAMA + a.file, alt: a.alt, size: a.size,
           link: a.link ? (/^https?:/.test(a.link) ? a.link : JARNAMA + a.link) : "#" }; });
