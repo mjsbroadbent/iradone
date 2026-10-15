@@ -1,4 +1,4 @@
 {
-  "_readme": "Ads for IradOne Online. Put images in ads/ and list them here. size is 'leaderboard' (728x90, also used on phones at full width) or 'box' (300x250). Each slot shows a random ad of its size; set active to false to pause one. link can be a full URL, '#', or a path on this site such as 'news/index.html'. Example: {\"image\": \"ads/talasbank-728x90.jpg\", \"alt\": \"Talasbank: dollar and som accounts\", \"link\": \"#\", \"size\": \"leaderboard\"}",
+  "_readme": "House ads for IradOne Online (its own promos). Most ads now come from Attelkom Jarnama (https://github.com/mjsbroadbent/jarnama, themes 'current' and 'state'), which site.js mixes in. Put images in ads/ and list them here. size is 'leaderboard' (728x90) or 'box' (300x250); set active to false to pause one. link can be a full URL, '#', or a path on this site.",
   "ads": []
 }
