@@ -128,7 +128,7 @@ def show_page(sid: str, show: dict, sched: dict, slots, page, arts) -> str:
         {extra}
         <p class="show-back"><a href="../index.html#schedule">Full TV guide</a> &middot; <a href="index.html">All shows A&ndash;Z</a></p>
       </article>"""
-    return page(f"{show['title']} | IradOne", show["desc"], f"{SITE}/shows/{sid}.html", content, arts,
+    return page(f"{show['title']}{' (repeats)' if sid.endswith('_repeat') else ''} | IradOne", show["desc"], f"{SITE}/shows/{sid}.html", content, arts,
                 f"{SITE}/iradone.png", base="../", scripts=("sport.js", "schedule.js"))
 
 

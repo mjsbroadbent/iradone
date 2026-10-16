@@ -233,7 +233,7 @@ def tag_page(tag: str, items: list[dict], arts: list[dict]) -> str:
 {archive_rows(items, "../", "../../")}
         </ul>
       </section>"""
-    return page(f"{tag} | IradOne News", f"IradOne stories about {tag}.",
+    return page(f"Tag: {tag} | IradOne News", f"IradOne stories about {tag}.",
                 f"{SITE}/news/tag/{slugify(tag)}.html", content, arts, f"{SITE}/iradone.png", base="../../")
 
 
