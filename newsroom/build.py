@@ -146,9 +146,9 @@ def article_page(a: dict, arts: list[dict]) -> str:
     src = a.get("source")
     source_html = ""
     if src and src.get("url"):
-        source_html = (f'\n      <p class="story-source">Inspired by real reporting: '
+        source_html = (f'\n      <p class="story-source">Based on reporting by: '
                        f'<a href="{esc(src["url"])}" rel="nofollow noopener" target="_blank">'
-                       f'{esc(src["title"])}</a> ({esc(src["name"])}). This IradOne story is fiction.</p>')
+                       f'{esc(src["title"])}</a> ({esc(src["name"])}).</p>')
     tags = "".join(f'<a class="story-tag" href="tag/{slugify(t)}.html">{esc(t)}</a>' for t in a.get("tags", []))
     content = f"""      <article class="story">
         <p class="story-kicker"><a href="index.html">News</a> &middot; <a href="section/{slugify(a['category'])}.html">{esc(a['category'])}</a></p>
@@ -285,7 +285,7 @@ def feed_xml(arts: list[dict]) -> str:
 <channel>
   <title>IradOne News</title>
   <link>{SITE}/news/index.html</link>
-  <description>News from IradOne Online, Talas. Fiction from the Irad worldbuilding project.</description>
+  <description>News from IradOne Online, Talas.</description>
   <language>en</language>
 {chr(10).join(items)}
 </channel>
