@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /newsroom/
 
 Sitemap: https://iradone.com/sitemap.xml
