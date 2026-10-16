@@ -55,7 +55,7 @@ def credit_text(image: str) -> str | None:
     if not c:
         return None
     if c.get("kind") == "ai":
-        return "Image: AI-generated for the Irad Wiki"
+        return "Image: AI-generated illustration"
     return f"Photo: {c['author']} / Wikimedia Commons, {c['licence']}"
 
 
@@ -64,7 +64,7 @@ def credit_html(image: str, base: str, cls: str = "photo-credit") -> str:
     if not c:
         return ""
     if c.get("kind") == "ai":
-        return f'<p class="{cls}">Image: AI-generated for the <a href="https://irad.wiki" rel="noopener" target="_blank">Irad Wiki</a></p>'
+        return f'<p class="{cls}">Image: AI-generated illustration</p>'
     lic = (f'<a href="{esc(c["licence_url"])}" rel="license noopener" target="_blank">{esc(c["licence"])}</a>'
            if c.get("licence_url") else esc(c["licence"]))
     return (f'<p class="{cls}">Photo: <a href="{esc(c["source"])}" rel="noopener" target="_blank">'
