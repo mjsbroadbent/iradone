@@ -1,4 +1,4 @@
-IradOne newsroom run, 2026-10-14 20:01 IRT, up to 1 stories
+IradOne newsroom run, 2026-10-17 13:11 IRT, up to 1 stories
 Fetching feeds
   Kabar: 50 items
   RFE/RL Kyrgyzstan: 6 items
@@ -7,9 +7,9 @@ Fetching feeds
   RFE/RL Kazakhstan: 6 items
   RFE/RL Uzbekistan: 6 items
 40 fresh candidates
-    [claude-haiku-5-5] in=5398 cache_read=0 cache_write=68059 out=259
-Triage picked 2: [{"id": 23, "treatment": "domestic", "angle": "A strong harvest year, with grain and potato yields up sharply on last year, lets IradOne report on the ISEZ's Chu and Talas breadbaskets and what it means for bazaar prices and the feed mills at Nurzhan Agro-Industrial."}, {"id": 25, "treatment": "regional", "angle": "A Kyrgyz university training staff for the China-Kyrgyzstan-Uzbekistan railway gives IradOne a regional transport story about the Irad Temir Jolu network, Trans-Chuy trucking and what new rail links mean for the ISEZ's freight corridors."}]
-Writing: Kyrgyzstan harvests 714,000 tons more than in 2025  [domestic]
-    [claude-sonnet-5-5] in=1043 cache_read=0 cache_write=68445 out=2530
-  published: Bumper Harvest in Chu and Talas Lifts Grain and Potato Output Sharply
+    [claude-haiku-5-5] in=5425 cache_read=0 cache_write=99546 out=229
+Triage picked 2: [{"id": 2, "treatment": "domestic", "angle": "Irad's Lieutenant Governor's office opens a first business census of ISEZ firms, with the unobserved economy (much of it in agriculture and the bazaars) the central puzzle for the Bank of Irad and NAI."}, {"id": 24, "treatment": "regional", "angle": "A neighbour's temporary potato import ban is a useful foil for Irad's glut of potatoes at 2 som/kg, and a note on Kazakh and Kyrgyz trucking and the Trans-Chuy corridor."}]
+Writing: Uzbekistan launches first business census, running until 30 November  [domestic]
+    [claude-sonnet-5-5] in=1108 cache_read=0 cache_write=99932 out=2132
+  published: Lieutenant Governor Opens First Business Census of ISEZ Firms
 Done: 1 new stories, 0 failed calls

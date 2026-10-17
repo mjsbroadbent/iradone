@@ -1,0 +1,52 @@
+{
+  "slug": "2026-10-17-lieutenant-governor-opens-first-business-census-of-isez-firms",
+  "headline": "Lieutenant Governor Opens First Business Census of ISEZ Firms",
+  "dek": "Enumerators will visit farms, workshops and bazaar stalls until 30 November in an effort to measure the part of the economy that official figures miss.",
+  "dateline": "TALAS",
+  "category": "Economy",
+  "ticker": "First ISEZ business census under way until 30 November",
+  "tags": [
+    "business census",
+    "Bank of Irad",
+    "NAI",
+    "Lieutenant Governor",
+    "bazaars",
+    "agriculture"
+  ],
+  "paragraphs": [
+    "The Lieutenant Governor's office this week opened the first census of business entities in the Irad Special Economic Zone, a count that will run until 30 November and aims to give the government its most accurate picture yet of how the ISEZ earns its living.",
+    "Lieutenant Governor Aidar Maksat said the exercise would replace estimates with evidence. \"For thirty years we have planned the economy from tax filings and bank statistics. Those tell us a great deal about NurGaz and Talasbank, and very little about a family selling apricots from a cart. This census is about seeing the whole economy,\" he said.",
+    "About 1,800 enumerators, drawn largely from teachers and Talas State University students, will visit registered companies, farms, workshops, market stalls and home businesses in the three cities and the six districts. Firms may also complete the form online through the government's id.gov portal or at Attelkom service points. The Territorial Statistics Office says the registry lists about 41,000 entities, but it expects the real number of active businesses to be considerably higher.",
+    "The central puzzle is the unobserved economy: activity that never reaches official accounts. The Bank of Irad's working estimate puts it at about 23 per cent of output, and about 60 per cent of turnover in agriculture, where household plots, seasonal labour and cash sales at the Bazar-i Kalan and Bazar-Korgon are common. \"Our GDP growth is strong, but we may be measuring it with a short ruler,\" said Vera Lisitsyna, a senior economist at the Bank of Irad. \"Better data will sharpen our view of credit, prices and the money supply.\"",
+    "Nurzhan Agro-Industrial (NAI), which buys grain, maize and feed crops from hundreds of small growers, is also a stakeholder. Officials say the figures will help plan procurement and input credit after this autumn's bumper harvest.",
+    "Farmers have been told that answers will be used for statistics only and will not be passed to tax inspectors. \"If they ask me how many hands I hire at harvest, I will tell them, provided it does not become a tax bill,\" said Tynchtyk Aitmat uulu, who grows potatoes and keeps a few Aulie-Ata cattle near Kyzyl-Adyr.",
+    "Preliminary results are due in the new year, ahead of the 2027 budget review. The Lieutenant Governor's office has asked every business owner to receive enumerators and keep their ID card ready."
+  ],
+  "people_quoted": [
+    {
+      "name": "Aidar Maksat",
+      "role": "Lieutenant Governor of the ISEZ",
+      "canon": true
+    },
+    {
+      "name": "Vera Lisitsyna",
+      "role": "Senior economist, Bank of Irad",
+      "canon": false
+    },
+    {
+      "name": "Tynchtyk Aitmat uulu",
+      "role": "Potato grower and cattle keeper, Kara-Buura District",
+      "canon": false
+    }
+  ],
+  "image": "photos/livestock-bazaar.jpg",
+  "published": "2026-10-17T13:11+06:00",
+  "treatment": "domestic",
+  "source": {
+    "name": "Gazeta.uz",
+    "title": "Uzbekistan launches first business census, running until 30 November",
+    "url": "https://www.gazeta.uz/en/2026/10/16/business-census/",
+    "published": "2026-10-16T14:03:00+00:00"
+  },
+  "generated_by": "claude-sonnet-5-5"
+}
