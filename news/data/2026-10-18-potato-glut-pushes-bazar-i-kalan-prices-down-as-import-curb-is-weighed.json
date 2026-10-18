@@ -1,0 +1,51 @@
+{
+  "slug": "2026-10-18-potato-glut-pushes-bazar-i-kalan-prices-down-as-import-curb-is-weighed",
+  "headline": "Potato Glut Pushes Bazar-i Kalan Prices Down as Import Curb Is Weighed",
+  "dek": "A 50-kilo sack now sells for about 90 som in Talas, and the Ministry of Natural Resources says a temporary ban on imported potatoes is under consideration.",
+  "dateline": "TALAS",
+  "category": "Agriculture",
+  "ticker": "Potato glut: sacks at 90 som in Bazar-i Kalan, import curb under review",
+  "tags": [
+    "potatoes",
+    "Bazar-i Kalan",
+    "harvest",
+    "import curb",
+    "Ministry of Natural Resources",
+    "Chu"
+  ],
+  "paragraphs": [
+    "A 50-kilo sack of potatoes at Talas's Bazar-i Kalan sold for around 90 som on Sunday, or 1.80 som a kilo. Traders say that is about a quarter below the price at this time last year. The fall follows this autumn's bumper harvest in the Chu and Talas valleys, and the Ministry of Natural Resources has confirmed it is weighing a temporary restriction on potato imports.",
+    "A ministry spokesman said no decision has been taken. Officials are comparing the size of the crop with the ISEZ's annual consumption, and any curb would run only until the new season's supply is secure. A date of 1 March 2027 is among the options being discussed. \"The harvest is large enough to cover the table all winter, and we want to be sure that imported tubers do not crowd out our growers while the cellars are full,\" said Pavel Gorbunov, deputy head of the ministry's crop production department.",
+    "At the Bazar-i Kalan, the potato rows by the Kök-Bel road were crowded from early morning. Bermet Soltonova, who has sold vegetables there for twenty years, said buyers are filling cellars earlier than usual. \"Nobody can complain about the price today,\" she said. \"But if it falls any lower, the farmers who bring the sacks to me will not cover their diesel.\"",
+    "Growers in the lower Chu say that is the real worry. Almazbek Tursun uulu, who farms near Merke, said his yield per hectare was among the best he has seen, but that Kazakh and Uzbek potatoes still reach Talas shops through Chu Gate and Kyzyl-Tuu. \"A curb in the winter months would give us room to sell what we have grown,\" he said. He added that he also wants more cold storage, so that growers need not sell in a rush.",
+    "Traders note that imports usually make up only a small part of ISEZ supply in autumn and rise in late winter and spring, when local stocks thin out. Officials say that is the reason any restriction would be timed carefully and reviewed if prices rose. Shop prices for other staples, including bread at 3 to 4 som, are not expected to change.",
+    "The ministry says it will consult growers' associations, traders and Trans-Chuy before the end of the month, and will announce its decision through the Department of Public Information. Farmers have also asked for more space in the Municipal Cold Storage in western Talas to hold part of the surplus until spring."
+  ],
+  "people_quoted": [
+    {
+      "name": "Pavel Gorbunov",
+      "role": "Deputy head of crop production department, Ministry of Natural Resources",
+      "canon": false
+    },
+    {
+      "name": "Bermet Soltonova",
+      "role": "Vegetable trader, Bazar-i Kalan",
+      "canon": false
+    },
+    {
+      "name": "Almazbek Tursun uulu",
+      "role": "Potato farmer, Merke area, Chu District",
+      "canon": false
+    }
+  ],
+  "image": "photos/chu-canal.jpg",
+  "published": "2026-10-18T18:11+06:00",
+  "treatment": "domestic",
+  "source": {
+    "name": "Kabar",
+    "title": "Kyrgyzstan temporary restricts potato imports",
+    "url": "https://en.kabar.kg/news/kyrgyzstan-imposes-temporary-restrictions-on-potato-imports/",
+    "published": "2026-10-16T09:52:31+00:00"
+  },
+  "generated_by": "claude-sonnet-5-5"
+}

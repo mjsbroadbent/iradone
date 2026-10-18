@@ -1,15 +1,15 @@
-IradOne newsroom run, 2026-10-17 13:11 IRT, up to 1 stories
+IradOne newsroom run, 2026-10-18 18:11 IRT, up to 1 stories
 Fetching feeds
   Kabar: 50 items
-  RFE/RL Kyrgyzstan: 6 items
+  RFE/RL Kyrgyzstan: 7 items
   The Times of Central Asia: 10 items
   Gazeta.uz: 20 items
-  RFE/RL Kazakhstan: 6 items
-  RFE/RL Uzbekistan: 6 items
+  RFE/RL Kazakhstan: 7 items
+  RFE/RL Uzbekistan: 8 items
 40 fresh candidates
-    [claude-haiku-5-5] in=5425 cache_read=0 cache_write=99546 out=229
-Triage picked 2: [{"id": 2, "treatment": "domestic", "angle": "Irad's Lieutenant Governor's office opens a first business census of ISEZ firms, with the unobserved economy (much of it in agriculture and the bazaars) the central puzzle for the Bank of Irad and NAI."}, {"id": 24, "treatment": "regional", "angle": "A neighbour's temporary potato import ban is a useful foil for Irad's glut of potatoes at 2 som/kg, and a note on Kazakh and Kyrgyz trucking and the Trans-Chuy corridor."}]
-Writing: Uzbekistan launches first business census, running until 30 November  [domestic]
-    [claude-sonnet-5-5] in=1108 cache_read=0 cache_write=99932 out=2132
-  published: Lieutenant Governor Opens First Business Census of ISEZ Firms
+    [claude-haiku-5-5] in=5472 cache_read=0 cache_write=106169 out=254
+Triage picked 2: [{"id": 25, "treatment": "domestic", "angle": "Irad's own potato glut after a bumper harvest in Chu and Talas: the Ministry of Natural Resources (Chingiz Asanov's ministry, unnamed) could consider a temporary import curb, and the Bazar-i Kalan price of sacked potatoes becomes the story."}, {"id": 10, "treatment": "regional", "angle": "A neighbour revoking a major private oil producer's field licences is a warning for ISEZ concession politics and NurGaz's own licensing, and a reminder that Uzbek resource rules shape Irad's Fergana rim and energy talks."}]
+Writing: Kyrgyzstan temporary restricts potato imports  [domestic]
+    [claude-sonnet-5-5] in=1166 cache_read=0 cache_write=106555 out=2176
+  published: Potato Glut Pushes Bazar-i Kalan Prices Down as Import Curb Is Weighed
 Done: 1 new stories, 0 failed calls
