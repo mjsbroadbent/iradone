@@ -1,4 +1,4 @@
-IradOne newsroom run, 2026-10-18 18:11 IRT, up to 1 stories
+IradOne newsroom run, 2026-10-19 14:05 IRT, up to 1 stories
 Fetching feeds
   Kabar: 50 items
   RFE/RL Kyrgyzstan: 7 items
@@ -7,9 +7,9 @@ Fetching feeds
   RFE/RL Kazakhstan: 7 items
   RFE/RL Uzbekistan: 8 items
 40 fresh candidates
-    [claude-haiku-5-5] in=5472 cache_read=0 cache_write=106169 out=254
-Triage picked 2: [{"id": 25, "treatment": "domestic", "angle": "Irad's own potato glut after a bumper harvest in Chu and Talas: the Ministry of Natural Resources (Chingiz Asanov's ministry, unnamed) could consider a temporary import curb, and the Bazar-i Kalan price of sacked potatoes becomes the story."}, {"id": 10, "treatment": "regional", "angle": "A neighbour revoking a major private oil producer's field licences is a warning for ISEZ concession politics and NurGaz's own licensing, and a reminder that Uzbek resource rules shape Irad's Fergana rim and energy talks."}]
-Writing: Kyrgyzstan temporary restricts potato imports  [domestic]
-    [claude-sonnet-5-5] in=1166 cache_read=0 cache_write=106555 out=2176
-  published: Potato Glut Pushes Bazar-i Kalan Prices Down as Import Curb Is Weighed
+    [claude-haiku-5-5] in=5766 cache_read=0 cache_write=108662 out=286
+Triage picked 2: [{"id": 7, "treatment": "domestic", "angle": "A national investment tally of 88 agreements worth $11.8 billion becomes an Irad story about the Bank of Irad's and the National Investment Agency's counterpart, the ISEZ's foreign-investment pitch, and what the Sary-Bulak restart and Toktogul upgrade mean for Lieutenant Governor Maksat's investor agenda."}, {"id": 9, "treatment": "domestic", "angle": "A regional cultural-heritage council meeting becomes an IradOne piece on the Kara-Khanid and Rabat-i-Safed heritage, the Irad Palace of Art and the 2004 UNESCO listing, with a quote from a Talas heritage official."}]
+Writing: Kyrgyzstan attracts $11.8 billion in investments in past three years  [domestic]
+    [claude-sonnet-5-5] in=1277 cache_read=0 cache_write=109048 out=2193
+  published: ISEZ Logs 88 Investment Agreements Worth $2.4 Billion Over Three Years
 Done: 1 new stories, 0 failed calls
