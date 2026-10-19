@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>IradOne NewsDesk - Staff Sign-In</title>
+<link rel="icon" href="../favicon.ico">
+<style>
+:root{--navy:#14284b;--navy2:#1f3d6e;--red:#c8102e;--panel:#eef0f3;--line:#9aa3b2;--ink:#1b1b1b;--muted:#5d6675;--hi:#fff7d6;--ok:#2e7d32;--warn:#b26a00;--bad:#b00020}
+*{box-sizing:border-box}
+html,body{margin:0;background:#c9ced6;color:var(--ink);font:12px/1.45 Verdana,Tahoma,Arial,sans-serif}
+a{color:#0b3d91}
+.bar{background:linear-gradient(#24477f,#14284b);color:#fff;border-bottom:3px solid var(--red);padding:6px 12px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.bar img{height:30px}
+.bar b{font:bold 14px Arial,sans-serif;letter-spacing:.5px}
+.bar .ver{color:#b9c7e0;font-size:11px}
+.bar .who{margin-left:auto;font-size:11px;color:#dbe4f3}
+.bar button{font:11px Verdana,sans-serif}
+.wrap{max-width:1100px;margin:14px auto;padding:0 12px}
+.box{background:#fff;border:1px solid var(--line);box-shadow:2px 2px 0 #a7aebb}
+.box h2{margin:0;background:linear-gradient(#e9edf3,#d3d9e3);border-bottom:1px solid var(--line);font:bold 12px Verdana,sans-serif;padding:5px 8px;color:var(--navy)}
+.box .in{padding:10px}
+.login{max-width:380px;margin:60px auto}
+.login label{display:block;margin:8px 0 2px;font-weight:bold}
+.login input[type=text],.login input[type=password]{width:100%;padding:3px 4px;border:1px solid #7f8794;font:12px Verdana,sans-serif}
+.login .row{display:flex;justify-content:space-between;align-items:center;margin-top:12px}
+.btn{font:11px Verdana,sans-serif;padding:3px 10px;border:1px solid #6b7382;background:linear-gradient(#fdfdfd,#dfe3ea);cursor:pointer}
+.btn:active{background:#d2d7df}
+.btn.ok{border-color:#2e7d32;color:#1b5e20}
+.btn.no{border-color:#b00020;color:#8e0018}
+.err{color:var(--bad);margin-top:8px;min-height:1.4em}
+.fine{color:var(--muted);font-size:10px;margin-top:10px}
+.tabs{display:flex;gap:2px;margin:0 0 -1px;flex-wrap:wrap}
+.tabs button{font:bold 11px Verdana,sans-serif;padding:5px 12px;border:1px solid var(--line);border-bottom:0;background:#dfe4ec;color:var(--navy);cursor:pointer}
+.tabs button[aria-selected=true]{background:#fff;position:relative;top:1px}
+.tool{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:10px}
+select,input.q{font:11px Verdana,sans-serif;padding:2px}
+.card{border:1px solid #b9c0cc;margin:0 0 10px;background:#fbfcfd}
+.card .hd{display:flex;gap:8px;align-items:flex-start;padding:6px 8px;background:#f1f3f7;border-bottom:1px solid #d6dbe4}
+.card .hd h3{margin:0;font:bold 12px Verdana,sans-serif;flex:1}
+.card .bd{padding:8px}
+.tier{font:bold 10px Verdana,sans-serif;padding:1px 5px;border:1px solid;white-space:nowrap}
+.t0{color:#455a64;border-color:#90a4ae;background:#eceff1}.t1{color:#0b5394;border-color:#6fa8dc;background:#e8f1fb}.t2{color:#9c0012;border-color:#e06666;background:#fdecee}
+.st{font-size:10px;padding:1px 5px;border:1px solid #b9c0cc;background:#fff;white-space:nowrap}
+.st.approved{color:var(--ok);border-color:#81c784}.st.rejected{color:var(--bad);border-color:#e57373}.st.proposed{color:var(--warn);border-color:#ffb74d}
+.meta{color:var(--muted);font-size:11px;margin:0 0 6px}
+table.kv{border-collapse:collapse;width:100%;margin:6px 0}
+table.kv td,table.kv th{border:1px solid #d6dbe4;padding:3px 6px;vertical-align:top;text-align:left}
+table.kv th{width:120px;background:#f4f6f9;font-weight:bold;color:#2b3a55}
+.conf{background:#fff0f0;border:1px dashed #d9534f;padding:5px 7px;margin:6px 0;color:#7a0010}
+.conf b{letter-spacing:1px}
+.acts{display:flex;gap:6px;align-items:center;margin-top:8px}
+.note{font-size:11px;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:10px}
+.small{font-size:11px}
+ul.tight{margin:4px 0;padding-left:18px}
+.foot{text-align:center;color:#4a5363;font-size:10px;margin:18px 0}
+.empty{color:var(--muted);padding:14px;text-align:center}
+@media (max-width:600px){.wrap{padding:0 8px}.bar .who{margin-left:0}table.kv th{width:90px}}
+</style>
+</head>
+<body>
+<div class="bar">
+  <img src="../iradone.png" alt="IradOne">
+  <b>NewsDesk</b><span class="ver">v2.4 &middot; Staff Intranet</span>
+  <span class="who" id="who"></span>
+</div>
+
+<div class="wrap" id="loginView">
+  <div class="box login">
+    <h2>Staff Sign-In</h2>
+    <form class="in" id="loginForm" autocomplete="off">
+      <div class="small">Authorised IradOne staff only. Use your NewsDesk login and access key.</div>
+      <label for="u">Staff login</label>
+      <input type="text" id="u" spellcheck="false" autocapitalize="off">
+      <label for="k">Access key</label>
+      <input type="password" id="k">
+      <div class="row">
+        <label class="small" style="margin:0;font-weight:normal"><input type="checkbox" id="remember"> Remember on this computer</label>
+        <button class="btn" type="submit" id="go">Sign in</button>
+      </div>
+      <div class="err" id="err"></div>
+      <div class="fine">Lost your key? Contact IT Helpdesk, ext. 2210 (Mon&ndash;Fri, 09:00&ndash;17:00 IRT). All access is logged.</div>
+    </form>
+  </div>
+</div>
+
+<div class="wrap" id="appView" hidden>
+  <div class="tabs" role="tablist">
+    <button data-tab="rundown" aria-selected="true">Rundown</button>
+    <button data-tab="waiting">Awaiting approval</button>
+    <button data-tab="arcs">Storylines</button>
+    <button data-tab="calendar">Calendar</button>
+    <button data-tab="people">Who's who</button>
+    <button data-tab="system">System</button>
+  </div>
+  <div class="box"><div class="in" id="pane"></div></div>
+</div>
+
+<div class="foot">&copy; 2003&ndash;2026 IradOne Public Broadcasting &middot; NewsDesk internal system &middot; Not for distribution</div>
+
+<script>
+(() => {
+  "use strict";
+  // the desk repository (kept out of plain sight in the page source)
+  const REPO = atob("bWpzYnJvYWRiZW50L2lyYWRfZGVzaw==");
+  const API = "https://api.github.com";
+  const $ = s => document.querySelector(s);
+  const join = x => Array.isArray(x) ? x.join("; ") : (x == null ? "" : String(x));
+  const esc = s => String(s == null ? "" : s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+  const store = {
+    get(k) { try { return sessionStorage.getItem(k) || localStorage.getItem(k); } catch (e) { return null; } },
+    set(k, v, keep) { try { (keep ? localStorage : sessionStorage).setItem(k, v); } catch (e) { } },
+    clear() { try { ["nd_key", "nd_user"].forEach(k => { sessionStorage.removeItem(k); localStorage.removeItem(k); }); } catch (e) { } }
+  };
+  let KEY = null, USER = null, TAB = "rundown";
+  const cache = {};
+
+  async function gh(path, opts = {}) {
+    const r = await fetch(API + path, Object.assign({}, opts, {
+      headers: Object.assign({ Authorization: "Bearer " + KEY, Accept: opts.raw ? "application/vnd.github.raw+json" : "application/vnd.github+json",
+        "X-GitHub-Api-Version": "2022-11-28" }, opts.body ? { "Content-Type": "application/json" } : {})
+    }));
+    if (!r.ok) { const e = new Error("HTTP " + r.status); e.status = r.status; throw e; }
+    return r.status === 204 ? null : (opts.raw ? r.text() : r.json());
+  }
+  const file = async p => JSON.parse(await gh(`/repos/${REPO}/contents/${p}?t=${Date.now() % 1e6}`, { raw: true }));
+  const list = async p => { try { return await gh(`/repos/${REPO}/contents/${p}`); } catch (e) { if (e.status === 404) return []; throw e; } };
+
+  // ---------- sign-in ----------
+  async function signIn(user, key, keep, quiet) {
+    KEY = key;
+    try {
+      const me = await gh("/user");
+      if (user && me.login.toLowerCase() !== user.toLowerCase()) throw Object.assign(new Error("user"), { status: 401 });
+      await gh(`/repos/${REPO}`);
+      USER = me.login;
+      store.set("nd_key", key, keep); store.set("nd_user", USER, keep);
+      $("#loginView").hidden = true; $("#appView").hidden = false;
+      $("#who").innerHTML = `Signed in: <b>${esc(USER)}</b> &nbsp;<button class="btn" id="out">Sign out</button>`;
+      $("#out").onclick = () => { store.clear(); location.reload(); };
+      show(TAB);
+    } catch (e) {
+      KEY = null;
+      if (!quiet) $("#err").textContent = e.status === 401 || e.status === 403 || e.status === 404
+        ? "Access denied. Check your staff login and access key." : "NewsDesk server unavailable. Try again later.";
+      if (quiet) store.clear();
+    }
+  }
+  $("#loginForm").addEventListener("submit", e => {
+    e.preventDefault(); $("#err").textContent = "";
+    const u = $("#u").value.trim(), k = $("#k").value.trim();
+    if (!u || !k) { $("#err").textContent = "Enter your staff login and access key."; return; }
+    signIn(u, k, $("#remember").checked);
+  });
+  { const k = store.get("nd_key"), u = store.get("nd_user"); if (k) signIn(u, k, !!(function () { try { return localStorage.getItem("nd_key"); } catch (e) { } })(), true); }
+
+  // ---------- tabs ----------
+  document.querySelectorAll(".tabs [data-tab]").forEach(b => b.onclick = () => show(b.dataset.tab));
+  function show(tab) {
+    TAB = tab;
+    document.querySelectorAll(".tabs [data-tab]").forEach(b => b.setAttribute("aria-selected", String(b.dataset.tab === tab)));
+    const pane = $("#pane"); pane.innerHTML = `<div class="empty">Loading&hellip;</div>`;
+    ({ rundown, waiting, arcs, calendar, people, system })[tab](pane).catch(e => {
+      pane.innerHTML = `<div class="empty">Could not load (${esc(e.message)}).</div>`;
+    });
+  }
+
+  // ---------- cards ----------
+  async function days() { return (await list("cards")).filter(x => x.type === "dir").map(x => x.name).sort().reverse(); }
+  async function cardsOf(day) {
+    if (cache[day]) return cache[day];
+    const files = (await list(`cards/${day}`)).filter(f => f.name.endsWith(".json"));
+    const out = await Promise.all(files.map(async f => Object.assign(await file(`cards/${day}/${f.name}`), { _file: f.name.replace(/\.json$/, "") })));
+    out.sort((a, b) => b.tier - a.tier || a.headline_hint.localeCompare(b.headline_hint));
+    return (cache[day] = out);
+  }
+  const OUT = { iradone: "IradOne", herald: "Talas Herald", irad_times: "Irad Times", freeirad: "freeirad.org", forum: "FREEFORUM", tulpar: "Tulpar", kartalar: "Kartalar" };
+
+  function cardHtml(c) {
+    const rows = [];
+    if (c.places && c.places.length) rows.push(["Places", esc(c.places.join(", "))]);
+    if (c.characters && c.characters.length) rows.push(["People", c.characters.map(x => `<b>${esc(x.id)}</b>: ${esc(x.role_in_story)}${x.change ? ` <span style="color:var(--bad)">[CHANGE: ${esc(x.change)}]</span>` : ""}`).join("<br>")]);
+    if (c.new_names && c.new_names.length) rows.push(["New names", c.new_names.map(n => `${esc(n.name)} <span class="note">(${esc(n.kind)}${n.recurring ? ", recurring" : ""})</span>`).join(", ")]);
+    if (c.facts && c.facts.length) rows.push(["Sets as fact", `<ul class="tight">${c.facts.map(f => `<li>${esc(f)}</li>`).join("")}</ul>`]);
+    if (c.arcs && c.arcs.length) rows.push(["Storylines", c.arcs.map(a => `${esc(a.id)}${a.beat ? ": " + esc(a.beat) : ""}`).join("<br>")]);
+    for (const [o, v] of Object.entries(c.outlets || {})) rows.push([OUT[o] || o, esc(v.angle || "")]);
+    if (c.contradictions && c.contradictions.length) rows.push(["Contradictions", esc(c.contradictions.join("; "))]);
+    if (c.map_change) rows.push(["Map change", esc(c.map_change)]);
+    const can = true;      // decisions can be reversed: the newest comment wins
+    return `<div class="card" data-id="${esc(c.id)}">
+      <div class="hd"><span class="tier t${c.tier}">TIER ${c.tier}</span><h3>${esc(c.headline_hint)}</h3><span class="st ${esc(c.status)}">${esc(c.status.toUpperCase())}</span></div>
+      <div class="bd">
+        <p class="meta">${esc(c.date)} &middot; ${esc(c.treatment || "")} &middot; source: <a href="${esc(c.source && c.source.url)}" target="_blank" rel="noopener noreferrer">${esc(c.source && c.source.source)}</a>: ${esc(c.source && c.source.title)}${c.decided_by ? ` &middot; ${esc(c.status)} by ${esc(c.decided_by)}` : ""}</p>
+        <div>${esc(c.what_happened)}</div>
+        ${c.tier_reasons && c.tier_reasons.length ? `<p class="note">Why tier ${c.tier}: ${esc(c.tier_reasons.join("; "))}</p>` : ""}
+        <table class="kv">${rows.map(([k, v]) => `<tr><th>${esc(k)}</th><td>${v}</td></tr>`).join("")}</table>
+        ${c.desk_notes ? `<div class="conf"><b>DESK NOTES (CONFIDENTIAL)</b><br>${esc(c.desk_notes)}</div>` : ""}
+        ${can ? `<div class="acts">${c.status !== "approved" ? `<button class="btn ok" data-act="approve" data-f="${esc(c._file)}">Approve</button>` : ""}${c.status !== "rejected" ? `<button class="btn no" data-act="reject" data-f="${esc(c._file)}">Reject</button>` : ""}<span class="note" data-msg></span></div>` : ""}
+      </div></div>`;
+  }
+
+  function wireActions(root) {
+    root.querySelectorAll("[data-act]").forEach(b => b.onclick = async () => {
+      const msg = b.parentElement.querySelector("[data-msg]");
+      b.parentElement.querySelectorAll("button").forEach(x => x.disabled = true);
+      msg.textContent = "Sending...";
+      try {
+        await decide(b.dataset.act, b.dataset.f);
+        msg.textContent = `Sent. The desk applies it within a minute or two.`;
+        Object.keys(cache).forEach(k => delete cache[k]);
+      } catch (e) {
+        msg.textContent = e.status === 403 || e.status === 404 ? "Your key cannot post approvals (it needs Issues: read and write)." : "Failed: " + e.message;
+        b.parentElement.querySelectorAll("button").forEach(x => x.disabled = false);
+      }
+    });
+  }
+
+  // approvals are comments on the newest digest issue (the desk's approve workflow applies them)
+  async function decide(act, f) {
+    let issues = await gh(`/repos/${REPO}/issues?labels=digest&state=all&per_page=1`);
+    let n = issues.length ? issues[0].number : null;
+    if (!n) n = (await gh(`/repos/${REPO}/issues`, { method: "POST", body: JSON.stringify({ title: "Desk approvals", labels: ["digest"] }) })).number;
+    await gh(`/repos/${REPO}/issues/${n}/comments`, { method: "POST", body: JSON.stringify({ body: `/${act} ${f}` }) });
+  }
+
+  async function rundown(pane) {
+    const ds = await days();
+    if (!ds.length) { pane.innerHTML = `<div class="empty">No rundowns filed yet.</div>`; return; }
+    const day = pane.dataset.day && ds.includes(pane.dataset.day) ? pane.dataset.day : ds[0];
+    const cs = await cardsOf(day);
+    const n2 = cs.filter(c => c.tier >= 2 && c.status === "proposed").length;
+    pane.innerHTML = `<div class="tool"><b>Rundown for</b> <select id="day">${ds.map(d => `<option${d === day ? " selected" : ""}>${d}</option>`).join("")}</select>
+      <span class="note">${cs.length} items &middot; ${n2} awaiting approval</span>
+      <button class="btn" id="reload" style="margin-left:auto">Refresh</button></div>
+      ${cs.map(cardHtml).join("") || `<div class="empty">No items.</div>`}`;
+    $("#day").onchange = e => { pane.dataset.day = e.target.value; show("rundown"); };
+    $("#reload").onclick = () => { delete cache[day]; show("rundown"); };
+    wireActions(pane);
+  }
+
+  async function waiting(pane) {
+    const ds = (await days()).slice(0, 14);
+    const all = (await Promise.all(ds.map(cardsOf))).flat().filter(c => c.tier >= 2 && c.status === "proposed");
+    pane.innerHTML = `<p class="note">Tier 2 items from the last two weeks that nobody has approved or rejected. They do not go out until approved.</p>` +
+      (all.map(cardHtml).join("") || `<div class="empty">Nothing waiting.</div>`);
+    wireActions(pane);
+  }
+
+  // ---------- storylines, calendar, people ----------
+  async function arcs(pane) {
+    const files = (await list("arcs")).filter(f => f.name.endsWith(".json"));
+    const as = await Promise.all(files.map(f => file(`arcs/${f.name}`)));
+    pane.innerHTML = as.map(a => `<div class="card"><div class="hd"><h3>${esc(a.title || a.id)}</h3><span class="st">${esc((a.status || "").toUpperCase())}</span></div><div class="bd">
+      <div>${esc(join(a.summary))}</div>
+      <table class="kv">
+        <tr><th>Public</th><td>${esc(join(a.public_knowledge))}</td></tr>
+        ${(a.beats_so_far || []).length ? `<tr><th>So far</th><td><ul class="tight">${a.beats_so_far.map(b => `<li><b>${esc(b.date)}</b> ${esc(b.what)}</li>`).join("")}</ul></td></tr>` : ""}
+        ${(a.possible_next_beats || []).length ? `<tr><th>Proposed next</th><td><ul class="tight">${a.possible_next_beats.map(b => `<li><span class="tier t${b.tier || 1}">T${b.tier || 1}</span> ${esc(b.what)}${b.earliest ? ` <span class="note">(not before ${esc(b.earliest)})</span>` : ""}</li>`).join("")}</ul></td></tr>` : ""}
+        ${(a.constraints || []).length ? `<tr><th>Rules</th><td><ul class="tight">${[].concat(a.constraints).map(x => `<li>${esc(x)}</li>`).join("")}</ul></td></tr>` : ""}
+        <tr><th>People</th><td>${esc((a.characters || []).join(", "))}</td></tr>
+      </table>
+      ${a.hidden ? `<div class="conf"><b>CONFIDENTIAL</b><br>${esc(join(a.hidden))}</div>` : ""}
+    </div></div>`).join("") || `<div class="empty">No storylines.</div>`;
+  }
+
+  async function calendar(pane) {
+    const cal = await file("state/calendar.json");
+    const today = new Date(); const y = today.getFullYear();
+    const when = e => {
+      if (!e.date) return null;
+      if (e.recurring || /^\d\d-\d\d$/.test(e.date)) {
+        const md = e.date.slice(-5); let d = new Date(`${y}-${md}T00:00:00`); if (d < today - 864e5) d = new Date(`${y + 1}-${md}T00:00:00`); return d;
+      }
+      return new Date(e.date + "T00:00:00");
+    };
+    const rows = cal.map(e => [when(e), e]).filter(([d]) => d && !isNaN(d) && d >= today - 864e5).sort((a, b) => a[0] - b[0]).slice(0, 60);
+    pane.innerHTML = `<table class="kv"><tr><th>Date</th><th style="width:auto">Event</th></tr>${rows.map(([d, e]) =>
+      `<tr><td>${d.toISOString().slice(0, 10)}${e.recurring ? " <span class='note'>(yearly)</span>" : ""}</td><td><b>${esc(e.label)}</b>${e.notes ? `<br><span class="note">${esc(e.notes)}</span>` : ""}</td></tr>`).join("")}</table>`;
+  }
+
+  async function people(pane) {
+    const [ch, inst, nums] = await Promise.all(["characters", "institutions", "numbers"].map(n => file(`state/${n}.json`)));
+    pane.innerHTML = `<div class="tool"><input class="q" id="q" placeholder="Search names, roles, facts" style="width:260px">
+      <select id="kind"><option value="ch">People (${ch.length})</option><option value="in">Institutions (${inst.length})</option><option value="nu">Numbers (${nums.length})</option></select></div><div id="res"></div>`;
+    const render = () => {
+      const q = $("#q").value.trim().toLowerCase(), k = $("#kind").value;
+      const src = k === "ch" ? ch : k === "in" ? inst : nums;
+      const hits = src.filter(x => !q || JSON.stringify(x).toLowerCase().includes(q)).slice(0, 120);
+      $("#res").innerHTML = hits.map(x => k === "nu"
+        ? `<div class="card"><div class="bd"><b>${esc(x.label || x.id)}</b>: ${esc(x.value)} ${esc(x.unit || "")} <span class="note">${x.as_of ? "as of " + esc(x.as_of) : ""}${x.may_drift ? " &middot; drifts: " + esc(x.drift_rule || "") : " &middot; fixed"}</span></div></div>`
+        : `<div class="card"><div class="hd"><h3>${esc(x.name)}</h3><span class="st">${esc(k === "ch" ? (x.status || "") : (x.kind || ""))}</span></div><div class="bd">
+            <table class="kv">${(k === "ch"
+              ? [["Role", x.role], ["Affiliation", x.affiliation], ["Location", x.location], ["Public image", x.public_stance], ["Open threads", [].concat(x.open_threads || []).join("; ")]]
+              : [["Head", x.head], ["Stance", x.stance || x.alignment], ["Key facts", [].concat(x.key_facts || []).join("; ")]]
+            ).filter(r => r[1]).map(([a, b]) => `<tr><th>${a}</th><td>${esc(b)}</td></tr>`).join("")}</table>
+            ${x.secrets && [].concat(x.secrets).join("").trim() ? `<div class="conf"><b>CONFIDENTIAL</b><br>${esc(join(x.secrets))}</div>` : ""}
+          </div></div>`).join("") || `<div class="empty">No matches.</div>`;
+    };
+    $("#q").oninput = render; $("#kind").onchange = render; render();
+  }
+
+  // ---------- system ----------
+  async function system(pane) {
+    const runs = (await gh(`/repos/${REPO}/actions/runs?per_page=10`)).workflow_runs || [];
+    let wire = null; try { wire = await file("wire.json"); } catch (e) { }
+    pane.innerHTML = `<table class="kv"><tr><th>Wire</th><td>${wire ? `${wire.cards.length} items on the wire &middot; publishing to outlets: <b>${wire.publishing ? "ON" : "OFF (trial)"}</b> &middot; updated ${esc(wire.updated)}` : "not built yet"}</td></tr></table>
+      <h3 class="small" style="margin:12px 0 4px">Recent jobs</h3>
+      <table class="kv"><tr><th>When (UTC)</th><th style="width:auto">Job</th><th>Result</th></tr>${runs.map(r =>
+        `<tr><td>${esc(r.created_at.replace("T", " ").slice(0, 16))}</td><td><a href="${esc(r.html_url)}" target="_blank" rel="noopener noreferrer">${esc(r.name)}</a> <span class="note">(${esc(r.event)})</span></td><td>${esc(r.conclusion || r.status)}</td></tr>`).join("")}</table>
+      <div class="acts"><button class="btn" id="runNow">Run the desk now</button><span class="note" id="runMsg"></span></div>
+      <p class="note">Running the desk by hand needs a key with Actions: read and write.</p>`;
+    $("#runNow").onclick = async () => {
+      $("#runMsg").textContent = "Starting...";
+      try { await gh(`/repos/${REPO}/actions/workflows/desk.yml/dispatches`, { method: "POST", body: JSON.stringify({ ref: "main" }) }); $("#runMsg").textContent = "Started. New items appear in about five minutes."; }
+      catch (e) { $("#runMsg").textContent = e.status === 403 || e.status === 404 ? "Your key cannot start jobs." : "Failed: " + e.message; }
+    };
+  }
+})();
+</script>
+</body>
+</html>
