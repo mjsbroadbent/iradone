@@ -215,7 +215,7 @@ STORY_TOOL = {
     "input_schema": {
         "type": "object",
         "properties": {
-            "publishable": {"type": "boolean", "description": "False if the item breaks the house rules (tragedy, real people at its core, nothing to adapt)."},
+            "publishable": {"type": "boolean", "description": "False if the item breaks the house rules (a violent incident, real people at its core, nothing to adapt)."},
             "reason_if_not": {"type": "string"},
             "headline": {"type": "string"},
             "dek": {"type": "string"},
@@ -308,7 +308,7 @@ class Claude:
             f"Today is {today}. Choose up to {n} items below for IradOne to adapt. Prefer items that make "
             "good, varied Irad stories (economy, infrastructure, culture, sport, agriculture, energy, regional "
             "diplomacy, water); avoid near-duplicates of each other and of recent IradOne headlines. Do not "
-            "pick anything centred on deaths, crime, attacks, disasters with casualties, or on a real "
+            "pick anything centred on a killing, violent crime, an attack, abuse, a disaster with victims, or on a real "
             "person's personal conduct. Pick fewer, or none, if nothing fits.\n\n"
             "Recent IradOne headlines:\n" + "\n".join(f"- {h}" for h in recent[:15]) +
             "\n\nCandidates:\n" + "\n".join(lines)

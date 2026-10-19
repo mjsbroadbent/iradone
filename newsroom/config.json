@@ -56,11 +56,6 @@
   "skip_keywords": [
     "killed",
     "kills",
-    "dead",
-    "death",
-    "deaths",
-    "died",
-    "dies",
     "murder",
     "homicide",
     "rape",
@@ -80,10 +75,6 @@
     "drone attack",
     "child abuse",
     "trafficking",
-    "fatal",
-    "victims",
-    "funeral",
-    "mourning",
     "crash"
   ],
   "real_people_watchlist": [
