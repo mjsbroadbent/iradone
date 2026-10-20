@@ -1,29 +1,21 @@
-/* IradOne info strip: Irad Time clock, weather for four cities, and
- * Bank of Irad exchange rates.
+/* IradOne info strip: Irad Time clock, weather for four cities, Bank of Irad
+ * exchange rates and the Toktogul reservoir.
  *
- * Weather: Open-Meteo (free, no key). Each Irad city takes its weather from
- * a real-world point that matches its place in the lore.
- * Rates: open.er-api.com (free, daily, no key; attribution required).
- * The som is pegged at 5 per US dollar, so every rate is the real dollar
- * rate converted through the peg. Results are cached for 30 minutes.
+ * Everything but the clock comes from IradOne's daily market data,
+ * data/today.json (updated every morning at 03:07 Irad Time). If it cannot be
+ * read, the rates fall back to the figures below and the weather stays hidden.
+ * Results are cached for 30 minutes.
  */
 (function () {
   "use strict";
 
   var IRT_OFFSET_HOURS = 6;
-  var SOM_PER_USD = 5;
   var CACHE_MINUTES = 30;
+  var DATA_URL = (document.querySelector('script[src$="info.js"]') || { src: "info.js" }).src.replace(/info\.js(\?.*)?$/, "data/today.json");
 
-  var CITIES = [
-    { name: "Talas", lat: 42.52, lon: 72.24, elevation: 1270 },
-    { name: "Nurzhan", lat: 43.2, lon: 73.0, elevation: 740 },         // lower Chu plain
-    { name: "Iyık Janyl", lat: 41.42, lon: 72.22, elevation: 650 },    // Naryn river flats below the gorge
-    { name: "Tash-Kömür", lat: 41.35, lon: 72.23, elevation: 690 }
-  ];
-
-  // Quoted as the Bank of Irad would show them: units of foreign currency in som.
+  // Shown as the Bank of Irad would show them: units of foreign currency in som.
   var RATES = [
-    { code: "USD", units: 1, fixed: true },
+    { code: "USD", units: 1 },
     { code: "EUR", units: 1 },
     { code: "CNY", units: 1 },
     { code: "RUB", units: 100 },
@@ -31,24 +23,25 @@
     { code: "UZS", units: 10000 }
   ];
 
-  var WMO = [  // [max code, label, icon by day, icon by night]
-    [0, "Clear", "fa-sun", "fa-moon"],
-    [2, "Partly cloudy", "fa-cloud-sun", "fa-cloud-moon"],
-    [3, "Overcast", "fa-cloud", "fa-cloud"],
-    [48, "Fog", "fa-smog", "fa-smog"],
-    [57, "Drizzle", "fa-cloud-rain", "fa-cloud-rain"],
-    [67, "Rain", "fa-cloud-showers-heavy", "fa-cloud-showers-heavy"],
-    [77, "Snow", "fa-snowflake", "fa-snowflake"],
-    [82, "Showers", "fa-cloud-sun-rain", "fa-cloud-moon-rain"],
-    [86, "Snow showers", "fa-snowflake", "fa-snowflake"],
-    [99, "Thunderstorm", "fa-bolt", "fa-bolt"]
+  // Used only when data/today.json cannot be read (som per one unit).
+  var FALLBACK_RATES = { USD: 8.40, EUR: 9.74, CNY: 1.18, RUB: 0.1031, KZT: 0.0161, UZS: 0.000664 };
+
+  var WMO = [  // [max code, icon by day, icon by night]
+    [0, "fa-sun", "fa-moon"],
+    [2, "fa-cloud-sun", "fa-cloud-moon"],
+    [3, "fa-cloud", "fa-cloud"],
+    [48, "fa-smog", "fa-smog"],
+    [57, "fa-cloud-rain", "fa-cloud-rain"],
+    [67, "fa-cloud-showers-heavy", "fa-cloud-showers-heavy"],
+    [77, "fa-snowflake", "fa-snowflake"],
+    [82, "fa-cloud-sun-rain", "fa-cloud-moon-rain"],
+    [86, "fa-snowflake", "fa-snowflake"],
+    [99, "fa-bolt", "fa-bolt"]
   ];
 
-  function wmo(code, isDay) {
-    for (var i = 0; i < WMO.length; i++) {
-      if (code <= WMO[i][0]) return { label: WMO[i][1], icon: isDay ? WMO[i][2] : WMO[i][3] };
-    }
-    return { label: "", icon: "fa-cloud" };
+  function icon(code, isDay) {
+    for (var i = 0; i < WMO.length; i++) if (code <= WMO[i][0]) return isDay ? WMO[i][1] : WMO[i][2];
+    return "fa-cloud";
   }
 
   // ---------- small helpers ----------
@@ -72,7 +65,10 @@
   }
 
   function getJson(url) {
-    return fetch(url).then(function (r) { if (!r.ok) throw new Error(r.status + " " + url); return r.json(); });
+    return fetch(url, { cache: "no-cache" }).then(function (r) {
+      if (!r.ok) throw new Error(r.status + " " + url);
+      return r.json();
+    });
   }
 
   function fmt(n) {
@@ -80,13 +76,15 @@
     return n.toLocaleString("en-GB", { minimumFractionDigits: digits, maximumFractionDigits: digits });
   }
 
+  function irt() { return new Date(Date.now() + IRT_OFFSET_HOURS * 3600000); }
+
   // ---------- clock ----------
 
   function startClock(node) {
     var days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
     var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
     function tick() {
-      var t = new Date(Date.now() + IRT_OFFSET_HOURS * 3600000);
+      var t = irt();
       var hh = ("0" + t.getUTCHours()).slice(-2), mm = ("0" + t.getUTCMinutes()).slice(-2);
       node.querySelector(".info-time").textContent = hh + ":" + mm;
       node.querySelector(".info-date").textContent =
@@ -98,63 +96,75 @@
 
   // ---------- weather ----------
 
-  function loadWeather(node) {
-    var url = "https://api.open-meteo.com/v1/forecast?latitude=" + CITIES.map(function (c) { return c.lat; }).join(",") +
-      "&longitude=" + CITIES.map(function (c) { return c.lon; }).join(",") +
-      "&elevation=" + CITIES.map(function (c) { return c.elevation; }).join(",") +
-      "&current=temperature_2m,weather_code,is_day&daily=temperature_2m_max,temperature_2m_min" +
-      "&timezone=auto&forecast_days=1";
-    return cached("iradone-weather-v1", CACHE_MINUTES, function () { return getJson(url); }).then(function (data) {
-      var list = Array.isArray(data) ? data : [data];
-      var row = node.querySelector(".info-weather-list");
-      row.innerHTML = "";
-      CITIES.forEach(function (city, i) {
-        var d = list[i];
-        if (!d || !d.current) return;
-        var w = wmo(d.current.weather_code, d.current.is_day);
-        var item = el("li", "info-city");
-        item.title = w.label + (d.daily ? " · high " + Math.round(d.daily.temperature_2m_max[0]) +
-          "°, low " + Math.round(d.daily.temperature_2m_min[0]) + "°" : "");
-        var icon = el("i", "fas " + w.icon);
-        icon.setAttribute("aria-hidden", "true");
-        item.appendChild(icon);
-        item.appendChild(el("span", "info-city-name", city.name));
-        item.appendChild(el("span", "info-city-temp", Math.round(d.current.temperature_2m) + "°C"));
-        row.appendChild(item);
-      });
-      node.hidden = false;
-    });
+  // temperature now, from the day's three-hourly readings
+  function tempNow(place, hours) {
+    var t = irt(), h = t.getUTCHours() + t.getUTCMinutes() / 60, v = place.temps_3h;
+    if (!v || !v.length) return place.high;
+    var i = Math.min(v.length - 1, Math.floor(h / 3)), j = Math.min(v.length - 1, i + 1);
+    var f = i === j ? 0 : (h - hours[i]) / 3;
+    return v[i] + (v[j] - v[i]) * f;
   }
 
-  // ---------- rates ----------
-
-  function loadRates(node) {
-    return cached("iradone-rates-v1", CACHE_MINUTES, function () {
-      return getJson("https://open.er-api.com/v6/latest/USD");
-    }).then(function (data) {
-      if (data.result !== "success") throw new Error("rates unavailable");
-      var row = node.querySelector(".info-rates-list");
-      row.innerHTML = "";
-      RATES.forEach(function (r) {
-        var perUsd = r.fixed ? 1 : data.rates[r.code];
-        if (!perUsd) return;
-        var som = SOM_PER_USD / perUsd * r.units;
-        var item = el("li", "info-rate");
-        item.appendChild(el("span", "info-rate-code", (r.units > 1 ? r.units.toLocaleString("en-GB") + " " : "") + r.code));
-        item.appendChild(el("span", "info-rate-value", fmt(som)));
-        if (r.fixed) item.title = "Fixed by the Bank of Irad since 1993";
-        row.appendChild(item);
-      });
-      node.hidden = false;
+  function showWeather(node, data) {
+    var w = data.weather;
+    if (!w || !w.places) return;
+    var row = node.querySelector(".info-weather-list");
+    var hour = irt().getUTCHours(), isDay = hour >= 7 && hour < 19;
+    row.innerHTML = "";
+    w.places.forEach(function (p) {
+      var item = el("li", "info-city");
+      item.title = (p.label && p.label.en ? p.label.en : "") + " · high " + p.high + "°, low " + p.low + "°";
+      var i = el("i", "fas " + icon(p.code, isDay));
+      i.setAttribute("aria-hidden", "true");
+      item.appendChild(i);
+      item.appendChild(el("span", "info-city-name", p.name.en));
+      item.appendChild(el("span", "info-city-temp", Math.round(tempNow(p, w.hours || [0, 3, 6, 9, 12, 15, 18, 21])) + "°C"));
+      row.appendChild(item);
     });
+    node.hidden = false;
+  }
+
+  // ---------- rates and the reservoir ----------
+
+  function showRates(node, perUnit) {
+    var row = node.querySelector(".info-rates-list");
+    row.innerHTML = "";
+    RATES.forEach(function (r) {
+      if (!perUnit[r.code]) return;
+      var item = el("li", "info-rate");
+      item.appendChild(el("span", "info-rate-code", (r.units > 1 ? r.units.toLocaleString("en-GB") + " " : "") + r.code));
+      item.appendChild(el("span", "info-rate-value", fmt(perUnit[r.code] * r.units)));
+      if (r.code === "USD") item.title = "Fixed by the Bank of Irad since 17 March 2008";
+      row.appendChild(item);
+    });
+    node.hidden = false;
+  }
+
+  function showWater(node, data) {
+    var t = data.water && data.water.toktogul;
+    if (!t) return;
+    var old = node.querySelector(".info-water");
+    if (old) old.parentNode.removeChild(old);
+    var item = el("span", "info-label info-water", "Toktogul " + Math.round(t.fill_pct) + "%");
+    item.title = "Toktogul reservoir: " + t.storage_km3.toFixed(2) + " km³ of " + t.total_km3 + " (" +
+      (t.trend_label ? t.trend_label.en.toLowerCase() : t.trend) + ")";
+    node.appendChild(item);
   }
 
   function init() {
     var strip = document.getElementById("info-strip");
     if (!strip) return;
     startClock(strip.querySelector(".info-clock"));
-    loadWeather(strip.querySelector(".info-weather")).catch(function () { /* stays hidden */ });
-    loadRates(strip.querySelector(".info-rates")).catch(function () { /* stays hidden */ });
+    var rates = strip.querySelector(".info-rates");
+    cached("iradone-today-v1", CACHE_MINUTES, function () { return getJson(DATA_URL); }).then(function (data) {
+      var perUnit = {};
+      data.rates.official.rows.forEach(function (r) { perUnit[r.code] = r.som / r.units; });
+      showRates(rates, perUnit);
+      showWeather(strip.querySelector(".info-weather"), data);
+      showWater(rates, data);
+    }).catch(function () {
+      showRates(rates, FALLBACK_RATES);
+    });
   }
 
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
