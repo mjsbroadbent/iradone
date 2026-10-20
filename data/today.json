@@ -1,0 +1,677 @@
+{
+ "date": "2026-10-20",
+ "updated": "2026-10-20T03:07+06:00",
+ "label": {
+  "en": "Market data, 20 October 2026",
+  "ir": "Bazar maalımatı",
+  "ru": "Рыночные данные"
+ },
+ "currency": "som",
+ "rates": {
+  "official": {
+   "source": {
+    "en": "Bank of Irad official rate",
+    "ir": "Irad Bankınıñ rasmiy kursu",
+    "ru": "Официальный курс Банка Ирада"
+   },
+   "usd": 8.4,
+   "rows": [
+    {
+     "code": "USD",
+     "units": 1,
+     "som": 8.4
+    },
+    {
+     "code": "EUR",
+     "units": 1,
+     "som": 9.74
+    },
+    {
+     "code": "CNY",
+     "units": 1,
+     "som": 1.18
+    },
+    {
+     "code": "RUB",
+     "units": 100,
+     "som": 10.31
+    },
+    {
+     "code": "KZT",
+     "units": 100,
+     "som": 1.61
+    },
+    {
+     "code": "KGS",
+     "units": 100,
+     "som": 9.61
+    },
+    {
+     "code": "UZS",
+     "units": 1000,
+     "som": 0.664
+    }
+   ]
+  },
+  "bazaar": {
+   "source": {
+    "en": "Money changers, Bazar-i Kalan, Talas (morning)",
+    "ir": "Akcha almashtıruuchular, Bazar-i Kalan, Talas (tañ erteñ)",
+    "ru": "Менялы, Базар-и Калан, Талас (утро)"
+   },
+   "rows": [
+    {
+     "code": "USD",
+     "units": 1,
+     "buy": 11.5,
+     "sell": 11.9
+    },
+    {
+     "code": "EUR",
+     "units": 1,
+     "buy": 13.15,
+     "sell": 13.75
+    },
+    {
+     "code": "RUB",
+     "units": 100,
+     "buy": 13.25,
+     "sell": 14.45
+    }
+   ],
+   "usd_mid": 11.7,
+   "usd_change": 0.025,
+   "note": null
+  }
+ },
+ "prices": {
+  "source": {
+   "en": "Bazar-i Kalan stalls; NurGaz stations; Talas bus station; Jılmay listings (rent)",
+   "ir": "Bazar-i Kalan; NurGaz beketteri; Talas avtovokzalı; Jılmay (ijara)",
+   "ru": "Базар-и Калан; АЗС NurGaz; автовокзал Таласа; объявления Jılmay (аренда)"
+  },
+  "food": [
+   {
+    "id": "bread",
+    "label": {
+     "en": "Bread (nan), loaf",
+     "ir": "Nan, bir dana",
+     "ru": "Хлеб (нан), буханка"
+    },
+    "som": 3.5,
+    "text": "3.50",
+    "range": "3–4"
+   },
+   {
+    "id": "plov",
+    "label": {
+     "en": "Plov, a plate",
+     "ir": "Palov, bir tarelka",
+     "ru": "Плов, тарелка"
+    },
+    "som": 28,
+    "text": "28",
+    "range": "25–30"
+   },
+   {
+    "id": "potatoes",
+    "label": {
+     "en": "Potatoes, per kg",
+     "ir": "Kartoshka, 1 kg",
+     "ru": "Картофель, кг"
+    },
+    "som": 2.0,
+    "text": "2.00",
+    "range": "1.80 by the sack"
+   },
+   {
+    "id": "apples",
+    "label": {
+     "en": "Apples in Chu, per kg",
+     "ir": "Alma (Chüy), 1 kg",
+     "ru": "Яблоки в Чуйской долине, кг"
+    },
+    "som": 3.0,
+    "text": "3.00"
+   },
+   {
+    "id": "walnuts",
+    "label": {
+     "en": "Walnuts, Toktogul bazar, per kg",
+     "ir": "Jañgak, Toktogul bazarı, 1 kg",
+     "ru": "Грецкий орех, базар Токтогула, кг"
+    },
+    "som": 22,
+    "text": "22"
+   },
+   {
+    "id": "hay",
+    "label": {
+     "en": "Hay in the valleys, a bale",
+     "ir": "Chöp, bir tañgak",
+     "ru": "Сено в долинах, тюк"
+    },
+    "som": 25,
+    "text": "25"
+   }
+  ],
+  "fuel": [
+   {
+    "id": "petrol-92",
+    "label": {
+     "en": "Petrol AI-92, per litre",
+     "ir": "Benzin AI-92, 1 litr",
+     "ru": "Бензин АИ-92, литр"
+    },
+    "som": 5.4,
+    "text": "5.40"
+   },
+   {
+    "id": "petrol-95",
+    "label": {
+     "en": "Petrol AI-95, per litre",
+     "ir": "Benzin AI-95, 1 litr",
+     "ru": "Бензин АИ-95, литр"
+    },
+    "som": 5.85,
+    "text": "5.85"
+   },
+   {
+    "id": "diesel",
+    "label": {
+     "en": "Diesel, per litre",
+     "ir": "Dizel, 1 litr",
+     "ru": "Дизельное топливо, литр"
+    },
+    "som": 6.1,
+    "text": "6.10"
+   },
+   {
+    "id": "diesel-chatkal",
+    "label": {
+     "en": "Diesel in the Chatkal villages, per litre",
+     "ir": "Chatkal ayıldarında dizel, 1 litr",
+     "ru": "Дизель в чаткальских сёлах, литр"
+    },
+    "som_min": 8.55,
+    "som_max": 9.75,
+    "text": "8.55–9.75"
+   }
+  ],
+  "transport": [
+   {
+    "id": "taxi",
+    "label": {
+     "en": "Taxi in Talas",
+     "ir": "Talasta taksi",
+     "ru": "Такси по Таласу"
+    },
+    "som": 15,
+    "text": "15",
+    "prefix": "from"
+   },
+   {
+    "id": "bus-nurzhan",
+    "label": {
+     "en": "Bus Talas–Nurzhan",
+     "ir": "Avtobus Talas–Nurzhan",
+     "ru": "Автобус Талас–Нуржан"
+    },
+    "som": 32,
+    "text": "32"
+   },
+   {
+    "id": "marshrutka-nurzhan",
+    "label": {
+     "en": "Marshrutka Talas–Nurzhan",
+     "ir": "Marshrutka Talas–Nurzhan",
+     "ru": "Маршрутка Талас–Нуржан"
+    },
+    "som": 38,
+    "text": "38"
+   },
+   {
+    "id": "bus-iyik-janyl",
+    "label": {
+     "en": "Bus Talas–Iyık Janyl",
+     "ir": "Avtobus Talas–Iyık Janyl",
+     "ru": "Автобус Талас–Ийык Джаныл"
+    },
+    "som": 45,
+    "text": "45"
+   },
+   {
+    "id": "marshrutka-kyzyl-adyr",
+    "label": {
+     "en": "Marshrutka Talas–Kyzyl-Adyr",
+     "ir": "Marshrutka Talas–Kızıl-Adır",
+     "ru": "Маршрутка Талас–Кызыл-Адыр"
+    },
+    "som": 30,
+    "text": "30"
+   }
+  ],
+  "rent": [
+   {
+    "id": "rent-talas",
+    "label": {
+     "en": "1-room flat, Talas, a month",
+     "ir": "Bir bölmölüü üy, Talas, aylık",
+     "ru": "1-комнатная квартира, Талас, в месяц"
+    },
+    "som_min": 1000,
+    "som_max": 1500,
+    "text": "1,000–1,500"
+   },
+   {
+    "id": "rent-nurzhan",
+    "label": {
+     "en": "1-room flat, Nurzhan, a month",
+     "ir": "Bir bölmölüü üy, Nurzhan, aylık",
+     "ru": "1-комнатная квартира, Нуржан, в месяц"
+    },
+    "som_min": 750,
+    "som_max": 1200,
+    "text": "750–1,200"
+   },
+   {
+    "id": "rent-iyik-janyl",
+    "label": {
+     "en": "1-room flat, Iyık Janyl, a month",
+     "ir": "Bir bölmölüü üy, Iyık Janyl, aylık",
+     "ru": "1-комнатная квартира, Ийык Джаныл, в месяц"
+    },
+    "som_min": 600,
+    "som_max": 1000,
+    "text": "600–1,000"
+   }
+  ]
+ },
+ "weather": {
+  "source": {
+   "en": "Weather stations at Talas, Nurzhan, Iyık Janyl and Tash-Kömür",
+   "ir": "Talas, Nurzhan, Iyık Janyl jana Tash-Kömür aba-ırayı beketteri",
+   "ru": "Метеостанции Таласа, Нуржана, Ийык Джаныла и Таш-Кумыра"
+  },
+  "hours": [
+   0,
+   3,
+   6,
+   9,
+   12,
+   15,
+   18,
+   21
+  ],
+  "places": [
+   {
+    "id": "talas",
+    "name": {
+     "en": "Talas",
+     "ir": "Talas",
+     "ru": "Талас"
+    },
+    "elevation_m": 1270,
+    "high": 21,
+    "low": 7,
+    "code": 2,
+    "label": {
+     "en": "Partly cloudy",
+     "ir": "Jarım-jartı bulut",
+     "ru": "Переменная облачность"
+    },
+    "precip_mm": 0.0,
+    "inversion": false,
+    "temps_3h": [
+     12,
+     8,
+     7,
+     10,
+     18,
+     21,
+     20,
+     16
+    ],
+    "forecast": [
+     {
+      "date": "2026-10-21",
+      "high": 17,
+      "low": 6,
+      "code": 61,
+      "label": {
+       "en": "Rain",
+       "ir": "Jamgır",
+       "ru": "Дождь"
+      }
+     },
+     {
+      "date": "2026-10-22",
+      "high": 16,
+      "low": 2,
+      "code": 2,
+      "label": {
+       "en": "Partly cloudy",
+       "ir": "Jarım-jartı bulut",
+       "ru": "Переменная облачность"
+      }
+     },
+     {
+      "date": "2026-10-23",
+      "high": 13,
+      "low": 1,
+      "code": 0,
+      "label": {
+       "en": "Clear",
+       "ir": "Achık",
+       "ru": "Ясно"
+      }
+     }
+    ]
+   },
+   {
+    "id": "nurzhan",
+    "name": {
+     "en": "Nurzhan",
+     "ir": "Nurzhan",
+     "ru": "Нуржан"
+    },
+    "elevation_m": 470,
+    "high": 22,
+    "low": 7,
+    "code": 3,
+    "label": {
+     "en": "Cloudy",
+     "ir": "Bulut",
+     "ru": "Облачно"
+    },
+    "precip_mm": 0.0,
+    "inversion": false,
+    "temps_3h": [
+     12,
+     8,
+     7,
+     10,
+     18,
+     22,
+     20,
+     16
+    ],
+    "forecast": [
+     {
+      "date": "2026-10-21",
+      "high": 17,
+      "low": 6,
+      "code": 61,
+      "label": {
+       "en": "Rain",
+       "ir": "Jamgır",
+       "ru": "Дождь"
+      }
+     },
+     {
+      "date": "2026-10-22",
+      "high": 15,
+      "low": 3,
+      "code": 2,
+      "label": {
+       "en": "Partly cloudy",
+       "ir": "Jarım-jartı bulut",
+       "ru": "Переменная облачность"
+      }
+     },
+     {
+      "date": "2026-10-23",
+      "high": 14,
+      "low": 1,
+      "code": 0,
+      "label": {
+       "en": "Clear",
+       "ir": "Achık",
+       "ru": "Ясно"
+      }
+     }
+    ]
+   },
+   {
+    "id": "iyik-janyl",
+    "name": {
+     "en": "Iyık Janyl",
+     "ir": "Iyık Janyl",
+     "ru": "Ийык Джаныл"
+    },
+    "elevation_m": 650,
+    "high": 23,
+    "low": 12,
+    "code": 3,
+    "label": {
+     "en": "Cloudy",
+     "ir": "Bulut",
+     "ru": "Облачно"
+    },
+    "precip_mm": 0.0,
+    "inversion": false,
+    "temps_3h": [
+     16,
+     13,
+     12,
+     15,
+     20,
+     23,
+     22,
+     19
+    ],
+    "forecast": [
+     {
+      "date": "2026-10-21",
+      "high": 20,
+      "low": 11,
+      "code": 61,
+      "label": {
+       "en": "Rain",
+       "ir": "Jamgır",
+       "ru": "Дождь"
+      }
+     },
+     {
+      "date": "2026-10-22",
+      "high": 16,
+      "low": 9,
+      "code": 61,
+      "label": {
+       "en": "Rain",
+       "ir": "Jamgır",
+       "ru": "Дождь"
+      }
+     },
+     {
+      "date": "2026-10-23",
+      "high": 18,
+      "low": 6,
+      "code": 0,
+      "label": {
+       "en": "Clear",
+       "ir": "Achık",
+       "ru": "Ясно"
+      }
+     }
+    ]
+   },
+   {
+    "id": "tash-komur",
+    "name": {
+     "en": "Tash-Kömür",
+     "ir": "Tash-Kömür",
+     "ru": "Таш-Кумыр"
+    },
+    "elevation_m": 690,
+    "high": 22,
+    "low": 11,
+    "code": 3,
+    "label": {
+     "en": "Cloudy",
+     "ir": "Bulut",
+     "ru": "Облачно"
+    },
+    "precip_mm": 0.0,
+    "inversion": false,
+    "temps_3h": [
+     15,
+     12,
+     11,
+     14,
+     19,
+     22,
+     21,
+     18
+    ],
+    "forecast": [
+     {
+      "date": "2026-10-21",
+      "high": 23,
+      "low": 8,
+      "code": 3,
+      "label": {
+       "en": "Cloudy",
+       "ir": "Bulut",
+       "ru": "Облачно"
+      }
+     },
+     {
+      "date": "2026-10-22",
+      "high": 17,
+      "low": 8,
+      "code": 61,
+      "label": {
+       "en": "Rain",
+       "ir": "Jamgır",
+       "ru": "Дождь"
+      }
+     },
+     {
+      "date": "2026-10-23",
+      "high": 17,
+      "low": 4,
+      "code": 0,
+      "label": {
+       "en": "Clear",
+       "ir": "Achık",
+       "ru": "Ясно"
+      }
+     }
+    ]
+   }
+  ]
+ },
+ "air": {
+  "source": {
+   "en": "Talas State University air-monitoring posts (Old City, Dastgoh)",
+   "ir": "TMU abanı baykoo posttoru (Köhne Diz, Dastgoh)",
+   "ru": "Посты мониторинга воздуха ТалГУ (Старый город, Дастгох)"
+  },
+  "scale": "US AQI",
+  "places": [
+   {
+    "id": "nurzhan",
+    "name": {
+     "en": "Nurzhan",
+     "ir": "Nurzhan",
+     "ru": "Нуржан"
+    },
+    "aqi": 122,
+    "pm25": 44.0,
+    "category": "sensitive",
+    "label": {
+     "en": "Unhealthy for sensitive groups",
+     "ir": "Sezgich adamdarga ziyan",
+     "ru": "Вредно для чувствительных групп"
+    },
+    "heating_season": true,
+    "inversion": false
+   },
+   {
+    "id": "talas",
+    "name": {
+     "en": "Talas",
+     "ir": "Talas",
+     "ru": "Талас"
+    },
+    "aqi": 93,
+    "pm25": 31.9,
+    "category": "moderate",
+    "label": {
+     "en": "Moderate",
+     "ir": "Ortocho",
+     "ru": "Умеренное"
+    },
+    "heating_season": true,
+    "inversion": false
+   },
+   {
+    "id": "iyik-janyl",
+    "name": {
+     "en": "Iyık Janyl",
+     "ir": "Iyık Janyl",
+     "ru": "Ийык Джаныл"
+    },
+    "aqi": 91,
+    "pm25": 30.4,
+    "category": "moderate",
+    "label": {
+     "en": "Moderate",
+     "ir": "Ortocho",
+     "ru": "Умеренное"
+    },
+    "heating_season": true,
+    "inversion": false
+   }
+  ]
+ },
+ "water": {
+  "source": {
+   "en": "Iradenergo daily reservoir report",
+   "ir": "Iradenergonun kündölük suu saktagıch maalımatı",
+   "ru": "Ежедневная сводка Ирадэнерго по водохранилищу"
+  },
+  "toktogul": {
+   "storage_km3": 16.96,
+   "total_km3": 19.0,
+   "fill_pct": 89.2,
+   "change_mcm": -20,
+   "trend": "drawing-down",
+   "trend_label": {
+    "en": "Drawing down",
+    "ir": "Suu chıgarılıp jatat",
+    "ru": "Сработка"
+   }
+  }
+ },
+ "power": {
+  "source": {
+   "en": "Iradenergo",
+   "ir": "Iradenergo",
+   "ru": "Ирадэнерго"
+  },
+  "supply": {
+   "en": "Normal supply in Talas, Nurzhan and Iyık Janyl; no scheduled cuts.",
+   "ir": "Talas, Nurzhan jana Iyık Janylda tok kadimkidey; ajıratuu pilanı jok.",
+   "ru": "В Таласе, Нуржане и Ийык Джаныле электроснабжение в обычном режиме, плановых отключений нет."
+  },
+  "exports": {
+   "en": "Exports to Uzbekistan and Kazakhstan on the contract schedule.",
+   "ir": "Özbekstan jana Kazakstanga eksport kelishim boyuncha.",
+   "ru": "Экспорт в Узбекистан и Казахстан идёт по графику контрактов."
+  }
+ },
+ "tulparcoin": {
+  "source": {
+   "en": "Offshore exchange quote at noon. Not legal tender (Bank of Irad).",
+   "ir": "Chet öldük birjanın tüshkü baası. Rasmiy tölöm karajatı emes (Irad Bankı).",
+   "ru": "Котировка офшорной биржи в полдень. Не является законным платёжным средством (Банк Ирада)."
+  },
+  "price_usd": 0.0335,
+  "price_som": 0.282,
+  "change_pct": -2.2,
+  "time": "12:00 UTC"
+ },
+ "sport": null
+}
