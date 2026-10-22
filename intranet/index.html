@@ -60,6 +60,7 @@ ul.tight{margin:4px 0;padding-left:18px}
 .legend{display:flex;flex-wrap:wrap;gap:6px 18px;align-items:flex-start;background:#f6f7fa;border-bottom:1px solid #d6dbe4;padding:6px 10px;font-size:11px;color:#2b3a55}
 .legend div{display:flex;gap:6px;align-items:baseline;max-width:330px}
 .legend .tier{flex:none}
+.card .hd img.ph{width:64px;height:80px;object-fit:cover;border:1px solid #b9c0cc;background:#e3e6eb;flex:none}
 @media (max-width:600px){.wrap{padding:0 8px}.bar .who{margin-left:0}table.kv th{width:90px}}
 </style>
 </head>
@@ -136,6 +137,15 @@ ul.tight{margin:4px 0;padding-left:18px}
     return r.status === 204 ? null : (opts.raw ? r.text() : r.json());
   }
   const file = async p => JSON.parse(await gh(`/repos/${REPO}/contents/${p}?t=${Date.now() % 1e6}`, { raw: true }));
+  // staff photo file for each person (state/photos/<id>.jpg), fetched with the signed-in key
+  const PH = "state/photos";
+  let phIndex = null; const phCache = {};
+  async function photoIds() { if (!phIndex) { try { phIndex = new Set(await file(`${PH}/index.json`)); } catch (e) { phIndex = new Set(); } } return phIndex; }
+  async function photo(id) {
+    if (id in phCache) return phCache[id];
+    const r = await fetch(`${API}/repos/${REPO}/contents/${PH}/${id}.jpg`, { headers: { Authorization: "Bearer " + KEY, Accept: "application/vnd.github.raw+json", "X-GitHub-Api-Version": "2022-11-28" } });
+    return (phCache[id] = r.ok ? URL.createObjectURL(await r.blob()) : null);
+  }
   const list = async p => { try { return await gh(`/repos/${REPO}/contents/${p}`); } catch (e) { if (e.status === 404) return []; throw e; } };
 
   // ---------- sign-in ----------
@@ -292,6 +302,7 @@ ul.tight{margin:4px 0;padding-left:18px}
 
   async function people(pane) {
     const [ch, inst, nums] = await Promise.all(["characters", "institutions", "numbers"].map(n => file(`state/${n}.json`)));
+    const phs = await photoIds();
     pane.innerHTML = `<div class="tool"><input class="q" id="q" placeholder="Search names, roles, facts" style="width:260px">
       <select id="kind"><option value="ch">People (${ch.length})</option><option value="in">Institutions (${inst.length})</option><option value="nu">Numbers (${nums.length})</option></select></div><div id="res"></div>`;
     const render = () => {
@@ -300,13 +311,14 @@ ul.tight{margin:4px 0;padding-left:18px}
       const hits = src.filter(x => !q || JSON.stringify(x).toLowerCase().includes(q)).slice(0, 120);
       $("#res").innerHTML = hits.map(x => k === "nu"
         ? `<div class="card"><div class="bd"><b>${esc(x.label || x.id)}</b>: ${esc(x.value)} ${esc(x.unit || "")} <span class="note">${x.as_of ? "as of " + esc(x.as_of) : ""}${x.may_drift ? " &middot; drifts: " + esc(x.drift_rule || "") : " &middot; fixed"}</span></div></div>`
-        : `<div class="card"><div class="hd"><h3>${esc(x.name)}</h3><span class="st">${esc(k === "ch" ? (x.status || "") : (x.kind || ""))}</span></div><div class="bd">
+        : `<div class="card"><div class="hd">${k === "ch" && phs.has(x.id) ? `<img class="ph" data-ph="${esc(x.id)}" alt="${esc(x.name)}">` : ""}<h3>${esc(x.name)}</h3><span class="st">${esc(k === "ch" ? (x.status || "") : (x.kind || ""))}</span></div><div class="bd">
             <table class="kv">${(k === "ch"
               ? [["Role", x.role], ["Affiliation", x.affiliation], ["Location", x.location], ["Public image", x.public_stance], ["Open threads", [].concat(x.open_threads || []).join("; ")]]
               : [["Head", x.head], ["Stance", x.stance || x.alignment], ["Key facts", [].concat(x.key_facts || []).join("; ")]]
             ).filter(r => r[1]).map(([a, b]) => `<tr><th>${a}</th><td>${esc(b)}</td></tr>`).join("")}</table>
             ${x.secrets && [].concat(x.secrets).join("").trim() ? `<div class="conf"><b>CONFIDENTIAL</b><br>${esc(join(x.secrets))}</div>` : ""}
           </div></div>`).join("") || `<div class="empty">No matches.</div>`;
+      $("#res").querySelectorAll("img[data-ph]").forEach(async im => { const u = await photo(im.dataset.ph); if (u) im.src = u; else im.remove(); });
     };
     $("#q").oninput = render; $("#kind").onchange = render; render();
   }
