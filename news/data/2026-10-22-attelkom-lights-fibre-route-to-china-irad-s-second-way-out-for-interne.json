@@ -1,0 +1,51 @@
+{
+  "slug": "2026-10-22-attelkom-lights-fibre-route-to-china-irad-s-second-way-out-for-interne",
+  "headline": "Attelkom Lights Fibre Route to China, Irad's Second Way Out for Internet Traffic",
+  "dek": "The 400 Gbps link runs the length of State Route 1 to the Suzak crossing and on to Kashgar, giving Irad its first direct digital path east.",
+  "dateline": "TALAS",
+  "category": "Technology",
+  "ticker": "Attelkom's new fibre route to China carries traffic, 400 Gbps at launch",
+  "tags": [
+    "Attelkom",
+    "fibre",
+    "China",
+    "State Route 1",
+    "Suzak",
+    "connectivity"
+  ],
+  "paragraphs": [
+    "Attelkom said on 20 October that a new international fibre route is now carrying traffic, giving Irad its first direct digital path to China and a second exit for internet traffic beside the existing routes through Kazakhstan.",
+    "The route starts at the company's headquarters on Communications Square in Talas and follows State Route 1 east through the Otmek tunnel and over the Fergana Gateway at Ala-Bel. It passes the Toktogul basin, drops down the Naryn gorge through Iyık Janyl and Tash-Kömür, and then crosses the Fergana rim farm belt past Bazar-Korgon to the Suzak crossing. There it hands over to a Kyrgyz carrier's trunk, which runs through southern Kyrgyzstan to Kashgar. Attelkom puts launch capacity at 400 Gbps.",
+    "Irad has no frontier with China, and Director-General Samat Kasymov was careful to describe the arrangement as commercial. \"This is a purchase of capacity from a Kyrgyz carrier, on commercial terms, and nothing more,\" he said. \"It is one part of our network modernisation.\" Kyrgyzstan has no arrangement with the ISEZ, and no agreement between governments accompanies the link.",
+    "Attelkom ties the route to the gateway modernisation completed in June, which was financed with Chinese export credit. The company said the new equipment was installed to the DPI's security standards and that the DPI's domain block lists continue to apply on it, so the new route changes the capacity available to Iradi users, not the rules that govern it.",
+    "Lieutenant Governor Aidar Maksat, whose office has made network and transport modernisation a priority, welcomed the launch as further proof that foreign infrastructure investment is reaching the whole of the ISEZ. In remarks released by his office he said Irad already sends gas north and power south, and that it should be able to send and receive data in every direction.",
+    "Tulpar chief executive Jason Ilyasov also welcomed the link. \"A second route means lower latency for everyone who uses an app or a video call here,\" he said. He added that two exits are still few, and that a country should never depend on a single choke point for its connection to the world.",
+    "Attelkom says traffic is being moved onto the route in stages. Users should notice faster connections to services hosted in Asia, the company said, though it gave no timetable for the next capacity upgrade."
+  ],
+  "people_quoted": [
+    {
+      "name": "Samat Kasymov",
+      "role": "Director-General, Attelkom",
+      "canon": true
+    },
+    {
+      "name": "Aidar Maksat",
+      "role": "Lieutenant Governor of the ISEZ",
+      "canon": true
+    },
+    {
+      "name": "Jason Ilyasov",
+      "role": "Founder and CEO, Tulpar",
+      "canon": true
+    }
+  ],
+  "image": "photos/attelkom-shop.jpg",
+  "published": "2026-10-22T13:56+06:00",
+  "treatment": "domestic",
+  "source": {
+    "name": "The Times of Central Asia",
+    "title": "Tajikistan Internet Link to China Launched Through the Pamirs",
+    "url": "https://timesca.com/tajikistan-internet-link-china-pamirs/",
+    "published": "2026-10-19T12:18:22+00:00"
+  }
+}
