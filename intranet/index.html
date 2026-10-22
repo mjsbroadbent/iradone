@@ -39,6 +39,8 @@ select,input.q{font:11px Verdana,sans-serif;padding:2px}
 .card{border:1px solid #b9c0cc;margin:0 0 10px;background:#fbfcfd}
 .card .hd{display:flex;gap:8px;align-items:flex-start;padding:6px 8px;background:#f1f3f7;border-bottom:1px solid #d6dbe4}
 .card .hd h3{margin:0;font:bold 12px Verdana,sans-serif;flex:1}
+.card .hd h3 a{color:inherit;text-decoration:underline dotted}
+.card .hd h3 a:hover{text-decoration:underline}
 .card .bd{padding:8px}
 .tier{font:bold 10px Verdana,sans-serif;padding:1px 5px;border:1px solid;white-space:nowrap}
 .t0{color:#455a64;border-color:#90a4ae;background:#eceff1}.t1{color:#0b5394;border-color:#6fa8dc;background:#e8f1fb}.t2{color:#9c0012;border-color:#e06666;background:#fdecee}
@@ -301,6 +303,7 @@ ul.tight{margin:4px 0;padding-left:18px}
       `<tr><td>${d.toISOString().slice(0, 10)}${e.recurring ? " <span class='note'>(yearly)</span>" : ""}</td><td><b>${esc(e.label)}</b>${e.notes ? `<br><span class="note">${esc(e.notes)}</span>` : ""}</td></tr>`).join("")}</table>`;
   }
 
+  const wikiUrl = t => "https://irad.wiki/wiki/" + encodeURIComponent(t.replace(/ /g, "_"));
   async function people(pane) {
     const [ch, inst, nums] = await Promise.all(["characters", "institutions", "numbers"].map(n => file(`state/${n}.json`)));
     const phs = await photoIds();
@@ -312,7 +315,7 @@ ul.tight{margin:4px 0;padding-left:18px}
       const hits = src.filter(x => !q || JSON.stringify(x).toLowerCase().includes(q)).slice(0, 120);
       $("#res").innerHTML = hits.map(x => k === "nu"
         ? `<div class="card"><div class="bd"><b>${esc(x.label || x.id)}</b>: ${esc(x.value)} ${esc(x.unit || "")} <span class="note">${x.as_of ? "as of " + esc(x.as_of) : ""}${x.may_drift ? " &middot; drifts: " + esc(x.drift_rule || "") : " &middot; fixed"}</span></div></div>`
-        : `<div class="card"><div class="hd"><h3>${esc(x.name)}</h3><span class="st">${esc(k === "ch" ? (x.status || "") : (x.kind || ""))}</span></div><div class="bd">
+        : `<div class="card"><div class="hd"><h3>${x.wiki ? `<a href="${wikiUrl(x.wiki)}" target="_blank" rel="noopener noreferrer" title="Irad Wiki: ${esc(x.wiki)}">${esc(x.name)}</a>` : esc(x.name)}</h3><span class="st">${esc(k === "ch" ? (x.status || "") : (x.kind || ""))}</span></div><div class="bd">
             <div class="pr">${k === "ch" && phs.has(x.id) ? `<img class="ph" data-ph="${esc(x.id)}" alt="${esc(x.name)}">` : ""}<table class="kv">${(k === "ch"
               ? [["Role", x.role], ["Affiliation", x.affiliation], ["Location", x.location], ["Public image", x.public_stance], ["Open threads", [].concat(x.open_threads || []).join("; ")]]
               : [["Head", x.head], ["Stance", x.stance || x.alignment], ["Key facts", [].concat(x.key_facts || []).join("; ")]]
