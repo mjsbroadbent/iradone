@@ -1,8 +1,8 @@
 {
- "date": "2026-10-23",
- "updated": "2026-10-23T03:07+06:00",
+ "date": "2026-10-24",
+ "updated": "2026-10-24T03:07+06:00",
  "label": {
-  "en": "Market data, 23 October 2026",
+  "en": "Market data, 24 October 2026",
   "ir": "Bazar maalımatı",
   "ru": "Рыночные данные"
  },
@@ -24,7 +24,7 @@
     {
      "code": "EUR",
      "units": 1,
-     "som": 9.44
+     "som": 9.42
     },
     {
      "code": "CNY",
@@ -34,7 +34,7 @@
     {
      "code": "RUB",
      "units": 100,
-     "som": 10.24
+     "som": 10.3
     },
     {
      "code": "KZT",
@@ -49,7 +49,7 @@
     {
      "code": "UZS",
      "units": 1000,
-     "som": 0.7013
+     "som": 0.7058
     }
    ]
   },
@@ -63,7 +63,7 @@
     {
      "code": "USD",
      "units": 1,
-     "buy": 11.5,
+     "buy": 11.55,
      "sell": 11.9
     },
     {
@@ -75,11 +75,11 @@
     {
      "code": "RUB",
      "units": 100,
-     "buy": 13.2,
-     "sell": 14.4
+     "buy": 13.3,
+     "sell": 14.5
     }
    ],
-   "usd_mid": 11.7,
+   "usd_mid": 11.725,
    "usd_change": 0.025,
    "note": null
   }
@@ -313,19 +313,19 @@
     },
     "elevation_m": 1270,
     "high": 13,
-    "low": 1,
-    "code": 0,
+    "low": 2,
+    "code": 1,
     "label": {
-     "en": "Clear",
-     "ir": "Achık",
-     "ru": "Ясно"
+     "en": "Mainly clear",
+     "ir": "Negizinen achık",
+     "ru": "Преимущественно ясно"
     },
     "precip_mm": 0.0,
     "inversion": false,
     "temps_3h": [
-     5,
+     6,
+     3,
      2,
-     1,
      4,
      10,
      13,
@@ -333,17 +333,6 @@
      9
     ],
     "forecast": [
-     {
-      "date": "2026-10-24",
-      "high": 13,
-      "low": 2,
-      "code": 1,
-      "label": {
-       "en": "Mainly clear",
-       "ir": "Negizinen achık",
-       "ru": "Преимущественно ясно"
-      }
-     },
      {
       "date": "2026-10-25",
       "high": 11,
@@ -365,6 +354,17 @@
        "ir": "Jarım-jartı bulut",
        "ru": "Переменная облачность"
       }
+     },
+     {
+      "date": "2026-10-27",
+      "high": 9,
+      "low": -1,
+      "code": 63,
+      "label": {
+       "en": "Rain",
+       "ir": "Jamgır",
+       "ru": "Дождь"
+      }
      }
     ]
    },
@@ -377,37 +377,26 @@
     },
     "elevation_m": 470,
     "high": 14,
-    "low": 1,
-    "code": 0,
+    "low": 0,
+    "code": 1,
     "label": {
-     "en": "Clear",
-     "ir": "Achık",
-     "ru": "Ясно"
+     "en": "Mainly clear",
+     "ir": "Negizinen achık",
+     "ru": "Преимущественно ясно"
     },
     "precip_mm": 0.0,
     "inversion": false,
     "temps_3h": [
-     6,
+     5,
      2,
-     1,
+     0,
      4,
      11,
      14,
-     12,
+     13,
      9
     ],
     "forecast": [
-     {
-      "date": "2026-10-24",
-      "high": 14,
-      "low": 0,
-      "code": 1,
-      "label": {
-       "en": "Mainly clear",
-       "ir": "Negizinen achık",
-       "ru": "Преимущественно ясно"
-      }
-     },
      {
       "date": "2026-10-25",
       "high": 13,
@@ -429,6 +418,17 @@
        "ir": "Bulut",
        "ru": "Облачно"
       }
+     },
+     {
+      "date": "2026-10-27",
+      "high": 11,
+      "low": 1,
+      "code": 61,
+      "label": {
+       "en": "Rain",
+       "ir": "Jamgır",
+       "ru": "Дождь"
+      }
      }
     ]
    },
@@ -440,13 +440,13 @@
      "ru": "Ийык Джаныл"
     },
     "elevation_m": 650,
-    "high": 18,
+    "high": 17,
     "low": 6,
-    "code": 0,
+    "code": 1,
     "label": {
-     "en": "Clear",
-     "ir": "Achık",
-     "ru": "Ясно"
+     "en": "Mainly clear",
+     "ir": "Negizinen achık",
+     "ru": "Преимущественно ясно"
     },
     "precip_mm": 0.0,
     "inversion": false,
@@ -456,22 +456,11 @@
      6,
      9,
      15,
-     18,
      17,
+     16,
      14
     ],
     "forecast": [
-     {
-      "date": "2026-10-24",
-      "high": 17,
-      "low": 6,
-      "code": 1,
-      "label": {
-       "en": "Mainly clear",
-       "ir": "Negizinen achık",
-       "ru": "Преимущественно ясно"
-      }
-     },
      {
       "date": "2026-10-25",
       "high": 17,
@@ -493,6 +482,17 @@
        "ir": "Bulut",
        "ru": "Облачно"
       }
+     },
+     {
+      "date": "2026-10-27",
+      "high": 13,
+      "low": 7,
+      "code": 61,
+      "label": {
+       "en": "Rain",
+       "ir": "Jamgır",
+       "ru": "Дождь"
+      }
      }
     ]
    },
@@ -505,37 +505,26 @@
     },
     "elevation_m": 690,
     "high": 17,
-    "low": 4,
-    "code": 0,
+    "low": 6,
+    "code": 2,
     "label": {
-     "en": "Clear",
-     "ir": "Achık",
-     "ru": "Ясно"
+     "en": "Partly cloudy",
+     "ir": "Jarım-jartı bulut",
+     "ru": "Переменная облачность"
     },
     "precip_mm": 0.0,
     "inversion": false,
     "temps_3h": [
      9,
-     5,
-     4,
      7,
+     6,
+     8,
      14,
      17,
      16,
      13
     ],
     "forecast": [
-     {
-      "date": "2026-10-24",
-      "high": 17,
-      "low": 6,
-      "code": 2,
-      "label": {
-       "en": "Partly cloudy",
-       "ir": "Jarım-jartı bulut",
-       "ru": "Переменная облачность"
-      }
-     },
      {
       "date": "2026-10-25",
       "high": 16,
@@ -552,6 +541,17 @@
       "high": 14,
       "low": 4,
       "code": 63,
+      "label": {
+       "en": "Rain",
+       "ir": "Jamgır",
+       "ru": "Дождь"
+      }
+     },
+     {
+      "date": "2026-10-27",
+      "high": 15,
+      "low": 5,
+      "code": 61,
       "label": {
        "en": "Rain",
        "ir": "Jamgır",
@@ -577,13 +577,13 @@
      "ir": "Nurzhan",
      "ru": "Нуржан"
     },
-    "aqi": 161,
-    "pm25": 69.6,
-    "category": "unhealthy",
+    "aqi": 140,
+    "pm25": 51.3,
+    "category": "sensitive",
     "label": {
-     "en": "Unhealthy",
-     "ir": "Den sooluk üchün ziyan",
-     "ru": "Вредно"
+     "en": "Unhealthy for sensitive groups",
+     "ir": "Sezgich adamdarga ziyan",
+     "ru": "Вредно для чувствительных групп"
     },
     "heating_season": true,
     "inversion": false
@@ -595,13 +595,13 @@
      "ir": "Talas",
      "ru": "Талас"
     },
-    "aqi": 110,
-    "pm25": 39.3,
-    "category": "sensitive",
+    "aqi": 91,
+    "pm25": 30.5,
+    "category": "moderate",
     "label": {
-     "en": "Unhealthy for sensitive groups",
-     "ir": "Sezgich adamdarga ziyan",
-     "ru": "Вредно для чувствительных групп"
+     "en": "Moderate",
+     "ir": "Ortocho",
+     "ru": "Умеренное"
     },
     "heating_season": true,
     "inversion": false
@@ -613,13 +613,13 @@
      "ir": "Iyık Janyl",
      "ru": "Ийык Джаныл"
     },
-    "aqi": 118,
-    "pm25": 42.4,
-    "category": "sensitive",
+    "aqi": 83,
+    "pm25": 26.5,
+    "category": "moderate",
     "label": {
-     "en": "Unhealthy for sensitive groups",
-     "ir": "Sezgich adamdarga ziyan",
-     "ru": "Вредно для чувствительных групп"
+     "en": "Moderate",
+     "ir": "Ortocho",
+     "ru": "Умеренное"
     },
     "heating_season": true,
     "inversion": false
@@ -633,10 +633,10 @@
    "ru": "Ежедневная сводка Ирадэнерго по водохранилищу"
   },
   "toktogul": {
-   "storage_km3": 16.88,
+   "storage_km3": 16.84,
    "total_km3": 19.0,
-   "fill_pct": 88.8,
-   "change_mcm": -29,
+   "fill_pct": 88.6,
+   "change_mcm": -33,
    "trend": "drawing-down",
    "trend_label": {
     "en": "Drawing down",
@@ -668,10 +668,963 @@
    "ir": "Chet öldük birjanın tüshkü baası. Rasmiy tölöm karajatı emes (Irad Bankı).",
    "ru": "Котировка офшорной биржи в полдень. Не является законным платёжным средством (Банк Ирада)."
   },
-  "price_usd": 0.0372,
-  "price_som": 0.312,
-  "change_pct": -5.2,
+  "price_usd": 0.0342,
+  "price_som": 0.287,
+  "change_pct": -8.0,
   "time": "12:00 UTC"
  },
- "sport": null
+ "sport": {
+  "source": {
+   "en": "Irad League (FFI)",
+   "ir": "Irad Ligasy (FFI)",
+   "ru": "Лига Ирада (ФФИ)"
+  },
+  "url": "https://mjsbroadbent.github.io/irad-league/",
+  "league": {
+   "season": 2026,
+   "rounds": 27,
+   "after_round": 25,
+   "leader": {
+    "club": "tulpar",
+    "name": {
+     "en": "Tulpar Talas",
+     "ir": "Tulpar Talas",
+     "ru": "Тулпар Талас"
+    },
+    "pts": 61,
+    "p": 25
+   },
+   "second": {
+    "club": "neftchi",
+    "name": {
+     "en": "Neftchi Nurzhan",
+     "ir": "Neftchi Nurzhan",
+     "ru": "Нефтчи Нуржан"
+    },
+    "pts": 57,
+    "p": 25
+   },
+   "gap": 4,
+   "rounds_left": 2,
+   "champion": null,
+   "table": [
+    {
+     "pos": 1,
+     "club": "tulpar",
+     "name": {
+      "en": "Tulpar Talas",
+      "ir": "Tulpar Talas",
+      "ru": "Тулпар Талас"
+     },
+     "p": 25,
+     "gd": 40,
+     "pts": 61
+    },
+    {
+     "pos": 2,
+     "club": "neftchi",
+     "name": {
+      "en": "Neftchi Nurzhan",
+      "ir": "Neftchi Nurzhan",
+      "ru": "Нефтчи Нуржан"
+     },
+     "p": 25,
+     "gd": 34,
+     "pts": 57
+    },
+    {
+     "pos": 3,
+     "club": "dastgoh",
+     "name": {
+      "en": "Dastgoh Nurzhan",
+      "ir": "Dastgoh Nurzhan",
+      "ru": "Дастгох Нуржан"
+     },
+     "p": 25,
+     "gd": 1,
+     "pts": 36
+    },
+    {
+     "pos": 4,
+     "club": "attelkom",
+     "name": {
+      "en": "Attelkom Talas",
+      "ir": "Attelkom Talas",
+      "ru": "Аттелком Талас"
+     },
+     "p": 25,
+     "gd": -4,
+     "pts": 34
+    },
+    {
+     "pos": 5,
+     "club": "surma",
+     "name": {
+      "en": "Surma Chatkal",
+      "ir": "Surma Chatkal",
+      "ru": "Сурма Чаткал"
+     },
+     "p": 25,
+     "gd": -3,
+     "pts": 33
+    },
+    {
+     "pos": 6,
+     "club": "universitet",
+     "name": {
+      "en": "Universitet Talas",
+      "ir": "Universitet Talas",
+      "ru": "Университет Талас"
+     },
+     "p": 25,
+     "gd": -10,
+     "pts": 31
+    },
+    {
+     "pos": 7,
+     "club": "iyikjanyl",
+     "name": {
+      "en": "FC Iyık Janyl",
+      "ir": "FC Iyık Janyl",
+      "ru": "ФК «Ийык Джаныл»"
+     },
+     "p": 25,
+     "gd": -9,
+     "pts": 29
+    },
+    {
+     "pos": 8,
+     "club": "temirjolchu",
+     "name": {
+      "en": "Temirjolchu Nurzhan",
+      "ir": "Temirjolchu Nurzhan",
+      "ru": "Темиржолчу Нуржан"
+     },
+     "p": 25,
+     "gd": 2,
+     "pts": 28
+    },
+    {
+     "pos": 9,
+     "club": "karabuura",
+     "name": {
+      "en": "Kara-Buura",
+      "ir": "Kara-Buura",
+      "ru": "Кара-Буура"
+     },
+     "p": 25,
+     "gd": -11,
+     "pts": 25
+    },
+    {
+     "pos": 10,
+     "club": "naryn",
+     "name": {
+      "en": "Naryn Tash-Kömür",
+      "ir": "Naryn Tash-Kömür",
+      "ru": "Нарын Таш-Кумыр"
+     },
+     "p": 25,
+     "gd": -40,
+     "pts": 8
+    }
+   ],
+   "last_round": {
+    "round": 25,
+    "date": "2026-10-10",
+    "results": [
+     {
+      "home": "neftchi",
+      "away": "attelkom",
+      "home_name": {
+       "en": "Neftchi Nurzhan",
+       "ir": "Neftchi Nurzhan",
+       "ru": "Нефтчи Нуржан"
+      },
+      "away_name": {
+       "en": "Attelkom Talas",
+       "ir": "Attelkom Talas",
+       "ru": "Аттелком Талас"
+      },
+      "time": "16:00",
+      "venue": {
+       "en": "NurGaz Stadium",
+       "ir": "NurGaz Stadionu",
+       "ru": "Стадион «НурГаз»"
+      },
+      "score": [
+       3,
+       1
+      ]
+     },
+     {
+      "home": "tulpar",
+      "away": "temirjolchu",
+      "home_name": {
+       "en": "Tulpar Talas",
+       "ir": "Tulpar Talas",
+       "ru": "Тулпар Талас"
+      },
+      "away_name": {
+       "en": "Temirjolchu Nurzhan",
+       "ir": "Temirjolchu Nurzhan",
+       "ru": "Темиржолчу Нуржан"
+      },
+      "time": "16:00",
+      "venue": {
+       "en": "Silk Road Arena",
+       "ir": "Jibek Jolu Arenasy",
+       "ru": "Арена «Шёлковый путь»"
+      },
+      "score": [
+       1,
+       1
+      ]
+     },
+     {
+      "home": "universitet",
+      "away": "karabuura",
+      "home_name": {
+       "en": "Universitet Talas",
+       "ir": "Universitet Talas",
+       "ru": "Университет Талас"
+      },
+      "away_name": {
+       "en": "Kara-Buura",
+       "ir": "Kara-Buura",
+       "ru": "Кара-Буура"
+      },
+      "time": "16:00",
+      "venue": {
+       "en": "TSU Stadium",
+       "ir": "TMU Stadionu",
+       "ru": "Стадион ТГУ"
+      },
+      "score": [
+       0,
+       1
+      ]
+     },
+     {
+      "home": "surma",
+      "away": "iyikjanyl",
+      "home_name": {
+       "en": "Surma Chatkal",
+       "ir": "Surma Chatkal",
+       "ru": "Сурма Чаткал"
+      },
+      "away_name": {
+       "en": "FC Iyık Janyl",
+       "ir": "FC Iyık Janyl",
+       "ru": "ФК «Ийык Джаныл»"
+      },
+      "time": "16:00",
+      "venue": {
+       "en": "Kombinat Stadium",
+       "ir": "Kombinat Stadionu",
+       "ru": "Стадион «Комбинат»"
+      },
+      "score": [
+       2,
+       0
+      ]
+     },
+     {
+      "home": "dastgoh",
+      "away": "naryn",
+      "home_name": {
+       "en": "Dastgoh Nurzhan",
+       "ir": "Dastgoh Nurzhan",
+       "ru": "Дастгох Нуржан"
+      },
+      "away_name": {
+       "en": "Naryn Tash-Kömür",
+       "ir": "Naryn Tash-Kömür",
+       "ru": "Нарын Таш-Кумыр"
+      },
+      "time": "16:00",
+      "venue": {
+       "en": "Dastgoh Stadium",
+       "ir": "Dastgoh Stadionu",
+       "ru": "Стадион «Дастгох»"
+      },
+      "score": [
+       3,
+       1
+      ]
+     }
+    ]
+   },
+   "next_round": {
+    "round": 26,
+    "date": "2026-10-24",
+    "fixtures": [
+     {
+      "home": "temirjolchu",
+      "away": "neftchi",
+      "home_name": {
+       "en": "Temirjolchu Nurzhan",
+       "ir": "Temirjolchu Nurzhan",
+       "ru": "Темиржолчу Нуржан"
+      },
+      "away_name": {
+       "en": "Neftchi Nurzhan",
+       "ir": "Neftchi Nurzhan",
+       "ru": "Нефтчи Нуржан"
+      },
+      "time": "17:00",
+      "venue": {
+       "en": "Lokomotiv Stadium",
+       "ir": "Lokomotiv Stadionu",
+       "ru": "Стадион «Локомотив»"
+      }
+     },
+     {
+      "home": "tulpar",
+      "away": "attelkom",
+      "home_name": {
+       "en": "Tulpar Talas",
+       "ir": "Tulpar Talas",
+       "ru": "Тулпар Талас"
+      },
+      "away_name": {
+       "en": "Attelkom Talas",
+       "ir": "Attelkom Talas",
+       "ru": "Аттелком Талас"
+      },
+      "time": "17:00",
+      "venue": {
+       "en": "Silk Road Arena",
+       "ir": "Jibek Jolu Arenasy",
+       "ru": "Арена «Шёлковый путь»"
+      }
+     },
+     {
+      "home": "naryn",
+      "away": "universitet",
+      "home_name": {
+       "en": "Naryn Tash-Kömür",
+       "ir": "Naryn Tash-Kömür",
+       "ru": "Нарын Таш-Кумыр"
+      },
+      "away_name": {
+       "en": "Universitet Talas",
+       "ir": "Universitet Talas",
+       "ru": "Университет Талас"
+      },
+      "time": "17:00",
+      "venue": {
+       "en": "Shakhtyor Stadium",
+       "ir": "Shakhtyor Stadionu",
+       "ru": "Стадион «Шахтёр»"
+      }
+     },
+     {
+      "home": "karabuura",
+      "away": "surma",
+      "home_name": {
+       "en": "Kara-Buura",
+       "ir": "Kara-Buura",
+       "ru": "Кара-Буура"
+      },
+      "away_name": {
+       "en": "Surma Chatkal",
+       "ir": "Surma Chatkal",
+       "ru": "Сурма Чаткал"
+      },
+      "time": "17:00",
+      "venue": {
+       "en": "Kara-Buura District Stadium",
+       "ir": "Kara-Buura Aymaktık Stadionu",
+       "ru": "Районный стадион «Кара-Буура»"
+      }
+     },
+     {
+      "home": "iyikjanyl",
+      "away": "dastgoh",
+      "home_name": {
+       "en": "FC Iyık Janyl",
+       "ir": "FC Iyık Janyl",
+       "ru": "ФК «Ийык Джаныл»"
+      },
+      "away_name": {
+       "en": "Dastgoh Nurzhan",
+       "ir": "Dastgoh Nurzhan",
+       "ru": "Дастгох Нуржан"
+      },
+      "time": "17:00",
+      "venue": {
+       "en": "Iyık Janyl City Stadium",
+       "ir": "Iyık Janyl Shaardık Stadionu",
+       "ru": "Городской стадион Ийык Джаныла"
+      }
+     }
+    ]
+   },
+   "derby": {
+    "home": "neftchi",
+    "away": "tulpar",
+    "home_name": {
+     "en": "Neftchi Nurzhan",
+     "ir": "Neftchi Nurzhan",
+     "ru": "Нефтчи Нуржан"
+    },
+    "away_name": {
+     "en": "Tulpar Talas",
+     "ir": "Tulpar Talas",
+     "ru": "Тулпар Талас"
+    },
+    "date": "2026-10-31",
+    "time": "18:00",
+    "venue": {
+     "en": "NurGaz Stadium",
+     "ir": "NurGaz Stadionu",
+     "ru": "Стадион «НурГаз»"
+    }
+   }
+  },
+  "cup_final": {
+   "home": "neftchi",
+   "away": "attelkom",
+   "home_name": {
+    "en": "Neftchi Nurzhan",
+    "ir": "Neftchi Nurzhan",
+    "ru": "Нефтчи Нуржан"
+   },
+   "away_name": {
+    "en": "Attelkom Talas",
+    "ir": "Attelkom Talas",
+    "ru": "Аттелком Талас"
+   },
+   "date": "2026-11-07",
+   "time": "14:00",
+   "venue": {
+    "en": "Silk Road Arena",
+    "ir": "Jibek Jolu Arenasy",
+    "ru": "Арена «Шёлковый путь»"
+   },
+   "neutral": true
+  },
+  "women": {
+   "after_round": 9,
+   "rounds": 10,
+   "table": [
+    {
+     "pos": 1,
+     "club": "tulpar",
+     "name": {
+      "en": "Tulpar Talas",
+      "ir": "Tulpar Talas",
+      "ru": "Тулпар Талас"
+     },
+     "p": 9,
+     "pts": 22
+    },
+    {
+     "pos": 2,
+     "club": "universitet",
+     "name": {
+      "en": "Universitet Talas",
+      "ir": "Universitet Talas",
+      "ru": "Университет Талас"
+     },
+     "p": 9,
+     "pts": 19
+    },
+    {
+     "pos": 3,
+     "club": "attelkom",
+     "name": {
+      "en": "Attelkom Talas",
+      "ir": "Attelkom Talas",
+      "ru": "Аттелком Талас"
+     },
+     "p": 9,
+     "pts": 13
+    },
+    {
+     "pos": 4,
+     "club": "akademiya",
+     "name": {
+      "en": "Akademiya Talas",
+      "ir": "Akademiya Talas",
+      "ru": "Академия Талас"
+     },
+     "p": 9,
+     "pts": 11
+    },
+    {
+     "pos": 5,
+     "club": "iyikjanyl",
+     "name": {
+      "en": "FC Iyık Janyl",
+      "ir": "FC Iyık Janyl",
+      "ru": "ФК «Ийык Джаныл»"
+     },
+     "p": 9,
+     "pts": 6
+    },
+    {
+     "pos": 6,
+     "club": "neftchi",
+     "name": {
+      "en": "Neftchi Nurzhan",
+      "ir": "Neftchi Nurzhan",
+      "ru": "Нефтчи Нуржан"
+     },
+     "p": 9,
+     "pts": 4
+    }
+   ],
+   "next": {
+    "round": 10,
+    "date": "2026-10-25",
+    "time": "14:00",
+    "fixtures": [
+     {
+      "home": "attelkom",
+      "away": "neftchi",
+      "home_name": {
+       "en": "Attelkom Talas",
+       "ir": "Attelkom Talas",
+       "ru": "Аттелком Талас"
+      },
+      "away_name": {
+       "en": "Neftchi Nurzhan",
+       "ir": "Neftchi Nurzhan",
+       "ru": "Нефтчи Нуржан"
+      }
+     },
+     {
+      "home": "universitet",
+      "away": "iyikjanyl",
+      "home_name": {
+       "en": "Universitet Talas",
+       "ir": "Universitet Talas",
+       "ru": "Университет Талас"
+      },
+      "away_name": {
+       "en": "FC Iyık Janyl",
+       "ir": "FC Iyık Janyl",
+       "ru": "ФК «Ийык Джаныл»"
+      }
+     },
+     {
+      "home": "tulpar",
+      "away": "akademiya",
+      "home_name": {
+       "en": "Tulpar Talas",
+       "ir": "Tulpar Talas",
+       "ru": "Тулпар Талас"
+      },
+      "away_name": {
+       "en": "Akademiya Talas",
+       "ir": "Akademiya Talas",
+       "ru": "Академия Талас"
+      }
+     }
+    ]
+   }
+  },
+  "ulak": {
+   "source": {
+    "en": "National Ulak Tartysh League (National Equestrian Sports Directorate)",
+    "ir": "Uluttuk Ulak Tartysh Ligası (Uluttuk at sportu bashkarması)",
+    "ru": "Национальная лига улак-тартыш (Национальное управление конного спорта)"
+   },
+   "season": 2026,
+   "conferences": [
+    {
+     "id": "isez",
+     "name": "ISEZ Conference",
+     "rounds": 11,
+     "table": [
+      {
+       "pos": 1,
+       "team": "Talas",
+       "p": 5,
+       "gd": 20,
+       "pts": 15
+      },
+      {
+       "pos": 2,
+       "team": "Chu",
+       "p": 6,
+       "gd": 7,
+       "pts": 14
+      },
+      {
+       "pos": 3,
+       "team": "Nurzhan",
+       "p": 6,
+       "gd": 6,
+       "pts": 12
+      },
+      {
+       "pos": 4,
+       "team": "Iyık Janyl",
+       "p": 6,
+       "gd": 5,
+       "pts": 10
+      },
+      {
+       "pos": 5,
+       "team": "Kara-Bulak",
+       "p": 5,
+       "gd": -1,
+       "pts": 9
+      },
+      {
+       "pos": 6,
+       "team": "Kyzyl-Adyr",
+       "p": 5,
+       "gd": -2,
+       "pts": 7
+      },
+      {
+       "pos": 7,
+       "team": "Köhne Diz",
+       "p": 6,
+       "gd": -5,
+       "pts": 6
+      },
+      {
+       "pos": 8,
+       "team": "Lower Naryn",
+       "p": 6,
+       "gd": -7,
+       "pts": 6
+      },
+      {
+       "pos": 9,
+       "team": "Dastgoh",
+       "p": 5,
+       "gd": -4,
+       "pts": 4
+      },
+      {
+       "pos": 10,
+       "team": "Sary-Bulak",
+       "p": 6,
+       "gd": -9,
+       "pts": 4
+      },
+      {
+       "pos": 11,
+       "team": "Semiz",
+       "p": 6,
+       "gd": -10,
+       "pts": 2
+      }
+     ],
+     "last_round": {
+      "round": 6,
+      "date": "2026-10-17",
+      "results": [
+       {
+        "home": "Talas",
+        "away": "Kara-Bulak",
+        "score": [
+         9,
+         2
+        ]
+       },
+       {
+        "home": "Iyık Janyl",
+        "away": "Chu",
+        "score": [
+         7,
+         8
+        ]
+       },
+       {
+        "home": "Sary-Bulak",
+        "away": "Semiz",
+        "score": [
+         4,
+         4
+        ]
+       },
+       {
+        "home": "Köhne Diz",
+        "away": "Lower Naryn",
+        "score": [
+         6,
+         3
+        ]
+       },
+       {
+        "home": "Kyzyl-Adyr",
+        "away": "Nurzhan",
+        "score": [
+         4,
+         7
+        ]
+       }
+      ],
+      "not_received": 0
+     },
+     "next_round": {
+      "round": 7,
+      "date": "2026-10-24",
+      "fixtures": [
+       {
+        "home": "Kara-Bulak",
+        "away": "Nurzhan",
+        "venue": "Kara-Bulak",
+        "time": "16:00"
+       },
+       {
+        "home": "Köhne Diz",
+        "away": "Talas",
+        "venue": "State Hippodrome, Talas",
+        "time": "19:00"
+       },
+       {
+        "home": "Kyzyl-Adyr",
+        "away": "Semiz",
+        "venue": "Kyzyl-Adyr",
+        "time": "17:00"
+       },
+       {
+        "home": "Dastgoh",
+        "away": "Sary-Bulak",
+        "venue": "Dastgoh works ground, Nurzhan",
+        "time": "16:00"
+       },
+       {
+        "home": "Chu",
+        "away": "Lower Naryn",
+        "venue": "Chu District ground",
+        "time": "17:00"
+       }
+      ]
+     }
+    },
+    {
+     "id": "hl",
+     "name": "Highland Conference",
+     "rounds": 13,
+     "table": [
+      {
+       "pos": 1,
+       "team": "Boztorgoy",
+       "p": 6,
+       "gd": 17,
+       "pts": 18
+      },
+      {
+       "pos": 2,
+       "team": "Karakoyun",
+       "p": 6,
+       "gd": 15,
+       "pts": 15
+      },
+      {
+       "pos": 3,
+       "team": "Tanıp",
+       "p": 5,
+       "gd": 14,
+       "pts": 13
+      },
+      {
+       "pos": 4,
+       "team": "Karatau Select",
+       "p": 5,
+       "gd": 7,
+       "pts": 12
+      },
+      {
+       "pos": 5,
+       "team": "Chatkal Highlands Select",
+       "p": 6,
+       "gd": -2,
+       "pts": 7
+      },
+      {
+       "pos": 6,
+       "team": "Naiman",
+       "p": 6,
+       "gd": -2,
+       "pts": 7
+      },
+      {
+       "pos": 7,
+       "team": "Northern Steppe Select",
+       "p": 6,
+       "gd": -4,
+       "pts": 7
+      },
+      {
+       "pos": 8,
+       "team": "Akjele",
+       "p": 4,
+       "gd": -1,
+       "pts": 6
+      },
+      {
+       "pos": 9,
+       "team": "Chubar (Highland)",
+       "p": 5,
+       "gd": -6,
+       "pts": 6
+      },
+      {
+       "pos": 10,
+       "team": "Kökjal",
+       "p": 6,
+       "gd": -7,
+       "pts": 6
+      },
+      {
+       "pos": 11,
+       "team": "Sarybagysh",
+       "p": 5,
+       "gd": -7,
+       "pts": 4
+      },
+      {
+       "pos": 12,
+       "team": "Aksay Plateau Select",
+       "p": 5,
+       "gd": -8,
+       "pts": 1
+      },
+      {
+       "pos": 13,
+       "team": "Moiynkum Select",
+       "p": 5,
+       "gd": -16,
+       "pts": 0
+      }
+     ],
+     "last_round": {
+      "round": 6,
+      "date": "2026-10-17",
+      "results": [
+       {
+        "home": "Boztorgoy",
+        "away": "Karakoyun",
+        "score": [
+         7,
+         5
+        ]
+       },
+       {
+        "home": "Karatau Select",
+        "away": "Chatkal Highlands Select",
+        "score": [
+         7,
+         6
+        ]
+       },
+       {
+        "home": "Kökjal",
+        "away": "Tanıp",
+        "score": [
+         6,
+         9
+        ]
+       },
+       {
+        "home": "Sarybagysh",
+        "away": "Akjele",
+        "score": null
+       },
+       {
+        "home": "Aksay Plateau Select",
+        "away": "Naiman",
+        "score": [
+         4,
+         5
+        ]
+       },
+       {
+        "home": "Northern Steppe Select",
+        "away": "Moiynkum Select",
+        "score": [
+         5,
+         2
+        ]
+       }
+      ],
+      "not_received": 1
+     },
+     "next_round": {
+      "round": 7,
+      "date": "2026-10-24",
+      "fixtures": [
+       {
+        "home": "Kökjal",
+        "away": "Northern Steppe Select",
+        "venue": "Toktogul basin",
+        "time": "13:00"
+       },
+       {
+        "home": "Aksay Plateau Select",
+        "away": "Chatkal Highlands Select",
+        "venue": "Aksay Plateau",
+        "time": "14:00"
+       },
+       {
+        "home": "Naiman",
+        "away": "Karatau Select",
+        "venue": "Naiman grounds",
+        "time": "15:00"
+       },
+       {
+        "home": "Tanıp",
+        "away": "Akjele",
+        "venue": "Upper Kara-Suu",
+        "time": "13:00"
+       },
+       {
+        "home": "Sarybagysh",
+        "away": "Boztorgoy",
+        "venue": "Chatkal valley",
+        "time": "14:00"
+       },
+       {
+        "home": "Chubar (Highland)",
+        "away": "Moiynkum Select",
+        "venue": "Arslanbob",
+        "time": "15:00"
+       }
+      ]
+     }
+    }
+   ],
+   "playoff": [
+    {
+     "round": "Semi-finals",
+     "date": "2026-12-12",
+     "venue": "State Hippodrome, Talas",
+     "matches": [
+      {
+       "home": "isez:1",
+       "away": "hl:2",
+       "time": "19:00"
+      },
+      {
+       "home": "hl:1",
+       "away": "isez:2",
+       "time": "21:00"
+      }
+     ]
+    },
+    {
+     "round": "Final",
+     "date": "2026-12-19",
+     "venue": "State Hippodrome, Talas",
+     "matches": [
+      {
+       "home": "win:sf1",
+       "away": "win:sf2",
+       "time": "19:00"
+      }
+     ]
+    }
+   ]
+  }
+ }
 }
