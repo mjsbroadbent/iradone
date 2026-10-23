@@ -1,12 +1,17 @@
 /* IradOne Online sport engine.
  *
  * Generates the horse-racing cards and results, the National Ulak Tartysh
- * League and President's Cup, the Irad League (football) and the equestrian
- * calendar from sport.json. Everything is seeded by the date, so results are
- * the same for every visitor and never change once played.
+ * League and President's Cup and the equestrian calendar from sport.json.
+ * Everything is seeded by the date, so results are the same for every visitor
+ * and never change once played.
  *
- * window.IradSport.ready resolves once sport.json has loaded; tvDetail(kind,
- * date) gives the TV and radio guides their "Tonight: ..." lines.
+ * Football comes from the Irad League's own site (the FFI's results files):
+ * the table is computed from its season file with the league's rules, and if
+ * the files can't be fetched the page says so rather than showing anything else.
+ *
+ * window.IradSport.ready resolves once sport.json (and the league files, or
+ * their failure) have loaded; tvDetail(kind, date) gives the TV and radio
+ * guides their "Tonight: ..." lines.
  */
 (function (global) {
   "use strict";
@@ -67,11 +72,6 @@
     var out = list.slice(), r = rng(seed);
     for (var i = out.length - 1; i > 0; i--) { var j = Math.floor(r() * (i + 1)), t = out[i]; out[i] = out[j]; out[j] = t; }
     return out;
-  }
-  function poisson(lambda, r) {
-    var L = Math.exp(-Math.max(lambda, 0.05)), k = 0, p = 1;
-    do { k++; p *= r(); } while (p > L);
-    return k - 1;
   }
 
   // ---------- round robin ----------
@@ -225,31 +225,97 @@
     return { date: d, races: races };
   }
 
-  // ---------- football ----------
-  function footballDays(year) {
-    var F = data.football, s = F.season.start, d = nthWeekday(year, s.month, s.weekday, s.n), days = [], w = 0;
-    while (days.length < F.season.rounds) {
-      if ((w + 1) % F.season.rest_every !== 0) days.push(d);
-      d = addDays(d, 7); w++;
-    }
-    return days;
+  // ---------- football (the Irad League's results) ----------
+  var LEAGUE_DATA = "https://mjsbroadbent.github.io/irad-league/data/";
+  var LEAGUE_SITE = "https://mjsbroadbent.github.io/irad-league/";
+  var LEAGUE_TIMEOUT_MS = 8000;
+  var league = null;  // { season, cup, clubs: {id: club}, grounds: {id: ground} } once loaded
+
+  function getJson(url, ms) {
+    var ctl = typeof AbortController !== "undefined" ? new AbortController() : null;
+    var timer = setTimeout(function () { if (ctl) ctl.abort(); }, ms);
+    var req = fetch(url, { cache: "no-cache", signal: ctl ? ctl.signal : undefined }).then(function (r) {
+      if (!r.ok) throw new Error(url + " " + r.status);
+      return r.json();
+    });
+    var limit = new Promise(function (_, reject) { setTimeout(function () { reject(new Error("timeout")); }, ms + 50); });
+    return Promise.race([req, limit]).then(function (j) { clearTimeout(timer); return j; }, function (e) { clearTimeout(timer); throw e; });
   }
-  function footballSeason(year, now) {
-    var F = data.football, rr = roundRobin(F.clubs), cycle = [];
-    for (var c = 0; c < 3; c++) rr.forEach(function (r) { cycle.push(c % 2 ? r.map(function (p) { return [p[1], p[0]]; }) : r); });
-    var days = footballDays(year), matches = [];
-    days.forEach(function (d, k) {
-      cycle[k].forEach(function (p) {
-        var res = null;
-        if (isPlayed(d, 19 * 60, now)) {
-          var r = rng("fb|" + ymd(d) + "|" + p[0].name + "|" + p[1].name), diff = p[0].strength - p[1].strength;
-          res = [poisson(1.35 + diff * 1.6, r), poisson(1.05 - diff * 1.6, r)];
-        }
-        matches.push({ date: d, round: k + 1, home: p[0], away: p[1], result: res,
-                       derby: F.derby.indexOf(p[0].name) !== -1 && F.derby.indexOf(p[1].name) !== -1 });
+  function loadLeague() {
+    var cup = getJson(LEAGUE_DATA + "cup-2026.json", LEAGUE_TIMEOUT_MS).catch(function () { return null; });
+    return Promise.all([getJson(LEAGUE_DATA + "season-2026.json", LEAGUE_TIMEOUT_MS), getJson(LEAGUE_DATA + "clubs.json", LEAGUE_TIMEOUT_MS), cup])
+      .then(function (res) {
+        var clubs = {};
+        res[1].clubs.forEach(function (c) { clubs[c.id] = c; });
+        league = { season: res[0], clubs: clubs, grounds: res[1].grounds || {}, cup: res[2] };
+        return league;
+      });
+  }
+  function clubName(id) { var c = league && league.clubs[id]; return c ? c.name.en : id; }
+  function groundName(id) { var g = league && league.grounds[id]; return g ? g.name.en : ""; }
+  function isDerbyMatch(m) { return [m.home, m.away].sort().join() === "neftchi,tulpar"; }
+  function parseYmd(s) { var p = s.split("-"); return utc(+p[0], +p[1], +p[2]); }
+
+  // the league's table rules: points, goal difference, goals scored, head-to-head points, then name
+  function leagueTable(season) {
+    var rows = {}, h2h = {};
+    Object.keys(league.clubs).forEach(function (id) { rows[id] = { id: id, name: clubName(id), p: 0, w: 0, d: 0, l: 0, gf: 0, ga: 0, pts: 0, left: 0 }; });
+    season.rounds.forEach(function (r) {
+      r.matches.forEach(function (m) {
+        var H = rows[m.home], A = rows[m.away];
+        if (!H || !A) return;
+        if (!m.score) { H.left++; A.left++; return; }
+        [[H, m.score[0], m.score[1], A], [A, m.score[1], m.score[0], H]].forEach(function (x) {
+          var T = x[0], f = x[1], g = x[2], pts = f > g ? 3 : f === g ? 1 : 0;
+          T.p++; T.gf += f; T.ga += g; T.pts += pts; T[f > g ? "w" : f === g ? "d" : "l"]++;
+          h2h[T.id + ">" + x[3].id] = (h2h[T.id + ">" + x[3].id] || 0) + pts;
+        });
       });
     });
-    return { year: year, days: days, matches: matches };
+    return Object.keys(rows).map(function (k) { return rows[k]; }).sort(function (a, b) {
+      return b.pts - a.pts || (b.gf - b.ga) - (a.gf - a.ga) || b.gf - a.gf ||
+        (h2h[b.id + ">" + a.id] || 0) - (h2h[a.id + ">" + b.id] || 0) || a.name.localeCompare(b.name);
+    });
+  }
+  function lastPlayedRound(season) {
+    var last = null;
+    season.rounds.forEach(function (r) { if (r.matches.some(function (m) { return m.score; })) last = r; });
+    return last;
+  }
+  function nextLeagueRound(season) {
+    for (var i = 0; i < season.rounds.length; i++) if (season.rounds[i].matches.some(function (m) { return !m.score; })) return season.rounds[i];
+    return null;
+  }
+  function cupFinal() {
+    var c = league && league.cup;
+    if (!c) return null;
+    var f = c.rounds.filter(function (r) { return r.key === "final"; })[0];
+    return f && f.matches[0] ? { date: parseYmd(f.date), m: f.matches[0] } : null;
+  }
+  function cupWinner(m) {
+    var a = m.score[0], b = m.score[1];
+    if (a === b && m.pens) { a = m.pens[0]; b = m.pens[1]; }
+    return a > b ? m.home : m.away;
+  }
+  function overFor(m, date, now) { return isPlayed(date, minutesOf(m.time) + 115, now); }
+  function minutesOf(hm) { var p = (hm || "00:00").split(":"); return +p[0] * 60 + +p[1]; }
+  function fixtureLine(m, date, now) {
+    var li = el("li", "match" + (isDerbyMatch(m) ? " derby" : ""));
+    var sc = m.score ? m.score[0] + "–" + m.score[1] : (overFor(m, date, now) ? "v" : (m.time || "v"));
+    li.appendChild(el("span", "match-home", clubName(m.home)));
+    li.appendChild(el("span", "match-score", sc));
+    li.appendChild(el("span", "match-away", clubName(m.away)));
+    var meta = [];
+    if (isDerbyMatch(m)) meta.push("Kara-Ak derby");
+    if (m.score && m.pens) meta.push("after extra time, " + m.pens[0] + "–" + m.pens[1] + " on penalties");
+    else if (m.score && m.aet) meta.push("after extra time");
+    if (!m.score) {
+      meta.push(groundName(m.venue) + (m.neutral ? " (neutral)" : ""));
+      if (overFor(m, date, now)) meta.push("result to follow");
+      else if (m.tv) meta.push("live on " + m.tv.join(" and "));
+    }
+    li.appendChild(el("span", "match-meta", meta.filter(Boolean).join(" · ")));
+    return li;
   }
 
   // ---------- calendar ----------
@@ -298,11 +364,13 @@
       return "Tonight: " + games[0].home.name + " v " + games[0].away.name + " (" + games[0].conf + ")";
     }
     if (kind === "football") {
-      var fs = footballSeason(date.getUTCFullYear(), now);
-      var round = fs.matches.filter(function (x) { return sameDay(x.date, date); });
-      if (!round.length) return null;
-      var derby = round.filter(function (x) { return x.derby; })[0];
-      return "Round " + round[0].round + (derby ? ", including the Kara-Ak derby: " + derby.home.name + " v " + derby.away.name : "");
+      if (!league) return null;
+      var key = ymd(date), cf = cupFinal();
+      if (cf && sameDay(cf.date, date)) return "Irad Cup final: " + clubName(cf.m.home) + " v " + clubName(cf.m.away);
+      var round = league.season.rounds.filter(function (r) { return r.date === key; })[0];
+      if (!round) return null;
+      var derby = round.matches.filter(isDerbyMatch)[0];
+      return "Round " + round.round + (derby ? ", including the Kara-Ak derby: " + clubName(derby.home) + " v " + clubName(derby.away) : "");
     }
     return null;
   }
@@ -446,36 +514,57 @@
   }
 
   function renderFootball(root, now) {
-    var y = now.date.getUTCFullYear(), fs = footballSeason(y, now);
-    if (now.date.getTime() < fs.days[0].getTime()) fs = footballSeason(y - 1, now);
     root.innerHTML = "";
-    var played = fs.days.filter(function (d) { return isPlayed(d, 19 * 60, now); });
-    var next = fs.days.filter(function (d) { return !isPlayed(d, 19 * 60, now); })[0];
-    var status = el("p", "sport-status", data.football.name + " " + fs.year + ": " + (next ? "round " + (played.length + 1) + " on " + fmtDate(next, true) + "." : "season complete. The " + (fs.year + 1) + " season starts in March."));
-    root.appendChild(status);
+    if (!league) {
+      root.appendChild(el("p", "sport-status", "Irad League results are temporarily unavailable. Please try again later."));
+      return;
+    }
+    var s = league.season, rows = leagueTable(s), last = lastPlayedRound(s), next = nextLeagueRound(s);
+    var a = rows[0], b = rows[1], gap = a.pts - b.pts, left = a.left;
+    var decided = rows.slice(1).every(function (r) { return r.pts + 3 * r.left < a.pts; });
+    var text = "Irad League " + s.season + ": ";
+    if (decided) text += a.name + " are champions" + (next ? "." : ", " + a.pts + " points from " + a.p + " games.");
+    else if (gap === 0) text += a.name + " and " + b.name + " are level on " + a.pts + " points";
+    else text += a.name + " lead " + b.name + " by " + gap + " point" + (gap === 1 ? "" : "s");
+    if (!decided && next) text += " with " + left + " round" + (left === 1 ? "" : "s") + " left. Round " + next.round + " on " + fmtDate(parseYmd(next.date), true) + ".";
+    else if (!decided) text += ". Season complete.";
+    else if (next) text += " Round " + next.round + " on " + fmtDate(parseYmd(next.date), true) + ".";
+    root.appendChild(el("p", "sport-status", text));
     var grid = el("div", "sport-two-col");
-    var left = el("div");
-    left.appendChild(tableEl(["", "Club", "P", "W", "D", "L", "+/-", "Pts"], table(data.football.clubs, fs.matches).map(function (r, i) {
+    var leftCol = el("div");
+    leftCol.appendChild(tableEl(["", "Club", "P", "W", "D", "L", "+/-", "Pts"], rows.map(function (r, i) {
       var d = r.gf - r.ga;
       return [String(i + 1), r.name, String(r.p), String(r.w), String(r.d), String(r.l), (d > 0 ? "+" : "") + d, String(r.pts)];
     }), "league-table"));
-    grid.appendChild(left);
+    grid.appendChild(leftCol);
     var right = el("div");
-    var last = played[played.length - 1];
     if (last) {
-      right.appendChild(el("p", "match-day", "Round " + played.length + ", " + fmtDate(last, true)));
+      right.appendChild(el("p", "match-day", "Round " + last.round + ", " + fmtDate(parseYmd(last.date), true)));
       var ul = el("ul", "match-list");
-      fs.matches.filter(function (m) { return sameDay(m.date, last); }).forEach(function (m) { ul.appendChild(matchLine(m, m.derby ? "Kara-Ak derby" : "")); });
+      last.matches.forEach(function (m) { ul.appendChild(fixtureLine(m, parseYmd(last.date), now)); });
       right.appendChild(ul);
     }
-    if (next) {
-      right.appendChild(el("p", "match-day", "Round " + (played.length + 1) + ", " + fmtDate(next, true)));
+    if (next && next !== last) {
+      right.appendChild(el("p", "match-day", "Round " + next.round + ", " + fmtDate(parseYmd(next.date), true)));
       var ul2 = el("ul", "match-list");
-      fs.matches.filter(function (m) { return sameDay(m.date, next); }).forEach(function (m) { ul2.appendChild(matchLine(m, m.derby ? "Kara-Ak derby" : "")); });
+      next.matches.forEach(function (m) { ul2.appendChild(fixtureLine(m, parseYmd(next.date), now)); });
       right.appendChild(ul2);
+    }
+    var cf = cupFinal();
+    if (cf) {
+      right.appendChild(el("p", "match-day", "Irad Cup final, " + fmtDate(cf.date, true) + (cf.m.score ? "" : ", " + cf.m.time)));
+      var ul3 = el("ul", "match-list");
+      ul3.appendChild(fixtureLine(cf.m, cf.date, now));
+      right.appendChild(ul3);
+      if (cf.m.score) right.appendChild(el("p", "cup-winner", clubName(cupWinner(cf.m)) + " win the Irad Cup."));
     }
     grid.appendChild(right);
     root.appendChild(grid);
+    var more = el("p", "sport-sub");
+    var link = el("a", null, "Full fixtures, results and the First and Women's Leagues on the Irad League site");
+    link.href = LEAGUE_SITE; link.rel = "noopener";
+    more.appendChild(link);
+    root.appendChild(more);
   }
 
   function renderUpcoming(root, now) {
@@ -487,6 +576,21 @@
     var season = ulakSeason(ulakSeasonFor(now.date), now);
     var nextUlak = season.days.filter(function (d) { return !isPlayed(d, 22 * 60 + 45, now); })[0];
     if (nextUlak) items.push({ date: nextUlak, name: "Ulak tartysh league", where: "Grounds across Irad", what: "A full round in both conferences, live on IradOne at " + data.ulak.kickoff + "." });
+    if (league) {  // football from the Irad League's own fixtures
+      var nr = nextLeagueRound(league.season);
+      if (nr) {
+        var dm = nr.matches.filter(isDerbyMatch)[0];
+        items.push(dm ? { date: parseYmd(nr.date), name: "Kara-Ak derby: " + clubName(dm.home) + " v " + clubName(dm.away), where: groundName(dm.venue) + ", " + dm.time,
+                          what: "Irad League round " + nr.round + ", live on IradOne Sport." }
+                      : { date: parseYmd(nr.date), name: "Irad League, round " + nr.round, where: "Grounds across Irad", what: "Five matches from " + nr.matches[0].time + "." });
+      }
+      var dr = null;
+      league.season.rounds.forEach(function (r) { r.matches.forEach(function (m) { if (!dr && !m.score && isDerbyMatch(m) && r !== nr) dr = { r: r, m: m }; }); });
+      if (dr) items.push({ date: parseYmd(dr.r.date), name: "Kara-Ak derby: " + clubName(dr.m.home) + " v " + clubName(dr.m.away), where: groundName(dr.m.venue) + ", " + dr.m.time,
+                           what: "Irad League round " + dr.r.round + ", live on IradOne Sport." });
+      var cf = cupFinal();
+      if (cf && !cf.m.score) items.push({ date: cf.date, name: "Irad Cup final: " + clubName(cf.m.home) + " v " + clubName(cf.m.away), where: groundName(cf.m.venue) + ", " + cf.m.time, what: "Live on IradOne Sport." });
+    }
     items.sort(function (a, b) { return a.date - b.date; });
     root.innerHTML = "";
     var ul = el("ul", "event-list");
@@ -520,11 +624,13 @@
   var api = {
     tvDetail: tvDetail,
     load: function (json) { data = json; horses = null; return api; },
-    _internal: { ulakSeason: ulakSeason, cup: cup, meeting: meeting, footballSeason: footballSeason, upcomingEvents: upcomingEvents, utc: utc, cupDates: cupDates }
+    setLeague: function (j) { league = j; return api; },
+    _internal: { ulakSeason: ulakSeason, cup: cup, meeting: meeting, leagueTable: leagueTable, upcomingEvents: upcomingEvents, utc: utc, cupDates: cupDates }
   };
   if (typeof fetch !== "undefined" && typeof document !== "undefined") {
-    api.ready = fetch(base + "sport.json", { cache: "no-cache" }).then(function (r) { return r.json(); }).then(function (j) {
-      data = j;
+    var leagueP = loadLeague().catch(function (e) { if (global.console) console.warn("Irad League data unavailable", e); return null; });
+    api.ready = Promise.all([fetch(base + "sport.json", { cache: "no-cache" }).then(function (r) { return r.json(); }), leagueP]).then(function (res) {
+      data = res[0];
       if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", renderAll); else renderAll();
     });
   }

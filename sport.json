@@ -1,5 +1,5 @@
 {
-  "_readme": "Data for the sport section (sport.js). Results are generated from the date, the same for everyone, and never change once played. strength (0-1) tilts results towards stronger teams and horses. Edit names, venues and race titles freely.",
+  "_readme": "Data for the sport section (sport.js): racing, ulak tartysh and the horse-games calendar. Results are generated from the date, the same for everyone, and never change once played. strength (0-1) tilts results towards stronger teams and horses. Edit names, venues and race titles freely. Football is not here: the Irad League table, results and fixtures come from the league's own site.",
   "ulak": {
     "name": "National Ulak Tartysh League",
     "organiser": "National Equestrian Sports Directorate",
@@ -298,64 +298,6 @@
       "Alatau Heights Stud",
       "Talasbank Racing",
       "Kyzyl-Adyr Herders' Cooperative"
-    ]
-  },
-  "football": {
-    "name": "Irad League",
-    "season": {
-      "start": {
-        "month": 3,
-        "weekday": "sat",
-        "n": 1
-      },
-      "rounds": 27,
-      "rest_every": 4
-    },
-    "derby": [
-      "Neftchi Nurzhan",
-      "Tulpar Talas"
-    ],
-    "clubs": [
-      {
-        "name": "Neftchi Nurzhan",
-        "strength": 0.82
-      },
-      {
-        "name": "Tulpar Talas",
-        "strength": 0.8
-      },
-      {
-        "name": "Temirjolchu Nurzhan",
-        "strength": 0.6
-      },
-      {
-        "name": "Attelkom Talas",
-        "strength": 0.58
-      },
-      {
-        "name": "Universitet Talas",
-        "strength": 0.48
-      },
-      {
-        "name": "Surma Chatkal",
-        "strength": 0.47
-      },
-      {
-        "name": "Dastgoh Nurzhan",
-        "strength": 0.42
-      },
-      {
-        "name": "FC Iyık Janyl",
-        "strength": 0.4
-      },
-      {
-        "name": "Kara-Buura",
-        "strength": 0.38
-      },
-      {
-        "name": "Naryn Tash-Kömür",
-        "strength": 0.35
-      }
     ]
   },
   "events": [
