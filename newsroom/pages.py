@@ -258,7 +258,7 @@ def sport_page(arts: list[dict], page, credit_text) -> str:
       </section>"""
     return page("Sport | IradOne Online", "Racing, ulak tartysh, horse games and the Irad League.",
                 f"{SITE}/sport/index.html", content, arts, f"{SITE}/photos/ulak-riders.jpg", base="../",
-                scripts=("sport.js",))
+                scripts=("sport.js",), tulpar="iradonesport")
 
 
 # ---------------------------------------------------------------- entry point

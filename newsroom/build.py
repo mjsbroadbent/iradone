@@ -120,9 +120,12 @@ def card_html(a: dict, base: str) -> str:
     </article>"""
 
 
+TULPAR_NAMES = {"iradone": "IradOne", "iradonesport": "IradOne Sport"}   # channels on Tulpar (footer and header links)
+
+
 def page(title: str, description: str, canonical: str, content: str, arts: list[dict],
          og_image: str, og_type: str = "website", og_title: str | None = None,
-         base: str = "../", scripts: tuple[str, ...] = ()) -> str:
+         base: str = "../", scripts: tuple[str, ...] = (), tulpar: str = "iradone") -> str:
     """Wrap content in the site template. `base` is the path from the page up to
     the site root ("" for root pages, "../" one folder down, "../../" two)."""
     extra = "".join(f'\n  <script src="{base}{s}"></script>' for s in scripts)
@@ -131,6 +134,7 @@ def page(title: str, description: str, canonical: str, content: str, arts: list[
         "og_title": esc(og_title or title), "og_image": esc(og_image), "og_type": og_type,
         "base": base, "ticker": ticker_html(arts, base), "content": content,
         "year": str(dt.date.today().year), "scripts": extra,
+        "tulpar": tulpar, "tulpar_name": TULPAR_NAMES.get(tulpar, "IradOne"),
     }
     return re.sub(r"\{\{(\w+)\}\}", lambda m: values[m.group(1)], TEMPLATE)
 

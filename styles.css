@@ -69,6 +69,21 @@ nav ul li a {
   font-size: 1.2rem;
 }
 
+/* Tulpar channel: the winged-horse tile, sized like the other icons */
+.social-icons a.tulpar-link img {
+  width: 1.2rem;
+  height: 1.2rem;
+  vertical-align: -0.2rem;
+  border-radius: 0.28rem;
+}
+.tulpar-follow {
+  margin: 0.6rem 0 0;
+  font-size: 0.9rem;
+}
+.tulpar-follow a {
+  color: inherit;
+}
+
 /* Scrolling Banner */
 .scrolling-banner {
   background: #ffcc00;
