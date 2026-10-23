@@ -1,7 +1,8 @@
 /* IradOne Online sport engine.
  *
- * Generates the horse-racing cards and results, the National Ulak Tartysh
- * League and President's Cup and the equestrian calendar from sport.json.
+ * Generates the horse-racing cards and results and the equestrian calendar
+ * from sport.json. The National Ulak Tartysh League comes from its published
+ * results file (jarysh.com/data/ulak-2026.json).
  * Everything is seeded by the date, so results are the same for every visitor
  * and never change once played.
  *
@@ -74,104 +75,56 @@
     return out;
   }
 
-  // ---------- round robin ----------
-  function roundRobin(teams) {
-    var list = teams.slice();
-    if (list.length % 2) list.push(null);  // bye
-    var n = list.length, rounds = [];
-    for (var r = 0; r < n - 1; r++) {
-      var pairs = [];
-      for (var i = 0; i < n / 2; i++) {
-        var a = list[i], b = list[n - 1 - i];
-        if (a && b) pairs.push(r % 2 ? [b, a] : [a, b]);
-      }
-      rounds.push(pairs);
-      list.splice(1, 0, list.pop());
-    }
-    return rounds;
-  }
-
-  function table(teams, matches) {
-    var rows = {};
-    teams.forEach(function (t) { rows[t.name] = { name: t.name, p: 0, w: 0, d: 0, l: 0, gf: 0, ga: 0, pts: 0 }; });
-    matches.forEach(function (m) {
-      if (!m.result) return;
-      var h = rows[m.home.name], a = rows[m.away.name], hg = m.result[0], ag = m.result[1];
-      h.p++; a.p++; h.gf += hg; h.ga += ag; a.gf += ag; a.ga += hg;
-      if (hg > ag) { h.w++; a.l++; h.pts += 3; } else if (hg < ag) { a.w++; h.l++; a.pts += 3; } else { h.d++; a.d++; h.pts++; a.pts++; }
-    });
-    return Object.keys(rows).map(function (k) { return rows[k]; }).sort(function (x, y) {
-      return y.pts - x.pts || (y.gf - y.ga) - (x.gf - x.ga) || y.gf - x.gf || x.name.localeCompare(y.name);
-    });
-  }
-
   function isPlayed(date, endMinute, now) {
     return date.getTime() < now.date.getTime() || (sameDay(date, now.date) && now.minute >= endMinute);
   }
 
-  // ---------- ulak tartysh ----------
-  function ulakSeasonStart(year) {
-    var s = data.ulak.season.start;
-    return nthWeekday(year, s.month, s.weekday, s.n);
-  }
-  function ulakSeasonFor(date) {
-    var y = date.getUTCFullYear();
-    return date.getTime() >= ulakSeasonStart(y).getTime() ? y : y - 1;
-  }
-  function ulakMatchdays(year) {
-    var start = ulakSeasonStart(year), end = lastWeekday(year + 1, data.ulak.season.end_month, "sat");
-    var br = data.ulak.season.break, b0 = br[0].split("-"), b1 = br[1].split("-");
-    var from = utc(year, +b0[0], +b0[1]), to = utc(year + 1, +b1[0], +b1[1]);
-    var days = [];
-    for (var d = start; d.getTime() <= end.getTime(); d = addDays(d, 7)) {
-      if (d.getTime() >= from.getTime() && d.getTime() <= to.getTime()) continue;
-      days.push(d);
-    }
-    return days;
-  }
-  function ulakScore(home, away, seed) {
-    var r = rng(seed), edge = home.strength - away.strength + 0.05;
-    return [Math.max(0, Math.round(3 + r() * 5 + edge * 6)), Math.max(0, Math.round(3 + r() * 5 - edge * 6))];
-  }
-  function ulakSeason(year, now) {
-    var days = ulakMatchdays(year), kickEnd = 22 * 60 + 45;
-    var confs = data.ulak.conferences.map(function (c) {
-      var rr = roundRobin(c.teams), cycle = rr.concat(rr.map(function (r) { return r.map(function (p) { return [p[1], p[0]]; }); }));
-      var matches = [];
-      days.forEach(function (d, k) {
-        cycle[k % cycle.length].forEach(function (p) {
-          var played = isPlayed(d, kickEnd, now);
-          matches.push({ date: d, home: p[0], away: p[1], conf: c.name,
-                         result: played ? ulakScore(p[0], p[1], "ulak|" + ymd(d) + "|" + p[0].name + "|" + p[1].name) : null });
-        });
-      });
-      return { name: c.name, teams: c.teams, matches: matches };
-    });
-    return { year: year, days: days, confs: confs };
-  }
+  // ---------- ulak tartysh (the National Ulak Tartysh League's results, as published at jarysh.com) ----------
+  var ULAK_DATA = "https://jarysh.com/data/ulak-2026.json";
+  var ulakData = null;  // the season file once loaded
   function cupDates(seasonYear) {
     var final = firstWeekdayAfter(seasonYear + 1, "03-11", "sat");
     return { qf: addDays(final, -14), sf: addDays(final, -7), final: final };
   }
-  function cup(season, now) {
-    var dates = cupDates(season.year), q = data.ulak.cup.qualifiers;
-    var seeds = season.confs.map(function (c) { return table(c.teams, c.matches).slice(0, q).map(function (row) {
-      return c.teams.filter(function (t) { return t.name === row.name; })[0];
-    }); });
-    if (!seeds[0].length) return null;
-    var A = seeds[0], B = seeds[1];
-    function tie(h, a, d) {
-      var played = isPlayed(d, 22 * 60 + 45, now), res = null, aet = false;
-      if (played) {
-        res = ulakScore(h, a, "cup|" + ymd(d) + "|" + h.name + "|" + a.name);
-        if (res[0] === res[1]) { aet = true; res[rng("aet|" + ymd(d) + h.name)() < 0.5 ? 0 : 1]++; }
-      }
-      return { date: d, home: h, away: a, result: res, aet: aet, winner: res ? (res[0] > res[1] ? h : a) : null };
+  function ulakSeasonYear(date) { return date.getUTCMonth() >= 8 ? date.getUTCFullYear() : date.getUTCFullYear() - 1; }
+  function ulakTable(conf) {
+    var rows = {};
+    ulakData.conferences[conf].teams.forEach(function (t) {
+      var b = ulakData.before[conf][t.name] || [0, 0, 0, 0, 0, 0];
+      rows[t.name] = { name: t.name, p: b[0], w: b[1], d: b[2], l: b[3], gf: b[4], ga: b[5] };
+    });
+    ulakData.rounds.forEach(function (r) {
+      r.matches.forEach(function (m) {
+        if (m.conf !== conf || !m.score) return;
+        [[m.home, m.score[0], m.score[1]], [m.away, m.score[1], m.score[0]]].forEach(function (x) {
+          var T = rows[x[0]]; T.p++; T.gf += x[1]; T.ga += x[2]; T[x[1] > x[2] ? "w" : x[1] === x[2] ? "d" : "l"]++;
+        });
+      });
+    });
+    return Object.keys(rows).map(function (k) { var r = rows[k]; r.pts = 3 * r.w + r.d; return r; }).sort(function (x, y) {
+      return y.pts - x.pts || (y.gf - y.ga) - (x.gf - x.ga) || y.gf - x.gf;
+    });
+  }
+  function ulakLatest() {
+    var last = null;
+    ulakData.rounds.forEach(function (r) { if (r.matches.some(function (m) { return m.score; })) last = r; });
+    return last;
+  }
+  function ulakNext(now) {
+    var today = ymd(now.date);
+    for (var i = 0; i < ulakData.rounds.length; i++) {
+      var r = ulakData.rounds[i];
+      if (r.date >= today && r.matches.every(function (m) { return !m.score; })) return r;
     }
-    var qf = [tie(A[0], B[3], dates.qf), tie(B[0], A[3], dates.qf), tie(A[1], B[2], dates.qf), tie(B[1], A[2], dates.qf)];
-    var sf = qf[0].winner && qf[3].winner ? [tie(qf[0].winner, qf[3].winner, dates.sf), tie(qf[1].winner, qf[2].winner, dates.sf)] : null;
-    var fin = sf && sf[0].winner && sf[1].winner ? tie(sf[0].winner, sf[1].winner, dates.final) : null;
-    return { dates: dates, qf: qf, sf: sf, final: fin };
+    return null;
+  }
+  function ulakLine(m, meta) {
+    var li = el("li", "match");
+    li.appendChild(el("span", "match-home", m.home));
+    li.appendChild(el("span", "match-score", m.score ? m.score[0] + "–" + m.score[1] : "v"));
+    li.appendChild(el("span", "match-away", m.away));
+    if (meta) li.appendChild(el("span", "match-meta", meta));
+    return li;
   }
 
   // ---------- racing ----------
@@ -349,19 +302,16 @@
       return "Tonight: " + m.races.length + " races, featuring the " + feature.type.name + " (" + feature.type.breed + ", " + feature.type.distance.toLocaleString("en-GB") + " m)";
     }
     if (kind === "ulak" || kind === "presidents_cup") {
-      var sy = ulakSeasonFor(date), dates = cupDates(sy);
-      if (kind === "presidents_cup" || sameDay(date, dates.final)) {
-        var c = cup(ulakSeason(sy, now), now);
-        return c && c.final ? "Final: " + c.final.home.name + " v " + c.final.away.name : "The President's Cup final, live from the Irad State Hippodrome";
-      }
+      var dates = cupDates(ulakSeasonYear(date));
+      if (kind === "presidents_cup" || sameDay(date, dates.final)) return "The President's Cup final, live from the Irad State Hippodrome";
       if (sameDay(date, dates.qf)) return "Tonight: President's Cup quarter-finals";
       if (sameDay(date, dates.sf)) return "Tonight: President's Cup semi-finals";
-      var season = ulakSeason(sy, now);
-      var games = [];
-      season.confs.forEach(function (cf) { cf.matches.forEach(function (x) { if (sameDay(x.date, date)) games.push(x); }); });
-      if (!games.length) return null;
-      games.sort(function (a, b) { return (b.home.strength + b.away.strength) - (a.home.strength + a.away.strength); });
-      return "Tonight: " + games[0].home.name + " v " + games[0].away.name + " (" + games[0].conf + ")";
+      if (!ulakData) return null;
+      var rd = ulakData.rounds.filter(function (r) { return r.date === ymd(date); })[0];
+      if (!rd) return null;
+      var games = rd.matches.slice().sort(function (a, b) { return (b.time || "").localeCompare(a.time || ""); });  // the late game is the one on air
+      var g = games[0];
+      return "Tonight: " + g.home + " v " + g.away + " (" + ulakData.conferences[g.conf].name + ")";
     }
     if (kind === "football") {
       if (!league) return null;
@@ -447,66 +397,43 @@
     tabs(root, panels);
   }
 
-  function matchLine(m, showConf) {
-    var li = el("li", "match" + (m.derby ? " derby" : ""));
-    var score = m.result ? m.result[0] + "–" + m.result[1] + (m.aet ? " (aet)" : "") : "v";
-    li.appendChild(el("span", "match-home", m.home.name));
-    li.appendChild(el("span", "match-score", score));
-    li.appendChild(el("span", "match-away", m.away.name));
-    if (showConf) li.appendChild(el("span", "match-meta", showConf));
-    return li;
-  }
-
   function renderUlak(root, now) {
-    var sy = ulakSeasonFor(now.date), season = ulakSeason(sy, now), dates = cupDates(sy);
     root.innerHTML = "";
-    var played = season.days.filter(function (d) { return isPlayed(d, 22 * 60 + 45, now); });
-    var upcoming = season.days.filter(function (d) { return !isPlayed(d, 22 * 60 + 45, now); });
-    var status = el("p", "sport-status");
-    if (!played.length) status.textContent = "The " + sy + "–" + String(sy + 1).slice(2) + " season opens on " + fmtDate(season.days[0], true) + ". Live on IradOne, Saturdays at " + data.ulak.kickoff + ".";
-    else if (upcoming.length) status.textContent = "Season " + sy + "–" + String(sy + 1).slice(2) + ", after " + played.length + " of " + season.days.length + " matchdays. Next: " + fmtDate(upcoming[0], true) + ", live on IradOne at " + data.ulak.kickoff + ".";
-    else status.textContent = "Regular season complete. The top four in each conference go into the President's Cup.";
-    root.appendChild(status);
-
-    // President's Cup, once the regular season is over
-    if (!upcoming.length) {
-      var c = cup(season, now);
-      if (c) {
-        var box = el("div", "cup-box");
-        box.appendChild(el("h4", null, data.ulak.cup.name + " · " + data.ulak.cup.venue));
-        var rounds = [["Quarter-finals, " + fmtDate(c.dates.qf, true), c.qf], ["Semi-finals, " + fmtDate(c.dates.sf, true), c.sf], ["Final, " + fmtDate(c.dates.final, true), c.final ? [c.final] : null]];
-        rounds.forEach(function (r) {
-          box.appendChild(el("p", "cup-round", r[0]));
-          var ul = el("ul", "match-list");
-          if (r[1]) r[1].forEach(function (m) { ul.appendChild(matchLine(m)); });
-          else ul.appendChild(el("li", "match-tbc", "To be decided"));
-          box.appendChild(ul);
-        });
-        if (c.final && c.final.winner) box.appendChild(el("p", "cup-winner", c.final.winner.name + " win the " + data.ulak.cup.name + "."));
-        root.appendChild(box);
-      }
+    if (!ulakData) {
+      root.appendChild(el("p", "sport-status", "Ulak tartysh results are temporarily unavailable. Please try again later."));
+      return;
     }
-
+    var sy = ulakData.season, last = ulakLatest(), next = ulakNext(now);
+    var status = el("p", "sport-status");
+    if (!last) status.textContent = "The " + sy + "–" + String(sy + 1).slice(2) + " season opens soon. Live on IradOne, Saturdays at " + data.ulak.kickoff + ".";
+    else if (next) status.textContent = "Season " + sy + "–" + String(sy + 1).slice(2) + ", after round " + last.round + ". Next: round " + next.round + ", " + fmtDate(parseYmd(next.date), true) + ", live on IradOne at " + data.ulak.kickoff + ".";
+    else status.textContent = "Regular season complete. The top two in each conference meet in the play-off at the State Hippodrome in December; the top four go into the President's Cup in Irad Day week.";
+    root.appendChild(status);
     var grid = el("div", "sport-two-col");
-    season.confs.forEach(function (cf) {
+    Object.keys(ulakData.conferences).forEach(function (conf) {
       var col = el("div");
-      col.appendChild(el("h4", null, cf.name));
-      col.appendChild(tableEl(["", "Team", "P", "W", "D", "L", "+/-", "Pts"], table(cf.teams, cf.matches).map(function (r, i) {
+      col.appendChild(el("h4", null, ulakData.conferences[conf].name));
+      col.appendChild(tableEl(["", "Team", "P", "W", "D", "L", "+/-", "Pts"], ulakTable(conf).map(function (r, i) {
         var d = r.gf - r.ga;
         return [String(i + 1), r.name, String(r.p), String(r.w), String(r.d), String(r.l), (d > 0 ? "+" : "") + d, String(r.pts)];
       }), "league-table"));
-      var lastDay = played[played.length - 1], nextDay = upcoming[0];
-      if (lastDay) {
-        col.appendChild(el("p", "match-day", "Results, " + fmtDate(lastDay, true)));
-        var ul = el("ul", "match-list");
-        cf.matches.filter(function (m) { return sameDay(m.date, lastDay); }).forEach(function (m) { ul.appendChild(matchLine(m)); });
-        col.appendChild(ul);
+      if (last) {
+        var lm = last.matches.filter(function (m) { return m.conf === conf; });
+        if (lm.length) {
+          col.appendChild(el("p", "match-day", "Results, round " + last.round + ", " + fmtDate(parseYmd(last.date), true)));
+          var ul = el("ul", "match-list");
+          lm.forEach(function (m) { ul.appendChild(ulakLine(m, m.score ? "" : "result not yet received")); });
+          col.appendChild(ul);
+        }
       }
-      if (nextDay) {
-        col.appendChild(el("p", "match-day", "Fixtures, " + fmtDate(nextDay, true)));
-        var ul2 = el("ul", "match-list");
-        cf.matches.filter(function (m) { return sameDay(m.date, nextDay); }).forEach(function (m) { ul2.appendChild(matchLine(m, m.home.ground)); });
-        col.appendChild(ul2);
+      if (next) {
+        var nm = next.matches.filter(function (m) { return m.conf === conf; });
+        if (nm.length) {
+          col.appendChild(el("p", "match-day", "Fixtures, round " + next.round + ", " + fmtDate(parseYmd(next.date), true)));
+          var ul2 = el("ul", "match-list");
+          nm.forEach(function (m) { ul2.appendChild(ulakLine(m, m.time + ", " + m.venue)); });
+          col.appendChild(ul2);
+        }
       }
       grid.appendChild(col);
     });
@@ -573,9 +500,8 @@
       var d = addDays(now.date, i);
       if (isRaceDay(d) && !isPlayed(d, 22 * 60, now)) { items.push({ date: d, name: "Race meeting", where: data.racing.venue, what: "Six races from " + data.racing.first_race + ", live on IradOne." }); break; }
     }
-    var season = ulakSeason(ulakSeasonFor(now.date), now);
-    var nextUlak = season.days.filter(function (d) { return !isPlayed(d, 22 * 60 + 45, now); })[0];
-    if (nextUlak) items.push({ date: nextUlak, name: "Ulak tartysh league", where: "Grounds across Irad", what: "A full round in both conferences, live on IradOne at " + data.ulak.kickoff + "." });
+    var nextUlak = ulakData ? ulakNext(now) : null;
+    if (nextUlak) items.push({ date: parseYmd(nextUlak.date), name: "Ulak tartysh league, round " + nextUlak.round, where: "Grounds across Irad", what: "A full round in both conferences, live on IradOne at " + data.ulak.kickoff + "." });
     if (league) {  // football from the Irad League's own fixtures
       var nr = nextLeagueRound(league.season);
       if (nr) {
@@ -625,11 +551,12 @@
     tvDetail: tvDetail,
     load: function (json) { data = json; horses = null; return api; },
     setLeague: function (j) { league = j; return api; },
-    _internal: { ulakSeason: ulakSeason, cup: cup, meeting: meeting, leagueTable: leagueTable, upcomingEvents: upcomingEvents, utc: utc, cupDates: cupDates }
+    _internal: { ulakTable: ulakTable, meeting: meeting, leagueTable: leagueTable, upcomingEvents: upcomingEvents, utc: utc, cupDates: cupDates }
   };
   if (typeof fetch !== "undefined" && typeof document !== "undefined") {
     var leagueP = loadLeague().catch(function (e) { if (global.console) console.warn("Irad League data unavailable", e); return null; });
-    api.ready = Promise.all([fetch(base + "sport.json", { cache: "no-cache" }).then(function (r) { return r.json(); }), leagueP]).then(function (res) {
+    var ulakP = getJson(ULAK_DATA, LEAGUE_TIMEOUT_MS).then(function (j) { ulakData = j; }).catch(function (e) { if (global.console) console.warn("Ulak data unavailable", e); });
+    api.ready = Promise.all([fetch(base + "sport.json", { cache: "no-cache" }).then(function (r) { return r.json(); }), leagueP, ulakP]).then(function (res) {
       data = res[0];
       if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", renderAll); else renderAll();
     });
